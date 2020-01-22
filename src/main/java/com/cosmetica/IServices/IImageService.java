@@ -1,0 +1,18 @@
+package com.cosmetica.IServices;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cosmetica.Entities.Image;
+
+public interface IImageService {
+	
+	public List<Image> getAll();
+
+	public Optional<Image> getOneById(int id);
+
+	public void saveOrUpdate(Image image);
+
+	public void delete(Image image);
+
+}
