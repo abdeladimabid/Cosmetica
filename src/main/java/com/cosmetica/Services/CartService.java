@@ -47,9 +47,10 @@ public class CartService implements ICartService{
 		double amount = 0;
 		List<Order> orders = cart.getOrders();
 		for (Order o : orders) {
+			//if order does not have a discount
 			if(o.getOrder_product().getDiscount()==0){
 			amount = amount+o.getQuantity()*o.getOrder_product().getRegular_price();}
-			else {
+			else {//if order does have a discount
 			amount = amount+o.getQuantity()*o.getOrder_product().getRegular_price()*(o.getOrder_product().getDiscount()/100);	
 			}
 		}
