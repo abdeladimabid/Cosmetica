@@ -1,5 +1,7 @@
 package com.cosmetica.Entities;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name="users")
@@ -58,15 +61,16 @@ public class User {
 	private Date updated_at;
 	
 
-	public User(String username, String email, String password, String token, boolean active, Role user_role) {
+	public User(String username, String email, String password, String token, boolean active, Role user_role) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		super();
 		this.username = username;
 		this.email = email;
-		this.password = password;
 		this.token = token;
 		this.active = active;
 		this.user_role = user_role;
 		this.inserted_at = new Date();
+		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+		this.password = new BCryptPasswordEncoder().encode(password+salt);
 	}
 
 	
