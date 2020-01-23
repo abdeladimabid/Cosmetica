@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cosmetica.Entities.Cart;
-import com.cosmetica.Entities.InvoiceHead;
+import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.Order;
 import com.cosmetica.Entities.User;
 
@@ -24,6 +24,6 @@ public interface ICartService {
 	
 	public List<Order> getCartOrders(Cart cart);
 	
-	public List<InvoiceHead> getCartInvoiceHeads(Cart cart);
+	public InvoiceBody getCartInvoiceHeads(Cart cart);
 	
 }

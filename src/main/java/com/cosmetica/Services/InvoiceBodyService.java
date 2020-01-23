@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IInvoiceBodyDao;
+import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.InvoiceBody;
-import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.IServices.IInvoiceBodyService;
 
 @Service
@@ -38,8 +38,9 @@ public class InvoiceBodyService implements IInvoiceBodyService{
 	}
 	
 	@Override
-	public List<InvoiceHead> getHeads(InvoiceBody InvoiceBody){
-		return InvoiceBody.getBody_heads();
+	public Cart getBodyCart(InvoiceBody InvoiceBody){
+		return InvoiceBody.getBody_cart();
 	}
+	
 	
 }

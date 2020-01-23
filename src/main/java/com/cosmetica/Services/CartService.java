@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICartDao;
 import com.cosmetica.Entities.Cart;
-import com.cosmetica.Entities.InvoiceHead;
+import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.Order;
 import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.ICartService;
@@ -65,8 +65,8 @@ public class CartService implements ICartService{
 	}
 	
 	@Override
-	public List<InvoiceHead> getCartInvoiceHeads(Cart cart) {
-		return cart.getHeads();
+	public InvoiceBody getCartInvoiceHeads(Cart cart) {
+		return cart.getCart_body();
 	}
 	
 }
