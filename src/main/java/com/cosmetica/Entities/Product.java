@@ -34,6 +34,8 @@ public class Product {
 	private Double regular_price;
 	private int discount;
 	private int quantity;
+	private int status;
+	private int tax;
 	private String hash;
 	private String meta_title;
 	private String meta_keywords;
@@ -76,7 +78,7 @@ public class Product {
 
 	public Product(String product_ref, String product_name, String product_title, String product_sub_title,
 			String description, Double regular_price, int quantity, String meta_title, String meta_keywords,
-			Category category, List<Tag> tags, List<Image> images, Brand brand) {
+			Category category, List<Tag> tags, List<Image> images, Brand brand, int tax) {
 		super();
 		this.product_ref = product_ref;
 		this.product_name = product_name;
@@ -91,7 +93,17 @@ public class Product {
 		this.product_tags = tags;
 		this.images = images;
 		this.product_brand = brand;
+		this.tax = tax;
 		this.inserted_at = new Date();
+		this.status = 0;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public int getProduct_id() {
@@ -254,15 +266,24 @@ public class Product {
 		this.product_reviews = product_reviews;
 	}
 
+	public int getTax() {
+		return tax;
+	}
+
+	public void setTax(int tax) {
+		this.tax = tax;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", product_ref=" + product_ref + ", product_name=" + product_name
 				+ ", product_title=" + product_title + ", product_sub_title=" + product_sub_title + ", description="
 				+ description + ", regular_price=" + regular_price + ", discount=" + discount + ", quantity=" + quantity
-				+ ", hash=" + hash + ", meta_title=" + meta_title + ", meta_keywords=" + meta_keywords
-				+ ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + ", product_category="
-				+ product_category + ", product_tags=" + product_tags + ", images=" + images + ", product_brand="
-				+ product_brand + ", orders=" + orders + ", product_reviews=" + product_reviews + "]";
+				+ ", status=" + status + ", tax=" + tax + ", hash=" + hash + ", meta_title=" + meta_title
+				+ ", meta_keywords=" + meta_keywords + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at
+				+ ", product_category=" + product_category + ", product_tags=" + product_tags + ", images=" + images
+				+ ", product_brand=" + product_brand + ", orders=" + orders + ", product_reviews=" + product_reviews
+				+ "]";
 	}
 
 
