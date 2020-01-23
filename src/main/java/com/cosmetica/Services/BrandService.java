@@ -34,5 +34,4 @@ public class BrandService implements IBrandService{
 		dao.delete(Brand);
 	}
 	
-
 }
