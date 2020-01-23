@@ -28,11 +28,11 @@ public class Coupon {
 	private boolean active;
 	private int discount_value;	
 	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy")
+	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date start_date;
 	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy")
+	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date end_date;
 	

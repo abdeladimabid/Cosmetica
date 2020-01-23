@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IInvoiceBodyDao;
 import com.cosmetica.Entities.InvoiceBody;
+import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.IServices.IInvoiceBodyService;
 
 @Service
@@ -34,6 +35,11 @@ public class InvoiceBodyService implements IInvoiceBodyService{
 	@Override
 	public void delete(InvoiceBody InvoiceBody) {
 		dao.delete(InvoiceBody);
+	}
+	
+	@Override
+	public List<InvoiceHead> getHeads(InvoiceBody InvoiceBody){
+		return InvoiceBody.getBody_heads();
 	}
 	
 }

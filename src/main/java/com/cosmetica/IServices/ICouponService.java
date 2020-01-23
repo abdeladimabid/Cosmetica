@@ -3,6 +3,7 @@ package com.cosmetica.IServices;
 import java.util.List;
 import java.util.Optional;
 
+import com.cosmetica.Entities.Brand;
 import com.cosmetica.Entities.Coupon;
 
 public interface ICouponService {
@@ -14,5 +15,9 @@ public interface ICouponService {
 	public void saveOrUpdate(Coupon coupon);
 
 	public void delete(Coupon coupon);
+	
+	public boolean validateCoupon(Coupon Coupon);
+	
+	public Brand getBrand(Coupon Coupon);
 
 }

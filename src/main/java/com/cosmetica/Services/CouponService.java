@@ -1,5 +1,7 @@
 package com.cosmetica.Services;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICouponDao;
+import com.cosmetica.Entities.Brand;
 import com.cosmetica.Entities.Coupon;
 import com.cosmetica.IServices.ICouponService;
 
@@ -34,6 +37,21 @@ public class CouponService implements ICouponService{
 	@Override
 	public void delete(Coupon Coupon) {
 		dao.delete(Coupon);
+	}
+	
+	@Override
+	public Brand getBrand(Coupon Coupon) {
+		return Coupon.getCoupon_brand();
+	}
+	
+	@Override
+	public boolean validateCoupon(Coupon Coupon) {
+		 Date now = new Date();
+		 if(Coupon.getEnd_date().before(now)) {
+			 return false;
+		 } else {
+			 return true;
+		 }
 	}
 
 }
