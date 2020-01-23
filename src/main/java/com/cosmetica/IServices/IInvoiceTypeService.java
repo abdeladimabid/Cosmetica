@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.cosmetica.Entities.InvoiceType;
 
-public interface IInvoiceType {
+public interface IInvoiceTypeService {
 	
 	public List<InvoiceType> getAll();
 
