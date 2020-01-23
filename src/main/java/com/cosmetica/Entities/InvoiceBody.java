@@ -1,7 +1,9 @@
 package com.cosmetica.Entities;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,9 +39,8 @@ public class InvoiceBody {
 	@Temporal(TemporalType.DATE)
 	private Date updated_at;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="invoice_head_id",nullable = false)
-	private InvoiceHead head_body;
+	@OneToMany(mappedBy = "head_body",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<InvoiceHead> body_heads;
 
 	public InvoiceBody() {
 		super();
@@ -120,13 +122,23 @@ public class InvoiceBody {
 		this.updated_at = updated_at;
 	}
 
-	public InvoiceHead getHead_body() {
-		return head_body;
+	public List<InvoiceHead> getBody_heads() {
+		return body_heads;
 	}
 
-	public void setHead_body(InvoiceHead head_body) {
-		this.head_body = head_body;
+	public void setBody_heads(List<InvoiceHead> body_heads) {
+		this.body_heads = body_heads;
 	}
+
+	@Override
+	public String toString() {
+		return "InvoiceBody [invoice_body_id=" + invoice_body_id + ", recieving_date=" + recieving_date
+				+ ", recipient_fname=" + recipient_fname + ", recipient_lname=" + recipient_lname + ", recipient_phone="
+				+ recipient_phone + ", recipient_adress=" + recipient_adress + ", inserted_at=" + inserted_at
+				+ ", updated_at=" + updated_at + ", body_heads=" + body_heads + "]";
+	}
+
+
 	
 	
 	

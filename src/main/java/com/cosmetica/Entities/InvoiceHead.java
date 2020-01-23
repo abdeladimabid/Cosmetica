@@ -44,17 +44,20 @@ public class InvoiceHead {
 	@JoinColumn (name="cart_id",nullable = false)
 	private Cart head_cart;
 	
-	@OneToMany(mappedBy = "head_body",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<InvoiceBody> body;
-	
-	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, List<InvoiceBody> body) {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn (name="invoice_body_id",nullable = false)
+	private InvoiceHead head_body;
+
+	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, InvoiceHead head_body) {
 		super();
 		this.ref = ref;
 		this.type = type;
 		this.head_cart = head_cart;
-		this.body = body;
+		this.head_body = head_body;
 		this.inserted_at = new Date();
 	}
+
+
 
 	public InvoiceHead() {
 		super();
@@ -117,21 +120,23 @@ public class InvoiceHead {
 		this.head_cart = head_cart;
 	}
 
-	public List<InvoiceBody> getBody() {
-		return body;
+	public InvoiceHead getHead_body() {
+		return head_body;
 	}
 
-	public void setBody(List<InvoiceBody> body) {
-		this.body = body;
+	public void setHead_body(InvoiceHead head_body) {
+		this.head_body = head_body;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "InvoiceHead [invoice_head_id=" + invoice_head_id + ", ref=" + ref + ", hash=" + hash + ", inserted_at="
-				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart=" + head_cart + ", body="
-				+ body + "]";
+				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart=" + head_cart
+				+ ", head_body=" + head_body + "]";
 	}
-	
+
 	
 
 }
