@@ -26,23 +26,35 @@ public class UserService implements IUserService{
 	public Optional<User> getOneById(int id) {
 		return dao.findById(id);
 	}
+	
+	@Override
+	public Optional<User> getOneByUsername(String username) {
+		return dao.findByUsername(username);
+	}
+	
+	@Override
+	public Optional<User> findByEmail(String email) {
+		return dao.findByUsername(email);
+	}
+	
+	@Override
+	public List<User> findByFirstnameAndLastname(String firstname, String lastname){
+		return dao.findByFirstnameAndLastname(firstname, lastname);
+	}
 
 	@Override
 	public void saveOrUpdate(User user) {
 		dao.save(user);
-		
 	}
 
 	@Override
 	public void delete(User user) {
 		dao.delete(user);
-		
 	}
 
 	@Override
 	public List<Cart> getUserCart(User user) {
 		return user.getCarts();
 	}
-	
 
 }

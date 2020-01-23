@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,9 +26,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int user_id;
+	
+	@Column(unique=true)
 	private String username;
 	private String user_firstname;
 	private String user_lastname;
+	@Column(unique=true)
 	private String email;
 	private String password;
 	private String adresse;

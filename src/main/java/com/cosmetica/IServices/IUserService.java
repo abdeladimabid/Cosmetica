@@ -11,6 +11,12 @@ public interface IUserService {
 	public List<User> getAll();
 
 	public Optional<User> getOneById(int id);
+	
+	public Optional<User> getOneByUsername(String username);
+	
+	public Optional<User> findByEmail(String email);
+	
+	public List<User> findByFirstnameAndLastname(String firstname, String lastname);
 
 	public void saveOrUpdate(User user);
 
