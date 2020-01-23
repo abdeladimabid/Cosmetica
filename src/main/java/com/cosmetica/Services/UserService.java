@@ -42,8 +42,5 @@ public class UserService implements IUserService{
 		return user.getCarts();
 	}
 	
-	
-	
-	
 
 }
