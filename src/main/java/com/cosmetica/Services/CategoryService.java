@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICategoryDao;
 import com.cosmetica.Entities.Category;
 import com.cosmetica.IServices.ICategoryService;
 
+@Service
 public class CategoryService implements ICategoryService{
 	
 	@Autowired

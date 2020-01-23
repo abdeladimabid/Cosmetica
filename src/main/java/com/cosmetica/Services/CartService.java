@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICartDao;
 import com.cosmetica.Entities.Cart;
+import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.Entities.Order;
 import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.ICartService;
 
-
+@Service
 public class CartService implements ICartService{
 	
 	@Autowired
@@ -60,6 +62,11 @@ public class CartService implements ICartService{
 	@Override
 	public List<Order> getCartOrders(Cart cart) {
 		return cart.getOrders();
+	}
+	
+	@Override
+	public List<InvoiceHead> getCartInvoiceHeads(Cart cart) {
+		return cart.getHeads();
 	}
 	
 }

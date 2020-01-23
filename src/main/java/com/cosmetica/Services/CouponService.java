@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICouponDao;
 import com.cosmetica.Entities.Coupon;
 import com.cosmetica.IServices.ICouponService;
 
+@Service
 public class CouponService implements ICouponService{
 
 	@Autowired

@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IOrederDao;
 import com.cosmetica.Entities.Order;
 import com.cosmetica.IServices.IOrderService;
 
+@Service
 public class OrderService implements IOrderService{
 
 	@Autowired

@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IInvoiceHeadDao;
 import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.IServices.IInvoiceHeadService;
 
+@Service
 public class InvoiceHeadService implements IInvoiceHeadService{
 
 	@Autowired

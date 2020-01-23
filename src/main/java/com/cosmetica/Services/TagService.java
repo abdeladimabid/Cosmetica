@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ITagDao;
 import com.cosmetica.Entities.Tag;
 import com.cosmetica.IServices.ITagService;
 
+@Service
 public class TagService implements ITagService{
 
 	@Autowired

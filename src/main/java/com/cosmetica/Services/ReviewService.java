@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IReviewDao;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.IReviewService;
 
+@Service
 public class ReviewService implements IReviewService{
-	
-
 	
 	@Autowired
 	IReviewDao dao;
