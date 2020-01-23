@@ -1,9 +1,7 @@
 package com.cosmetica.Entities;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,9 +39,9 @@ public class InvoiceHead {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name="invoice_body_id",nullable = false)
-	private InvoiceHead head_body;
+	private InvoiceBody head_body;
 
-	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, InvoiceHead head_body) {
+	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, InvoiceBody head_body) {
 		super();
 		this.ref = ref;
 		this.type = type;
@@ -105,11 +102,11 @@ public class InvoiceHead {
 		this.type = type;
 	}
 
-	public InvoiceHead getHead_body() {
+	public InvoiceBody getHead_body() {
 		return head_body;
 	}
 
-	public void setHead_body(InvoiceHead head_body) {
+	public void setHead_body(InvoiceBody head_body) {
 		this.head_body = head_body;
 	}
 
@@ -118,7 +115,5 @@ public class InvoiceHead {
 		return "InvoiceHead [invoice_head_id=" + invoice_head_id + ", ref=" + ref + ", hash=" + hash + ", inserted_at="
 				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart="+ ", head_body=" + head_body + "]";
 	}
-
-	
 
 }

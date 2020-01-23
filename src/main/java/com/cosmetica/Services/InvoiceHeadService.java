@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IInvoiceHeadDao;
+import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.IServices.IInvoiceHeadService;
 
@@ -36,4 +37,8 @@ public class InvoiceHeadService implements IInvoiceHeadService{
 		dao.delete(InvoiceHead);
 	}
 	
+	@Override
+	public InvoiceBody getBody(InvoiceHead InvoiceHead) {
+		return InvoiceHead.getHead_body();
+	}
 }

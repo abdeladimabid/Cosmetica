@@ -3,6 +3,7 @@ package com.cosmetica.IServices;
 import java.util.List;
 import java.util.Optional;
 
+import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.InvoiceHead;
 
 public interface IInvoiceHeadService {
@@ -14,5 +15,7 @@ public interface IInvoiceHeadService {
 	public void saveOrUpdate(InvoiceHead invoiceHead);
 
 	public void delete(InvoiceHead invoiceHead);
+	
+	public InvoiceBody getBody(InvoiceHead InvoiceHead);
 
 }
