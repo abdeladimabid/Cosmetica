@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
+import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Product;
+import com.cosmetica.Entities.Tag;
 import com.cosmetica.IServices.IProductService;
 
 @Service
@@ -37,6 +39,27 @@ public class ProductService implements IProductService{
 		dao.delete(product);
 	}
 	
+	@Override
+	public List<Tag> getProductTags(Product product){
+		return product.getProduct_tags();
+	}
+	
+	public List<Image> getProductImages(Product product){
+		return product.getImages();
+	}
+	
+	public Optional<Product> getProductByCategory(String category){
+		return dao.findByCategory(category);
+	}	
+	
+	public boolean productInStock(Product product) {
+		List<Product> products = dao.findAll();
+		for (Product p : products) {
+			if(product.getProduct_ref()==p.getProduct_ref()) {
+				return true;}
+		}
+				return false;
+	}
 	
 
 }

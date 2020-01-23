@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ITagDao;
+import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Tag;
 import com.cosmetica.IServices.ITagService;
 
@@ -36,6 +37,8 @@ public class TagService implements ITagService{
 		dao.delete(Tag);
 	}
 	
-	
+	public List<Product> getProductsWithTag(Tag Tag){
+		return Tag.getProducts();
+	}
 
 }

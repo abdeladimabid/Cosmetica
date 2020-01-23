@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cosmetica.Entities.Image;
+import com.cosmetica.Entities.Product;
 
 public interface IImageService {
 	
@@ -15,4 +16,9 @@ public interface IImageService {
 
 	public void delete(Image image);
 
+	public Product getImagePost(Image image);
+	
+//	public void uploadImage(MultipartFile image) throws Exception;
+	
+	public String getUploadDirectory();
 }

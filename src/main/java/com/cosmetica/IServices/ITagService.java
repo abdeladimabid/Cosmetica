@@ -3,6 +3,7 @@ package com.cosmetica.IServices;
 import java.util.List;
 import java.util.Optional;
 
+import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Tag;
 
 public interface ITagService {
@@ -14,5 +15,7 @@ public interface ITagService {
 	public void saveOrUpdate(Tag tag);
 
 	public void delete(Tag tag);
+	
+	public List<Product> getProductsWithTag(Tag Tag);
 
 }
