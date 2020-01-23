@@ -41,10 +41,6 @@ public class InvoiceHead {
 	private InvoiceType type;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="cart_id",nullable = false)
-	private Cart head_cart;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name="invoice_body_id",nullable = false)
 	private InvoiceHead head_body;
 
@@ -52,12 +48,9 @@ public class InvoiceHead {
 		super();
 		this.ref = ref;
 		this.type = type;
-		this.head_cart = head_cart;
 		this.head_body = head_body;
 		this.inserted_at = new Date();
 	}
-
-
 
 	public InvoiceHead() {
 		super();
@@ -112,14 +105,6 @@ public class InvoiceHead {
 		this.type = type;
 	}
 
-	public Cart getHead_cart() {
-		return head_cart;
-	}
-
-	public void setHead_cart(Cart head_cart) {
-		this.head_cart = head_cart;
-	}
-
 	public InvoiceHead getHead_body() {
 		return head_body;
 	}
@@ -128,13 +113,10 @@ public class InvoiceHead {
 		this.head_body = head_body;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "InvoiceHead [invoice_head_id=" + invoice_head_id + ", ref=" + ref + ", hash=" + hash + ", inserted_at="
-				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart=" + head_cart
-				+ ", head_body=" + head_body + "]";
+				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart="+ ", head_body=" + head_body + "]";
 	}
 
 	

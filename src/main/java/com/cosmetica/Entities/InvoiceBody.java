@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +39,10 @@ public class InvoiceBody {
 	@Temporal(TemporalType.DATE)
 	private Date updated_at;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
+	private Cart body_cart;
+	
 	@OneToMany(mappedBy = "head_body",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<InvoiceHead> body_heads;
 
@@ -48,14 +52,23 @@ public class InvoiceBody {
 	}
 
 	public InvoiceBody(Date recieving_date, String recipient_fname, String recipient_lname, String recipient_phone,
-			String recipient_adress) {
+			String recipient_adress, Cart body_cart) {
 		super();
 		this.recieving_date = recieving_date;
 		this.recipient_fname = recipient_fname;
 		this.recipient_lname = recipient_lname;
 		this.recipient_phone = recipient_phone;
 		this.recipient_adress = recipient_adress;
+		this.body_cart = body_cart;
 		this.inserted_at = new Date();
+	}
+
+	public Cart getBody_cart() {
+		return body_cart;
+	}
+
+	public void setBody_cart(Cart body_cart) {
+		this.body_cart = body_cart;
 	}
 
 	public int getInvoice_body_id() {
@@ -135,11 +148,8 @@ public class InvoiceBody {
 		return "InvoiceBody [invoice_body_id=" + invoice_body_id + ", recieving_date=" + recieving_date
 				+ ", recipient_fname=" + recipient_fname + ", recipient_lname=" + recipient_lname + ", recipient_phone="
 				+ recipient_phone + ", recipient_adress=" + recipient_adress + ", inserted_at=" + inserted_at
-				+ ", updated_at=" + updated_at + ", body_heads=" + body_heads + "]";
+				+ ", updated_at=" + updated_at + ", body_cart=" + body_cart + ", body_heads=" + body_heads + "]";
 	}
 
-
-	
-	
 	
 }

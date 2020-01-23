@@ -27,24 +27,6 @@ public class Cart {@Id
 	private int cart_id;
 	private int status;
 	private String hash;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="user_id",nullable = false)
-	private User cart_user;
-	
-	@OneToMany(mappedBy = "order_cart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Order> orders;
-	
-	@OneToMany(mappedBy = "head_cart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<InvoiceHead> heads;
-
-	public List<InvoiceHead> getHeads() {
-		return heads;
-	}
-
-	public void setHeads(List<InvoiceHead> heads) {
-		this.heads = heads;
-	}
 
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
@@ -53,13 +35,22 @@ public class Cart {@Id
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
 	private Date updated_at;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn (name="user_id",nullable = false)
+	private User cart_user;
+	
+	@OneToMany(mappedBy = "order_cart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Order> orders;
+	
+	@OneToOne(mappedBy = "body_cart")
+	private InvoiceBody cart_body;
+
 
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 	
 	public Cart(User cart_user, List<Order> orders) {
 		super();
@@ -71,8 +62,17 @@ public class Cart {@Id
 
 	@Override
 	public String toString() {
-		return "Cart [cart_id=" + cart_id + ", status=" + status + ", hash=" + hash + ", cart_user=" + cart_user + ", orders="
-				+ orders + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + "]";
+		return "Cart [cart_id=" + cart_id + ", status=" + status + ", hash=" + hash + ", inserted_at=" + inserted_at
+				+ ", updated_at=" + updated_at + ", cart_user=" + cart_user + ", orders=" + orders + ", cart_body="
+				+ cart_body + "]";
+	}
+
+	public InvoiceBody getCart_body() {
+		return cart_body;
+	}
+
+	public void setCart_body(InvoiceBody cart_body) {
+		this.cart_body = cart_body;
 	}
 
 	public int getCart_id() {
