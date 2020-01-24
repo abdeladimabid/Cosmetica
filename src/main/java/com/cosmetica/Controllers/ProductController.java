@@ -23,7 +23,6 @@ public class ProductController {
 		return produit;
 		 
 	 }
-	 
-	//this is just a test 
-
+	
+//wahslkjejj
 }
