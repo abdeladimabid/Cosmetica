@@ -28,5 +28,9 @@ public interface IUserService {
 	public boolean verifyPassword(User user, String password);
 	
 	public List<Review> getUserReviews(User user);
+	
+	public Double getUserAmountSpent(User user);
+	
+	public Optional<User> verifyLogin(String username, String email);
 
 }
