@@ -1,10 +1,11 @@
 package com.cosmetica.Services;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IUserDao;
@@ -55,13 +56,13 @@ public class UserService implements IUserService{
 	public List<Cart> getUserCart(User user) {
 		return user.getCarts();
 	}
-	
-	@Override
-	public boolean verifyPassword(User user, String password) {
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
-		String hash = new BCryptPasswordEncoder().encode(password+salt);
-		return user.getPassword().matches(hash);
-	}
+//	
+//	@Override
+//	public boolean verifyPassword(User user, String password) {
+//		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+//		String hash = new BCryptPasswordEncoder().encode(password+salt);
+//		return user.getPassword().matches(hash);
+//	}
 	
 	@Override
 	public List<Review> getUserReviews(User user) {

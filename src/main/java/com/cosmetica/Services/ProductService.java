@@ -28,15 +28,14 @@ public class ProductService implements IProductService{
 	public Optional<Product> getOneById(int id){
 		return dao.findById(id);
 	}
-
 	@Override
 	public void saveOrUpdate(Product product) {
 		dao.save(product);
 	}
 
 	@Override
-	public void delete(Product product) {
-		dao.delete(product);
+	public void delete(int product_id) {
+		dao.deleteById(product_id);
 	}
 	
 	@Override
