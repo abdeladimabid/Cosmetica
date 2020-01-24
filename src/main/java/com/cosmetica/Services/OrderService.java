@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IOrederDao;
-import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.Order;
-import com.cosmetica.Entities.Product;
-import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.IOrderService;
 
 @Service
@@ -39,19 +36,5 @@ public class OrderService implements IOrderService{
 		dao.delete(Order);
 	}
 	
-	@Override
-	public User getOrderUser(Order Order) {
-		return Order.getOrder_cart().getCart_user();
-	}
-	
-	@Override
-	public Product getOrderProduct(Order Order) {
-		return Order.getOrder_product();
-	}
-	
-	@Override
-	public Cart getOrderCart(Order Order) {
-		return Order.getOrder_cart();
-	}
 
 }
