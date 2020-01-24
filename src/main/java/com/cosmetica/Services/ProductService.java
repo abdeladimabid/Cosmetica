@@ -1,14 +1,17 @@
 package com.cosmetica.Services;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
 import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Product;
+import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.Tag;
 import com.cosmetica.IServices.IProductService;
 
@@ -48,9 +51,26 @@ public class ProductService implements IProductService{
 		return product.getImages();
 	}
 	
-	public Optional<Product> getProductByCategory(String category){
+	public List<Product> getProductsByCategory(String category){
 		return dao.findByCategory(category);
-	}	
+	}
+	
+	public List<Review> getProductReviews(Product product){
+		return product.getProduct_reviews();
+	}
+	
+	public float getProductStars(Product product){
+		int count=0;
+		float stars=0;
+		
+		List<Review> reviews = product.getProduct_reviews();
+		for (Review r : reviews) {
+			count++;
+			stars=stars+r.getStars();
+		}
+		stars=stars/count;
+		return Precision.round(stars, 1);
+	}
 	
 	public boolean productInStock(Product product) {
 		List<Product> products = dao.findAll();
@@ -60,6 +80,20 @@ public class ProductService implements IProductService{
 		}
 				return false;
 	}
+	
+//	public List<Product> productsSuggestionX(Product product){
+//		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
+//		List<Tag> tags;
+//		List<Product> matches;
+//		for (Product p : products) {
+//			tags=p.getProduct_tags();
+//			tags.retainAll(product.getProduct_tags());
+//				    return tags.size();
+//				}
+//					//make a table with product id and how many matching tags, 
+//					//make a table with best 5 rated products and return it
+//			
+//			}
 	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.ICategoryDao;
 import com.cosmetica.Entities.Category;
+import com.cosmetica.Entities.Product;
 import com.cosmetica.IServices.ICategoryService;
 
 @Service
@@ -34,6 +35,11 @@ public class CategoryService implements ICategoryService{
 	@Override
 	public void delete(Category Category) {
 		dao.delete(Category);
+	}
+	
+	@Override
+	public List<Product> getCategoryPruducts(Category Category) {
+		return Category.getProducts();
 	}
 
 }
