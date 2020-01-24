@@ -21,7 +21,7 @@ public interface IProductService {
 	public List<Tag> getProductTags(Product product);
 	
 	public List<Image> getProductImages(Product product);
-	
+  
 	public List<Product> getProductsByCategory(String category);
 	
 	public boolean productInStock(Product product);
@@ -29,6 +29,7 @@ public interface IProductService {
 	public List<Review> getProductReviews(Product product);
 	
 	public float getProductStars(Product product);
-	
+  
+
 
 }
