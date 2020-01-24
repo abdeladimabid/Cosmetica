@@ -16,7 +16,7 @@ public interface IProductService {
 
 	public void saveOrUpdate(Product product);
 
-	public void delete(Product product);
+	public void delete(int product_id);
 	
 	public List<Tag> getProductTags(Product product);
 	

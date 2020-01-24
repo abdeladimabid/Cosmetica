@@ -25,7 +25,7 @@ public interface IUserService {
 	
 	public List<Cart> getUserCart(User user);
 	
-	public boolean verifyPassword(User user, String password);
+//	public boolean verifyPassword(User user, String password);
 	
 	public List<Review> getUserReviews(User user);
 
