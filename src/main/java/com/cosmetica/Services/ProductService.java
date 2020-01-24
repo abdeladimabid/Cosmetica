@@ -48,9 +48,9 @@ public class ProductService implements IProductService{
 		return product.getImages();
 	}
 	
-	public Optional<Product> getProductByCategory(String category){
-		return dao.findByCategory(category);
-	}	
+//	public Optional<Product> getProductByCategory(String category){
+//		return dao.findByCategory(category);
+//	}	
 	
 	public boolean productInStock(Product product) {
 		List<Product> products = dao.findAll();

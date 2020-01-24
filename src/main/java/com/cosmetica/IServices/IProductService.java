@@ -20,9 +20,9 @@ public interface IProductService {
 	public List<Tag> getProductTags(Product product);
 	
 	public List<Image> getProductImages(Product product);
-	
-	public Optional<Product> getProductByCategory(String category);
-	
+//	
+//	public Optional<Product> getProductByCategory(String category);
+//	
 	public boolean productInStock(Product product) ;
 	
 
