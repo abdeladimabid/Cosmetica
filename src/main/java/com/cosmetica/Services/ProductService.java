@@ -84,11 +84,11 @@ public class ProductService implements IProductService{
 //	public List<Product> productsSuggestionX(Product product){
 //		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
 //		List<Tag> tags;
-//		List<Product> matches;
+//		int[][] matches;
 //		for (Product p : products) {
 //			tags=p.getProduct_tags();
 //			tags.retainAll(product.getProduct_tags());
-//				    return tags.size();
+//				     
 //				}
 //					//make a table with product id and how many matching tags, 
 //					//make a table with best 5 rated products and return it
