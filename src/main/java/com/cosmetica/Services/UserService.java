@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,16 +32,26 @@ public class UserService implements IUserService{
 	}
 	
 	
-	  @Override public Optional<User> getOneByUsername(String username) { return
-	  dao.findByUsername(username); }
+	@Override 
+	public Optional<User> getOneByUsername(String username) { 
+		return dao.findByUsername(username); 
+		}
 	  
-//	  @Override public Optional<User> findByEmail(String email) { return
-//	  dao.findByUsername(email); }
-//	  
-//	  @Override public List<User> findByFirstnameAndLastname(String firstname,
-//	  String lastname){ return dao.findByFirstnameAndLastname(firstname, lastname);
-//	  }
-//	 
+	@Override 
+	public Optional<User> getOneByEmail(String email) { 
+		return dao.findByEmail(email); 
+		}
+	  
+	@Override
+	public Optional<User> getOneByUsernameOrEmail(String username,String email){
+		return dao.findByUsernameOrEmail(username, email);
+	}
+	  
+	@Override 
+	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
+		return dao.findByFirstnameOrLastname(firstname, lastname);
+	}
+ 
 
 	@Override
 	public void saveOrUpdate(User user) {
@@ -56,17 +67,33 @@ public class UserService implements IUserService{
 	public List<Cart> getUserCart(User user) {
 		return user.getCarts();
 	}
-//	
-//	@Override
-//	public boolean verifyPassword(User user, String password) {
-//		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
-//		String hash = new BCryptPasswordEncoder().encode(password+salt);
-//		return user.getPassword().matches(hash);
-//	}
+	
+	@Override
+	public Double getUserAmountSpent(User user) {
+		List<Cart> carts = user.getCarts();
+		double amount=0;
+		CartService cs = new CartService();
+		for (Cart c : carts) {
+			amount=amount+cs.getTotalAmount(c);
+		}
+		return amount; // this one need to be tested
+	}
+	
+	@Override
+	public Optional<User> verifyLogin(String username, String email) {
+		return dao.findByUsernameOrEmail(username, email);
+	}
 	
 	@Override
 	public List<Review> getUserReviews(User user) {
 		return user.getUser_reviews();
+	}
+
+	@Override
+	public boolean verifyPassword(User user, String password) {
+		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+		String hash = new BCryptPasswordEncoder().encode(password+salt);
+		return user.getPassword().matches(hash);
 	}
 
 }

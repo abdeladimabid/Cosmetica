@@ -33,8 +33,8 @@ public class User {
 	
 	@Column(unique=true)
 	private String username;
-	private String user_firstname;
-	private String user_lastname;
+	private String firstname;
+	private String lastname;
 	@Column(unique=true)
 	private String email;
 	private String password;
@@ -78,8 +78,8 @@ public class User {
 	public User(String username,String user_firstname, String user_lastname, String email, String password, String adresse,
 			String token, boolean active, Role user_role) {
 		super();
-		this.user_firstname = user_firstname;
-		this.user_lastname = user_lastname;
+		this.firstname = user_firstname;
+		this.lastname = user_lastname;
 		this.email = email;
 		this.password = password;
 		this.adresse = adresse;
@@ -117,8 +117,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", user_firstname=" + user_firstname
-				+ ", user_lastname=" + user_lastname + ", email=" + email + ", password=" + password + ", adresse="
+		return "User [user_id=" + user_id + ", username=" + username + ", user_firstname=" + firstname
+				+ ", user_lastname=" + lastname + ", email=" + email + ", password=" + password + ", adresse="
 				+ adresse + ", token=" + token + ", active=" + active + ", amount_spent=" + amount_spent
 				+ ", user_role=" + user_role + ", user_reviews=" + user_reviews + ", carts=" + carts + ", inserted_at="
 				+ inserted_at + ", updated_at=" + updated_at + "]";
@@ -142,19 +142,19 @@ public class User {
 	}
 
 	public String getUser_firstname() {
-		return user_firstname;
+		return firstname;
 	}
 
 	public void setUser_firstname(String user_firstname) {
-		this.user_firstname = user_firstname;
+		this.firstname = user_firstname;
 	}
 
 	public String getUser_lastname() {
-		return user_lastname;
+		return lastname;
 	}
 
 	public void setUser_lastname(String user_lastname) {
-		this.user_lastname = user_lastname;
+		this.lastname = user_lastname;
 	}
 
 	public String getEmail() {

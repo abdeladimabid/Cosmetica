@@ -14,10 +14,6 @@ public interface IUserService {
 	public Optional<User> getOneById(int id);
 	
 	public Optional<User> getOneByUsername(String username);
-//	
-//	public Optional<User> findByEmail(String email);
-//	
-//	public List<User> findByFirstnameAndLastname(String firstname, String lastname);
 
 	public void saveOrUpdate(User user);
 
@@ -25,8 +21,18 @@ public interface IUserService {
 	
 	public List<Cart> getUserCart(User user);
 	
-//	public boolean verifyPassword(User user, String password);
+	public boolean verifyPassword(User user, String password);
 	
 	public List<Review> getUserReviews(User user);
+	
+	public Double getUserAmountSpent(User user);
+	
+	public Optional<User> verifyLogin(String username, String email);
+	
+	public Optional<User> getOneByEmail(String email);
+	
+	public Optional<User> getOneByUsernameOrEmail(String username,String email);
+	
+	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname);
 
 }
