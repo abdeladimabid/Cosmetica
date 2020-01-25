@@ -31,16 +31,25 @@ public class UserService implements IUserService{
 	}
 	
 	
-	  @Override public Optional<User> getOneByUsername(String username) { return
-	  dao.findByUsername(username); }
+	@Override 
+	public Optional<User> getOneByUsername(String username) { 
+		return dao.findByUsername(username); 
+		}
 	  
-//	  @Override public Optional<User> findByEmail(String email) { return
-//	  dao.findByUsername(email); }
-//	  
-//	  @Override public List<User> findByFirstnameAndLastname(String firstname,
-//	  String lastname){ return dao.findByFirstnameAndLastname(firstname, lastname);
-//	  }
-//	 
+	@Override 
+	public Optional<User> getOneByEmail(String email) { 
+		return dao.findByEmail(email); 
+		}
+	  
+	@Override
+	public Optional<User> getOneByUsernameOrEmail(String username,String email){
+		return dao.findByUsernameOrEmail(username, email);
+	}
+	  
+	@Override public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
+		return dao.findByFirstnameOrLastname(firstname, lastname);
+	}
+ 
 
 	@Override
 	public void saveOrUpdate(User user) {
@@ -59,7 +68,13 @@ public class UserService implements IUserService{
 	
 	@Override
 	public Double getUserAmountSpent(User user) {
-		return user.getAmount_spent();
+		List<Cart> carts = user.getCarts();
+		double amount=0;
+		CartService cs = new CartService();
+		for (Cart c : carts) {
+			amount=amount+cs.getTotalAmount(c);
+		}
+		return amount; // this one need to be tested
 	}
 	
 	@Override
