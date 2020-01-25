@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,8 @@ public class UserService implements IUserService{
 		return dao.findByUsernameOrEmail(username, email);
 	}
 	  
-	@Override public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
+	@Override 
+	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
 		return dao.findByFirstnameOrLastname(firstname, lastname);
 	}
  
