@@ -24,7 +24,7 @@ public class AdminController {
 	IAdminService adminservice;
 	
 	@GetMapping("/admins")
-	 public List<Admin > allAdmins() {
+	 public List<Admin> allAdmins() {
 		List<Admin> admin = adminservice.getAll();
 		return admin;
 		 
@@ -44,6 +44,7 @@ public class AdminController {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
+	 
 	 @DeleteMapping("/admin/remove/{admin_id}")
 	 public void removeAdmin(@PathVariable("admin_id")int admin_id) {
 		 if(!adminservice.getOneById(admin_id).isPresent())
