@@ -28,8 +28,8 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public Optional<Admin> getOneByUsername(String username) {
-		return dao.findByUsername(username); 
+	public List<Admin> getOneByUsername(String username) {
+		return dao.findByUsernameLike(username); 
 	}
 
 	@Override
@@ -57,18 +57,18 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public Optional<Admin> getOneByEmail(String email) {
-		return dao.findByEmail(email); 
+	public List<Admin> getOneByEmail(String email) {
+		return dao.findByEmailLike(email); 
 	}
 
 	@Override
-	public Optional<Admin> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmail(username, email);
+	public List<Admin> getOneByUsernameOrEmail(String username, String email) {
+		return dao.findByUsernameOrEmailLike(username, email);
 	}
 
 	@Override
 	public List<Admin> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastname(firstname, lastname);
+		return dao.findByFirstnameOrLastnameLike(firstname, lastname);
 	}
 
 }

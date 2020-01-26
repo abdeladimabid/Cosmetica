@@ -31,23 +31,23 @@ public class UserService implements IUserService{
 	
 	
 	@Override 
-	public Optional<User> getOneByUsername(String username) { 
-		return dao.findByUsername(username); 
+	public List<User> getOneByUsername(String username) { 
+		return dao.findByUsernameLike(username); 
 		}
 	  
 	@Override 
-	public Optional<User> getOneByEmail(String email) { 
-		return dao.findByEmail(email); 
+	public List<User> getOneByEmail(String email) { 
+		return dao.findByEmailLike(email); 
 		}
 	  
 	@Override
-	public Optional<User> getOneByUsernameOrEmail(String username,String email){
-		return dao.findByUsernameOrEmail(username, email);
+	public List<User> getOneByUsernameOrEmail(String username,String email){
+		return dao.findByUsernameOrEmailLike(username, email);
 	}
 	  
 	@Override 
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
-		return dao.findByFirstnameOrLastname(firstname, lastname);
+		return dao.findByFirstnameOrLastnameLike(firstname, lastname);
 	}
  
 

@@ -11,6 +11,7 @@ import com.cosmetica.Entities.User;
 @Repository
 public interface IUserDao  extends JpaRepository<User, Integer> {
 
+	Optional<User> findByUsernameOrEmail(String firstname, String lastname);
 	List<User> findByFirstnameOrLastnameLike(String firstname, String lastname);
 	List<User> findByUsernameOrEmailLike(String username,String email);
 	List<User> findByUsernameLike(String username);

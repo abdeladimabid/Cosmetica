@@ -30,12 +30,21 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/{admin_id}")
-	 public Optional <Admin> oneAdmin(@PathVariable("admin_id")int admin_id){
+	 @GetMapping("/admin/search/id/{admin_id}")
+	 public Optional <Admin> oneAdminById(@PathVariable("admin_id")int admin_id){
 		 
 		 if(!adminservice.getOneById(admin_id).isPresent())
 	         throw new CosmeticaException(admin_id );
 		 return adminservice.getOneById(admin_id);
+		 
+	 }
+	 
+	 @GetMapping("/admin/search/un/{username}")
+	 public List <Admin> oneAdminByUsername(@PathVariable("username")String username){
+		 
+		 if(adminservice.getOneByUsername(username).isEmpty())
+	         throw new CosmeticaException(username );
+		 return adminservice.getOneByUsername(username);
 		 
 	 }
 

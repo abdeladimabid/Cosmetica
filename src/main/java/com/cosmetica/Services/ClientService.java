@@ -29,9 +29,20 @@ public class ClientService implements IClientService{
 		return dao.findById(id);
 	}
 
+//	@Override
+//	public List<Client> getOneByUsername(String username) {
+//		List<String>id = dao.findByUsernameLike(username); 
+//		List<Client>clients = null;
+//		for (String i : id) {
+//			Client c =dao.findById(Integer.parseInt(i)).get();
+//			clients.add(c);
+//		}
+//		return clients;
+//	}
+	
 	@Override
-	public Optional<Client> getOneByUsername(String username) {
-		return dao.findByUsername(username); 
+	public List<Client> getOneByUsername(String username) {
+		return dao.findByUsernameLike(username);
 	}
 
 	@Override
@@ -80,18 +91,18 @@ public class ClientService implements IClientService{
 	}
 
 	@Override
-	public Optional<Client> getOneByEmail(String email) {
-		return dao.findByEmail(email); 
+	public List<Client> getOneByEmail(String email) {
+		return dao.findByEmailLike(email); 
 	}
 
 	@Override
-	public Optional<Client> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmail(username, email);
+	public List<Client> getOneByUsernameOrEmail(String username, String email) {
+		return dao.findByUsernameOrEmailLike(username, email);
 	}
 
 	@Override
 	public List<Client> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastname(firstname, lastname);
+		return dao.findByFirstnameOrLastnameLike(firstname, lastname);
 	}
 	
 
