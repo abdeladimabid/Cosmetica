@@ -17,5 +17,7 @@ public interface ICategoryService {
 	public void delete(Category category);
 	
 	public List<Product> getCategoryPruducts(Category Category);
+	
+	public List<Product> getProductsByCategory(Category category);
 
 }

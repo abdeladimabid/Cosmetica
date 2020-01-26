@@ -41,5 +41,10 @@ public class CategoryService implements ICategoryService{
 	public List<Product> getCategoryPruducts(Category Category) {
 		return Category.getProducts();
 	}
+	
+	@Override
+	public List<Product> getProductsByCategory(Category category){
+		return category.getProducts();
+	}
 
 }
