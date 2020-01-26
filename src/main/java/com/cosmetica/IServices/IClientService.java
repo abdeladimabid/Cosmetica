@@ -13,7 +13,7 @@ public interface IClientService {
 
 	public Optional<Client> getOneById(int id);
 	
-	public Optional<Client> getOneByUsername(String username);
+	public List<Client> getOneByUsername(String username);
 
 	public void saveOrUpdate(Client client);
 
@@ -29,9 +29,9 @@ public interface IClientService {
 	
 	public Optional<Client> verifyLogin(String username, String email);
 	
-	public Optional<Client> getOneByEmail(String email);
+	public List<Client> getOneByEmail(String email);
 	
-	public Optional<Client> getOneByUsernameOrEmail(String username,String email);
+	public List<Client> getOneByUsernameOrEmail(String username,String email);
 	
 	public List<Client> getOneByFirstnameOrLastname(String firstname,String lastname);
 

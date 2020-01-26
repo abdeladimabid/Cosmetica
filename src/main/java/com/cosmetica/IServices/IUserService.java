@@ -11,7 +11,7 @@ public interface IUserService {
 
 	public Optional<User> getOneById(int id);
 	
-	public Optional<User> getOneByUsername(String username);
+	public List<User> getOneByUsername(String username);
 
 	public void saveOrUpdate(User user);
 
@@ -21,9 +21,9 @@ public interface IUserService {
 	
 	public Optional<User> verifyLogin(String username, String email);
 	
-	public Optional<User> getOneByEmail(String email);
+	public List<User> getOneByEmail(String email);
 	
-	public Optional<User> getOneByUsernameOrEmail(String username,String email);
+	public List<User> getOneByUsernameOrEmail(String username,String email);
 	
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname);
 

@@ -12,7 +12,7 @@ public interface IAdminService {
 
 	public Optional<Admin> getOneById(int id);
 	
-	public Optional<Admin> getOneByUsername(String username);
+	public List<Admin> getOneByUsername(String username);
 
 	public void saveOrUpdate(Admin admin);
 
@@ -22,9 +22,9 @@ public interface IAdminService {
 	
 	public Optional<Admin> verifyLogin(String username, String email);
 	
-	public Optional<Admin> getOneByEmail(String email);
+	public List<Admin> getOneByEmail(String email);
 	
-	public Optional<Admin> getOneByUsernameOrEmail(String username,String email);
+	public List<Admin> getOneByUsernameOrEmail(String username,String email);
 	
 	public List<Admin> getOneByFirstnameOrLastname(String firstname,String lastname);
 }
