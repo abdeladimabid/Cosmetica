@@ -15,12 +15,8 @@ import com.cosmetica.Entities.Client;
 public interface IClientDao extends JpaRepository<Client , Integer>{
 
 	Optional<Client> findByUsernameOrEmail(String firstname, String lastname);
-	List<Client> findByFirstnameOrLastnameLike(String firstname, String lastname);
-	List<Client> findByUsernameOrEmailLike(String username,String email);
-	
-//	@Query("SELECT u.user_id FROM User u WHERE u.username LIKE CONCAT('%',:username,'%')")
-//	List<String> findByUsernameLike(@Param("username") String username);
-//	
-	List<Client> findByUsernameLike(String username);
-	List<Client> findByEmailLike(String email);
+	List<Client> findByFirstnameOrLastnameContaining(String firstname, String lastname);
+	List<Client> findByUsernameOrEmailContaining(String username,String email);	
+	List<Client> findByUsernameContaining(String username);
+	List<Client> findByEmailContaining(String email);
 }

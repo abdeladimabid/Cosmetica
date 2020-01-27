@@ -9,5 +9,5 @@ import com.cosmetica.Entities.Brand;
 @Repository
 public interface IBrandDao extends JpaRepository<Brand , Integer>{
 
-	List<Brand> findByNameLike(String name);
+	List<Brand> findByNameContaining(String name);
 }
