@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Brand;
 import com.cosmetica.Entities.Coupon;
+import com.cosmetica.Entities.Product;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IBrandService;
 
@@ -78,6 +79,22 @@ public class BrandController {
 	         throw new CosmeticaException(username );
 		 List<Brand> Brand = brandservice.getOneByBrandName(username);
 		 return brandservice.getBrandCoupons(Brand.get(0)); 
+	 }
+
+	 @GetMapping("/brand/products/id/{brand_id}")
+	 public List<Product> brandProductsById(@PathVariable("brand_id")int brand_id) {
+		 if(!brandservice.getOneById(brand_id).isPresent())
+	         throw new CosmeticaException(brand_id );
+		 Brand Brand = brandservice.getOneById(brand_id).get();
+		 return brandservice.getBrandProducts(Brand); 
+	 }
+	 
+	 @GetMapping("/brand/products/un/{username}")
+	 public List<Product> brandProductsByUsername(@PathVariable("username")String username) {
+		 if(brandservice.getOneByBrandName(username).isEmpty())
+	         throw new CosmeticaException(username );
+		 List<Brand> Brand = brandservice.getOneByBrandName(username);
+		 return brandservice.getBrandProducts(Brand.get(0)); 
 	 }
 
 }
