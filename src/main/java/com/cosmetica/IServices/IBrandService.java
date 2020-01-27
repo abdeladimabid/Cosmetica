@@ -18,9 +18,11 @@ public interface IBrandService {
 
 	public void delete(Brand brand);
 
-	public List<Product> getBrandProduct(Brand Brand);
+	public List<Product> getBrandProducts(Brand Brand);
 	
 	public List<Coupon> getBrandCoupons(Brand Brand);
+	
+	public List<Brand> getOneByBrandName(String username);
 	
 
 }

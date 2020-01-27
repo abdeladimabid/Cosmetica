@@ -1,30 +1,24 @@
 package com.cosmetica.Entities;
 
-import java.security.NoSuchAlgorithmException;
-
-import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Table(name="users")
+@Inheritance
 public class User {
 
 	@Id
@@ -32,98 +26,56 @@ public class User {
 	private int user_id;
 	
 	@Column(unique=true)
-	private String username;
-	private String user_firstname;
-	private String user_lastname;
+	protected String username;
+	protected String firstname;
+	protected String lastname;
 	@Column(unique=true)
-	private String email;
-	private String password;
-	private String adresse;
-	private String token;
-	private boolean active;
-	private double amount_spent;
-	
+	protected String email;
+	protected String password;
+	protected String token;
+	protected boolean active;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name="role_id",nullable = false)
-	private Role user_role;
-	
-	@OneToMany(mappedBy = "user_review",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Review> user_reviews;
-	
-	@OneToMany(mappedBy = "cart_user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Cart> carts;
+	protected Role user_role;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	protected Date inserted_at;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	protected Date updated_at;
 	
 
-	public User(String username, String email, String password, String token, boolean active, Role user_role) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public User(String username, String firstname, String lastname, String email, String password, String token,
+			boolean active, Role role) {
 		super();
 		this.username = username;
-		this.email = email;
-		this.token = token;
-		this.active = active;
-		this.user_role = user_role;
-		this.inserted_at = new Date();
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
-//		this.password = new BCryptPasswordEncoder().encode(password+salt);
-	}
-
-	
-	public User(String username,String user_firstname, String user_lastname, String email, String password, String adresse,
-			String token, boolean active, Role user_role) {
-		super();
-		this.user_firstname = user_firstname;
-		this.user_lastname = user_lastname;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
-		this.adresse = adresse;
 		this.token = token;
 		this.active = active;
-		this.user_role = user_role;
+		this.user_role = role;
 		this.inserted_at = new Date();
-		this.amount_spent = 0;
-		this.username = username;
+		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+		this.password = new BCryptPasswordEncoder().encode(password+salt);
 	}
-	
+
+	public Role getUser_role() {
+		return user_role;
+	}
+
+	public void setUser_role(Role user_role) {
+		this.user_role = user_role;
+	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public List<Review> getUser_reviews() {
-		return user_reviews;
-	}
-
-
-	public void setUser_reviews(List<Review> user_reviews) {
-		this.user_reviews = user_reviews;
-	}
-
-	public List<Cart> getCarts() {
-		return carts;
-	}
-
-
-	public void setCarts(List<Cart> carts) {
-		this.carts = carts;
-	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", user_firstname=" + user_firstname
-				+ ", user_lastname=" + user_lastname + ", email=" + email + ", password=" + password + ", adresse="
-				+ adresse + ", token=" + token + ", active=" + active + ", amount_spent=" + amount_spent
-				+ ", user_role=" + user_role + ", user_reviews=" + user_reviews + ", carts=" + carts + ", inserted_at="
-				+ inserted_at + ", updated_at=" + updated_at + "]";
-	}
-
 
 	public String getUsername() {
 		return username;
@@ -142,19 +94,19 @@ public class User {
 	}
 
 	public String getUser_firstname() {
-		return user_firstname;
+		return firstname;
 	}
 
 	public void setUser_firstname(String user_firstname) {
-		this.user_firstname = user_firstname;
+		this.firstname = user_firstname;
 	}
 
 	public String getUser_lastname() {
-		return user_lastname;
+		return lastname;
 	}
 
 	public void setUser_lastname(String user_lastname) {
-		this.user_lastname = user_lastname;
+		this.lastname = user_lastname;
 	}
 
 	public String getEmail() {
@@ -173,14 +125,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
 	public String getToken() {
 		return token;
 	}
@@ -195,14 +139,6 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public double getAmount_spent() {
-		return amount_spent;
-	}
-
-	public void setAmount_spent(double amount_spent) {
-		this.amount_spent = amount_spent;
 	}
 
 	public Date getInserted_at() {
@@ -221,12 +157,27 @@ public class User {
 		this.updated_at = updated_at;
 	}
 
-	public Role getUser_role() {
-		return user_role;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setUser_role(Role user_role) {
-		this.user_role = user_role;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", email=" + email + ", password=" + password + ", token=" + token + ", active=" + active
+				+ ", user_role=" + user_role + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + "]";
 	}
 	
 	

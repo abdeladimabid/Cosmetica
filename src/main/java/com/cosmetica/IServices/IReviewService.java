@@ -3,6 +3,7 @@ package com.cosmetica.IServices;
 import java.util.List;
 import java.util.Optional;
 
+import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.User;
 
@@ -20,6 +21,8 @@ public interface IReviewService {
 	public User getReviewUser(Review review);
 	
 	public String getReviewTimeSincePublished(Review Review);
+	
+	public Product getReviewProduct(Review review);
 	
 	
 
