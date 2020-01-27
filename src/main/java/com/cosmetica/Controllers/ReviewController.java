@@ -68,5 +68,14 @@ public class ReviewController {
 //		 return reviewservice.getReviewUser(review);
 //		 
 //	 }
+	 @GetMapping("/review/date/{review_id}")
+	 public String getReviewTimeSincePublished(@PathVariable("review_id")int review_id){
+		 
+		 if(!reviewservice.getOneById(review_id).isPresent())
+	         throw new CosmeticaException(review_id );
+		 Review review = reviewservice.getOneById(review_id).get();
+		 return reviewservice.getReviewTimeSincePublished(review);
+		 
+	 }
 	 
 }
