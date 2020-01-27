@@ -47,6 +47,6 @@ public class BrandService implements IBrandService{
 	}
 	
 	public List<Brand> getOneByBrandName(String username){
-		return dao.findByNameLike(username);
+		return dao.findByNameContaining(username);
 	}
 }

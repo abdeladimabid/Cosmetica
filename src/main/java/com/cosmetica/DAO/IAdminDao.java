@@ -12,9 +12,9 @@ import com.cosmetica.Entities.Admin;
 public interface IAdminDao  extends JpaRepository<Admin , Integer>{
 	
 	Optional<Admin> findByUsernameOrEmail(String firstname, String lastname);
-	List<Admin> findByFirstnameOrLastnameLike(String firstname, String lastname);
-	List<Admin> findByUsernameOrEmailLike(String username,String email);
-	List<Admin> findByUsernameLike(String username);
-	List<Admin> findByEmailLike(String email);
+	List<Admin> findByFirstnameOrLastnameContaining(String firstname, String lastname);
+	List<Admin> findByUsernameOrEmailContaining(String username,String email);
+	List<Admin> findByUsernameContaining(String username);
+	List<Admin> findByEmailContaining(String email);
 	
 }
