@@ -15,8 +15,11 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="reviews")
+@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "user_review","product_review"})
 public class Review {
 
 	@Id
@@ -24,7 +27,7 @@ public class Review {
 	private int review_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="client_id",nullable = false)
+	@JoinColumn (name="user_id",nullable = false)
 	private Client user_review;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -69,7 +72,7 @@ public class Review {
 		this.review_id = review_id;
 	}
 
-	public User getUser_review() {
+	public Client getUser_review() {
 		return user_review;
 	}
 

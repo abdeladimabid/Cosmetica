@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IReviewDao;
+import com.cosmetica.Entities.Client;
 import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.User;
@@ -40,7 +41,7 @@ public class ReviewService implements IReviewService{
 	}
 
 	@Override
-	public User getReviewUser(Review review) {
+	public Client getReviewUser(Review review) {
 		return review.getUser_review();
 	}
 
@@ -84,10 +85,6 @@ public class ReviewService implements IReviewService{
 		
 	}
 
-	@Override
-	public Product getReviewProduct(Review review) {
-		return review.getProduct_review();
-	}
 	
 
 

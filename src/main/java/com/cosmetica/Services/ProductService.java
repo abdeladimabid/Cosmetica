@@ -45,12 +45,11 @@ public class ProductService implements IProductService{
 		return product.getProduct_tags();
 	}
 	
-	public List<Image> getProductImages(Product product){
-		return product.getImages();
-	}
-	
 	public List<Review> getProductReviews(Product product){
 		return product.getProduct_reviews();
+	}
+	public List<Image> getProductImages(Product product){
+		return product.getImages();
 	}
 	
 	public float getProductStars(Product product){
@@ -66,13 +65,9 @@ public class ProductService implements IProductService{
 		return Precision.round(stars, 1);
 	}
 	
-	public boolean productInStock(Product product) {
-		List<Product> products = dao.findAll();
-		for (Product p : products) {
-			if(product.getProduct_ref()==p.getProduct_ref()) {
-				return true;}
-		}
-				return false;
+	public boolean productInStock(String ref) {
+		if(!dao.findByProductref(ref).isPresent()) return false;
+		return true;
 	}
 	
 //	public List<Product> productsSuggestionX(Product product){
