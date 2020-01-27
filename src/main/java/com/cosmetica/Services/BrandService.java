@@ -38,11 +38,15 @@ public class BrandService implements IBrandService{
 		dao.delete(Brand);
 	}
 	
-	public List<Product> getBrandProduct(Brand Brand){
+	public List<Product> getBrandProducts(Brand Brand){
 		return Brand.getProducts();
 	}
 	
 	public List<Coupon> getBrandCoupons(Brand Brand){
 		return Brand.getCoupons();
+	}
+	
+	public List<Brand> getOneByBrandName(String username){
+		return dao.findByNameLike(username);
 	}
 }

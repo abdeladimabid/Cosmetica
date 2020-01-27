@@ -37,8 +37,8 @@ public class Cart {@Id
 	private Date updated_at;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="user_id",nullable = false)
-	private User cart_user;
+	@JoinColumn (name="client_id",nullable = false)
+	private Client cart_user;
 	
 	@OneToMany(mappedBy = "order_cart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Order> orders;
@@ -52,7 +52,7 @@ public class Cart {@Id
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Cart(User cart_user, List<Order> orders) {
+	public Cart(Client cart_user, List<Order> orders) {
 		super();
 		this.cart_user = cart_user;
 		this.orders = orders;
@@ -103,7 +103,7 @@ public class Cart {@Id
 		return cart_user;
 	}
 
-	public void setCart_user(User cart_user) {
+	public void setCart_user(Client cart_user) {
 		this.cart_user = cart_user;
 	}
 

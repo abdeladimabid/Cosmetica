@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IUserDao;
-import com.cosmetica.Entities.Cart;
-import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.IUserService;
 
@@ -33,23 +31,23 @@ public class UserService implements IUserService{
 	
 	
 	@Override 
-	public Optional<User> getOneByUsername(String username) { 
-		return dao.findByUsername(username); 
+	public List<User> getOneByUsername(String username) { 
+		return dao.findByUsernameLike(username); 
 		}
 	  
 	@Override 
-	public Optional<User> getOneByEmail(String email) { 
-		return dao.findByEmail(email); 
+	public List<User> getOneByEmail(String email) { 
+		return dao.findByEmailLike(email); 
 		}
 	  
 	@Override
-	public Optional<User> getOneByUsernameOrEmail(String username,String email){
-		return dao.findByUsernameOrEmail(username, email);
+	public List<User> getOneByUsernameOrEmail(String username,String email){
+		return dao.findByUsernameOrEmailLike(username, email);
 	}
 	  
 	@Override 
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
-		return dao.findByFirstnameOrLastname(firstname, lastname);
+		return dao.findByFirstnameOrLastnameLike(firstname, lastname);
 	}
  
 
@@ -62,31 +60,10 @@ public class UserService implements IUserService{
 	public void delete(User user) {
 		dao.delete(user);
 	}
-
-	@Override
-	public List<Cart> getUserCart(User user) {
-		return user.getCarts();
-	}
-	
-	@Override
-	public Double getUserAmountSpent(User user) {
-		List<Cart> carts = user.getCarts();
-		double amount=0;
-		CartService cs = new CartService();
-		for (Cart c : carts) {
-			amount=amount+cs.getTotalAmount(c);
-		}
-		return amount; // this one need to be tested
-	}
 	
 	@Override
 	public Optional<User> verifyLogin(String username, String email) {
 		return dao.findByUsernameOrEmail(username, email);
-	}
-	
-	@Override
-	public List<Review> getUserReviews(User user) {
-		return user.getUser_reviews();
 	}
 
 	@Override

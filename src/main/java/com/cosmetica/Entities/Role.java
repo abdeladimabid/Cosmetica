@@ -16,8 +16,11 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="roles")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "users"})
 public class Role {
 	
 	@Id
@@ -32,12 +35,10 @@ public class Role {
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
 	private Date updated_at;
-	
+
 	@OneToMany(mappedBy = "user_role",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<User> users;
 	
-	
-
 	public Role(String label) {
 		super();
 		this.label = label;

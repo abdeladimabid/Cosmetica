@@ -1,6 +1,5 @@
 package com.cosmetica.Services;
 
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,10 +47,6 @@ public class ProductService implements IProductService{
 	
 	public List<Image> getProductImages(Product product){
 		return product.getImages();
-	}
-	
-	public List<Product> getProductsByCategory(String category){
-		return dao.findByCategory(category);
 	}
 	
 	public List<Review> getProductReviews(Product product){

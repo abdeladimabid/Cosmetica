@@ -24,8 +24,8 @@ public class Review {
 	private int review_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="user_id",nullable = false)
-	private User user_review;
+	@JoinColumn (name="client_id",nullable = false)
+	private Client user_review;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name="product_id",nullable = false)
@@ -45,7 +45,7 @@ public class Review {
 	private Date updated_at;
 	
 
-	public Review(User user_review, Product product_review, int stars, String title, String body) {
+	public Review(Client user_review, Product product_review, int stars, String title, String body) {
 		super();
 		this.user_review = user_review;
 		this.product_review = product_review;
@@ -73,7 +73,7 @@ public class Review {
 		return user_review;
 	}
 
-	public void setUser_review(User user_review) {
+	public void setUser_review(Client user_review) {
 		this.user_review = user_review;
 	}
 
