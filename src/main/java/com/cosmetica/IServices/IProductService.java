@@ -22,7 +22,7 @@ public interface IProductService {
 	
 	public List<Image> getProductImages(Product product);
 	
-	public boolean productInStock(Product product);
+	public boolean productInStock(String ref);
 	
 	public List<Review> getProductReviews(Product product);
 	

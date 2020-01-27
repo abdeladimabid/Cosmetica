@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
+
 public class Client extends User{
 
 	private String adresse;

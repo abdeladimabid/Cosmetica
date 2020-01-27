@@ -26,7 +26,7 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int product_id;
-	private String product_ref;
+	private String productref;// needs to be fixed
 	private String product_name;
 	private String product_title;
 	private String product_sub_title;
@@ -80,7 +80,7 @@ public class Product {
 			String description, Double regular_price, int quantity, String meta_title, String meta_keywords,
 			Category category, List<Tag> tags, List<Image> images, Brand brand, int tax) {
 		super();
-		this.product_ref = product_ref;
+		this.productref = product_ref;
 		this.product_name = product_name;
 		this.product_title = product_title;
 		this.product_sub_title = product_sub_title;
@@ -114,12 +114,15 @@ public class Product {
 		this.product_id = product_id;
 	}
 
-	public String getProduct_ref() {
-		return product_ref;
+	
+
+
+	public String getProductref() {
+		return productref;
 	}
 
-	public void setProduct_ref(String product_ref) {
-		this.product_ref = product_ref;
+	public void setProductref(String productref) {
+		this.productref = productref;
 	}
 
 	public String getProduct_name() {
@@ -276,7 +279,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", product_ref=" + product_ref + ", product_name=" + product_name
+		return "Product [product_id=" + product_id + ", productRef=" + productref + ", product_name=" + product_name
 				+ ", product_title=" + product_title + ", product_sub_title=" + product_sub_title + ", description="
 				+ description + ", regular_price=" + regular_price + ", discount=" + discount + ", quantity=" + quantity
 				+ ", status=" + status + ", tax=" + tax + ", hash=" + hash + ", meta_title=" + meta_title
@@ -285,6 +288,7 @@ public class Product {
 				+ ", product_brand=" + product_brand + ", orders=" + orders + ", product_reviews=" + product_reviews
 				+ "]";
 	}
+
 
 
 
