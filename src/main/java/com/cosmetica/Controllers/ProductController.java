@@ -30,7 +30,7 @@ public class ProductController {
 		 
 	 }
 	 
-	 @GetMapping("/product/{product_id}")
+	 @GetMapping("/product/search/id/{product_id}")
 	 public Optional <Product> oneProduct(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())

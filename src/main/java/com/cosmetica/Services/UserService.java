@@ -32,22 +32,22 @@ public class UserService implements IUserService{
 	
 	@Override 
 	public List<User> getOneByUsername(String username) { 
-		return dao.findByUsernameLike(username); 
+		return dao.findByUsernameContaining(username); 
 		}
 	  
 	@Override 
 	public List<User> getOneByEmail(String email) { 
-		return dao.findByEmailLike(email); 
+		return dao.findByEmailContaining(email); 
 		}
 	  
 	@Override
 	public List<User> getOneByUsernameOrEmail(String username,String email){
-		return dao.findByUsernameOrEmailLike(username, email);
+		return dao.findByUsernameOrEmailContaining(username, email);
 	}
 	  
 	@Override 
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname){ 
-		return dao.findByFirstnameOrLastnameLike(firstname, lastname);
+		return dao.findByFirstnameOrLastnameContaining(firstname, lastname);
 	}
  
 
