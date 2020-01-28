@@ -26,7 +26,7 @@ public class CategoryController {
 	@Autowired
 	ICategoryService categoryservice;
 	
-	@GetMapping("/cateories")
+	@GetMapping("/categories")
 	public List<Category> allCategories(){
 		List<Category> category = categoryservice.getAll();
 		return category;
@@ -41,7 +41,7 @@ public class CategoryController {
 		 return categoryservice.getOneById(category_id);
 		 
 	 }
-	@GetMapping("/cateory/children/{category_id}")
+	@GetMapping("/category/children/{category_id}")
 	public List<Category> allCategoryChlidren(@PathVariable("category_id")int category_id){
 		
 		if(!categoryservice.getOneById(category_id).isPresent())

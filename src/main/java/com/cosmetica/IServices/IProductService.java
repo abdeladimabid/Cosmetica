@@ -26,7 +26,7 @@ public interface IProductService {
 	
 	public List<Review> getProductReviews(Product product);
 	
-	public float getProductStars(Product product);
+	public float getProductStars(Product product);//not yet
   
 
 
