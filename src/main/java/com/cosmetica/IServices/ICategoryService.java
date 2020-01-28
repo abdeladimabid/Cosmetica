@@ -18,6 +18,6 @@ public interface ICategoryService {
 	
 	public List<Product> getCategoryPruducts(Category Category);
 	
-	public List<Product> getProductsByCategory(Category category);
+	public List<Category> getCategoryChildren(Category category);
 
 }
