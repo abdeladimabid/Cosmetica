@@ -35,7 +35,7 @@ public class ClientController {
 	 }
 	 
 	 @GetMapping("/client/{client_id}")
-	 public Optional <Client> oneClientById(@PathVariable("client_id")int client_id){
+	 public Optional <Client> oneClient(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
@@ -44,7 +44,7 @@ public class ClientController {
 	 }
 	 
 	 @GetMapping("/client/{username}")
-	 public List <Client> oneClientByUsername(@PathVariable("username")String username){
+	 public List <Client> ClientByUsername(@PathVariable("username")String username){
 		 
 		 if(clientservice.getOneByUsername(username).isEmpty())
 	         throw new CosmeticaException(username);

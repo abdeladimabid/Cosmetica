@@ -34,7 +34,7 @@ public class AdminController {
 	 }
 	 
 	 @GetMapping("/admin/{admin_id}")
-	 public Optional <Admin> oneAdminById(@PathVariable("admin_id")int admin_id){
+	 public Optional <Admin> oneAdmin(@PathVariable("admin_id")int admin_id){
 		 
 		 if(!adminservice.getOneById(admin_id).isPresent())
 	         throw new CosmeticaException(admin_id );
@@ -43,7 +43,7 @@ public class AdminController {
 	 }
 	 
 	 @GetMapping("/admin/{username}")
-	 public List <Admin> oneAdminByUsername(@PathVariable("username")String username){
+	 public List <Admin> AdminByUsername(@PathVariable("username")String username){
 		 
 		 if(adminservice.getOneByUsername(username).isEmpty())
 	         throw new CosmeticaException(username );

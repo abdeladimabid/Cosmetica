@@ -31,14 +31,14 @@ public class CouponController {
 	ICouponService couponservice;
 	
 	 @GetMapping("/coupons")
-	 public List<Coupon > allProducts() {
+	 public List<Coupon > allCoupons() {
 		List<Coupon> coupons = couponservice.getAll();
 		return coupons;
 		 
 	 }
 	 
 	 @GetMapping("/coupon/{coupon_id}")
-	 public Optional <Coupon> oneProduct(@PathVariable("coupon_id")int coupon_id){
+	 public Optional <Coupon> oneCoupon(@PathVariable("coupon_id")int coupon_id){
 		 if(!couponservice.getOneById(coupon_id).isPresent())
 	         throw new CosmeticaException(coupon_id );
 		 return couponservice.getOneById(coupon_id);
@@ -46,7 +46,7 @@ public class CouponController {
 	 }
 	 
 	 @GetMapping("/brand/coupon/{coupon_id}")
-	 public Brand getBrandCoupon(@PathVariable("coupon_id")int coupon_id,Coupon Coupon) {
+	 public Brand BrandCoupon(@PathVariable("coupon_id")int coupon_id,Coupon Coupon) {
 		 if(!couponservice.getOneById(coupon_id).isPresent())
 	         throw new CosmeticaException(coupon_id );
 		 Coupon coupon=couponservice.getOneById(coupon_id).get();
@@ -72,7 +72,7 @@ public class CouponController {
 	 }
 	 
 	 @DeleteMapping("/remove/coupon/{coupon_id}")
-	 public void removeProduct(@PathVariable("coupon_id")int coupon_id) {
+	 public void removeCoupon(@PathVariable("coupon_id")int coupon_id) {
 		 if(!couponservice.getOneById(coupon_id).isPresent())
 	         throw new CosmeticaException(coupon_id );
 		 Coupon coupon=couponservice.getOneById(coupon_id).get();

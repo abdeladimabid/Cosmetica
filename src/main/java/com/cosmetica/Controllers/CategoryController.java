@@ -36,7 +36,7 @@ public class CategoryController {
 	}
 	
 	 @GetMapping("/category/{category_id}")
-	 public Optional<Category> onecategory(@PathVariable("category_id")int category_id){
+	 public Optional<Category> oneCategory(@PathVariable("category_id")int category_id){
 		 
 		 if(!categoryservice.getOneById(category_id).isPresent())
 	         throw new CosmeticaException(category_id );
@@ -66,7 +66,7 @@ public class CategoryController {
 	 }
 	 
 	 @DeleteMapping("/remove/category/{category_id}")
-	 public void removeProduct(@PathVariable("category_id")int category_id) {
+	 public void removeCategory(@PathVariable("category_id")int category_id) {
 		 if(!categoryservice.getOneById(category_id).isPresent())
 	         throw new CosmeticaException(category_id );
 		 Category category=categoryservice.getOneById(category_id).get();

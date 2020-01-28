@@ -49,7 +49,7 @@ public class RoleController {
 		 
 	 }
 	 @PutMapping("/modify/role")
-	 public void modifuRole(@RequestBody Role Role) {
+	 public void modifyRole(@RequestBody Role Role) {
 		 Roleservice.saveOrUpdate(Role);
 		 
 	 }

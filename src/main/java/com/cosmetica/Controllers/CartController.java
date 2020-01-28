@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Cart;
+import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.Order;
-import com.cosmetica.Entities.Product;
+
 import com.cosmetica.Entities.User;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ICartService;
@@ -38,7 +39,7 @@ public class CartController {
 	 }
 	 
 	 @GetMapping("/cart/{cart_id}")
-	 public Optional <Cart> oneProduct(@PathVariable("cart_id")int cart_id){
+	 public Optional <Cart> oneCart(@PathVariable("cart_id")int cart_id){
 		 
 		 if(!cartservice.getOneById(cart_id).isPresent())
 	         throw new CosmeticaException(cart_id );
@@ -67,7 +68,7 @@ public class CartController {
 	 }
 
 	 @GetMapping("/cart/user/{cart_id}")
-	 public User getCartUser(@PathVariable("cart_id")int cart_id){
+	 public User cartUser(@PathVariable("cart_id")int cart_id){
 		 if(!cartservice.getOneById(cart_id).isPresent())
 	         throw new CosmeticaException(cart_id );
 		 Cart cart=cartservice.getOneById(cart_id).get();
@@ -76,7 +77,7 @@ public class CartController {
 	 }
 	 
 	 @GetMapping("/cart/orders/{cart_id}")
-	 public List<Order> CartOrders(@PathVariable("cart_id")int cart_id){
+	 public List<Order> cartOrders(@PathVariable("cart_id")int cart_id){
 		 if(!cartservice.getOneById(cart_id).isPresent())
 	         throw new CosmeticaException(cart_id );
 		Cart cart=cartservice.getOneById(cart_id).get();
@@ -85,5 +86,24 @@ public class CartController {
 		 
 		 
 	 }
+	 @GetMapping("/cart/invoiceBody/{cart_id}")
+	  public InvoiceBody cartInvoiceHeads(@PathVariable("cart_id")int cart_id) {
+		 if(!cartservice.getOneById(cart_id).isPresent())
+	         throw new CosmeticaException(cart_id );
+		   Cart cart=cartservice.getOneById(cart_id).get();
+		 return cartservice.getCartInvoiceHeads(cart);
+		 
+	 }
+	 
+	 @GetMapping("/cart/anoumnt/{cart_id}")
+	 public double totalAmount(@PathVariable("cart_id")int cart_id) {
+		 if(!cartservice.getOneById(cart_id).isPresent())
+	         throw new CosmeticaException(cart_id );
+		   Cart cart=cartservice.getOneById(cart_id).get();
+		 return cartservice.getTotalAmount(cart);
+		 
+		 
+	 }
+	 
 	 
 }

@@ -36,7 +36,7 @@ public class BrandController {
 	 }
 	 
 	 @GetMapping("/brand/{brand_id}")
-	 public Optional <Brand> oneBrandById(@PathVariable("brand_id")int brand_id){
+	 public Optional <Brand> oneBrand(@PathVariable("brand_id")int brand_id){
 		 
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -45,7 +45,7 @@ public class BrandController {
 	 }
 	 
 	 @GetMapping("/brand/{username}")
-	 public List <Brand> oneBrandByUsername(@PathVariable("username")String username){
+	 public List <Brand> BrandByUsername(@PathVariable("username")String username){
 		 
 		 if(brandservice.getOneByBrandName(username).isEmpty())
 	         throw new CosmeticaException(username );
