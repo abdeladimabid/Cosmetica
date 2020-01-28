@@ -30,8 +30,8 @@ public class BrandController {
 	
 	@GetMapping("/brands")
 	 public List<Brand> allBrands() {
-		List<Brand> Brand = brandservice.getAll();
-		return Brand;
+		List<Brand> brands = brandservice.getAll();
+		return brands;
 		 
 	 }
 	 

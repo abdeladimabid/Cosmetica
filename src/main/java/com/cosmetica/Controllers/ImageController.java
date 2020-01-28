@@ -27,8 +27,8 @@ public class ImageController {
 	
 	 @GetMapping("/images")
 	 public List<Image> allImages() {
-		List<Image> img = imgservice.getAll();
-		return img;
+		List<Image> imgs = imgservice.getAll();
+		return imgs;
 		 
 	 }
 	 

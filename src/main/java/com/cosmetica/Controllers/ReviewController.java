@@ -33,8 +33,8 @@ public class ReviewController {
 	
 	@GetMapping("/reviews")
 	 public List<Review> allReviews() {
-		List<Review> review = reviewservice.getAll();
-		return review;
+		List<Review> reviews = reviewservice.getAll();
+		return reviews;
 		 
 	 }
 	 

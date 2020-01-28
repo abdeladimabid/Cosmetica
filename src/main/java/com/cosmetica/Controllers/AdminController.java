@@ -28,8 +28,8 @@ public class AdminController {
 	
 	@GetMapping("/admins")
 	 public List<Admin> allAdmins() {
-		List<Admin> admin = adminservice.getAll();
-		return admin;
+		List<Admin> admins = adminservice.getAll();
+		return admins;
 		 
 	 }
 	 

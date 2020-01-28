@@ -33,8 +33,8 @@ public class CartController {
 	
 	 @GetMapping("/carts")
 	 public List<Cart > allCarts() {
-		List<Cart> produit = cartservice.getAll();
-		return produit;
+		List<Cart> carts = cartservice.getAll();
+		return carts;
 		 
 	 }
 	 

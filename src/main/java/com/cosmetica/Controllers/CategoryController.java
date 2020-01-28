@@ -30,8 +30,8 @@ public class CategoryController {
 	
 	@GetMapping("/categories")
 	public List<Category> allCategories(){
-		List<Category> category = categoryservice.getAll();
-		return category;
+		List<Category> categories = categoryservice.getAll();
+		return categories;
 
 	}
 	

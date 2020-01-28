@@ -30,8 +30,8 @@ public class TagController {
 	
 	@GetMapping("/tags")
 	 public List<Tag> allTags() {
-		List<Tag> Tag = tagservice.getAll();
-		return Tag;
+		List<Tag> Tags = tagservice.getAll();
+		return Tags;
 		 
 	 }
 	 
