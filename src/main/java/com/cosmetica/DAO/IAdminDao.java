@@ -15,6 +15,6 @@ public interface IAdminDao  extends JpaRepository<Admin , Integer>{
 	List<Admin> findByFirstnameOrLastnameContaining(String firstname, String lastname);
 	List<Admin> findByUsernameOrEmailContaining(String username,String email);
 	List<Admin> findByUsernameContaining(String username);
-	List<Admin> findByEmailContaining(String email);
+	Optional<Admin> findByEmail(String email);
 	
 }

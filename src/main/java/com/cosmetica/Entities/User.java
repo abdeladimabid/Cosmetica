@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 
 import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +30,7 @@ public class User {
 	protected String username;
 	protected String firstname;
 	protected String lastname;
+	@Email
 	@Column(unique=true)
 	protected String email;
 	protected String password;
@@ -60,7 +62,7 @@ public class User {
 		this.active = active;
 		this.user_role = role;
 		this.inserted_at = new Date();
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		this.password = new BCryptPasswordEncoder().encode(password+salt);
 	}
 
