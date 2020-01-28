@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Role;
+import com.cosmetica.Entities.User;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IRoleService;
 
@@ -50,6 +51,15 @@ public class RoleController {
 	         throw new CosmeticaException(role_id );
 		 Role Role = Roleservice.getOneById(role_id).get();
 		 Roleservice.delete(Role); 
+		 
+	 }
+	 
+	 @GetMapping("/roles/{role_id}")// all users that have this role
+	 public List<User> allClientsWithRole(@PathVariable("role_id")int role_id) {
+		 if(!Roleservice.getOneById(role_id).isPresent())throw new CosmeticaException(role_id);
+		 Role role = Roleservice.getOneById(role_id).get();
+		List<User> user = Roleservice.getUsersWithRole(role);
+		return user;
 		 
 	 }
 

@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IImageDao;
 import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Product;
 import com.cosmetica.IServices.IImageService;
-
+@Service
 public class ImageService implements IImageService{
 	
 	public static String uploadDirectory = System.getProperty("user.dir")+ "/uploads";
@@ -37,10 +38,6 @@ public class ImageService implements IImageService{
 		dao.delete(Image);
 	}
 	
-	@Override
-	public Product getImagePost(Image image) {
-		return image.getProduct_image();
-	}
 
 //	@Override
 //	public void uploadImage(MultipartFile image) throws Exception {
