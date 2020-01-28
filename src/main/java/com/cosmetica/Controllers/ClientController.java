@@ -72,7 +72,7 @@ public class ClientController {
 	 
 	 @GetMapping("/client/search/email/{email}")
 	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
-		 if(clientservice.getOneByEmail(email).isPresent())
+		 if(!clientservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
 		 return clientservice.getOneByEmail(email); 
 	 }

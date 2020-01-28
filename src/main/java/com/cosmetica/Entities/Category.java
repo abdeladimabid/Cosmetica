@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="categories")
-@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "products"})
+@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "products", "children"})
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,8 +63,9 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [category_id=" + category_id + ", label=" + label + ", parent_id=" + parent + ", products="
-				+ products + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + "]";
+		return "Category [category_id=" + category_id + ", label=" + label + ", parent=" + parent + ", children="
+				+ children + ", products=" + products + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at
+				+ "]";
 	}
 
 	public int getCategory_id() {
@@ -73,6 +74,22 @@ public class Category {
 
 	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
+	}
+
+	public Category getParent() {
+		return parent;
+	}
+
+	public void setParent(Category parent) {
+		this.parent = parent;
+	}
+
+	public List<Category> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Category> children) {
+		this.children = children;
 	}
 
 	public String getLabel() {
