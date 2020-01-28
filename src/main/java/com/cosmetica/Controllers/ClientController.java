@@ -40,7 +40,7 @@ public class ClientController {
 	 }
 	 
 	 @GetMapping("/client/search/un/{username}")
-	 public List <Client> oneClientByUsername(@PathVariable("username")String username){
+	 public List <Client> ClientsByUsername(@PathVariable("username")String username){
 		 
 		 if(clientservice.getOneByUsername(username).isEmpty())
 	         throw new CosmeticaException(username);
@@ -61,6 +61,20 @@ public class ClientController {
 		 Client Client = clientservice.getOneById(client_id).get();
 		 clientservice.delete(Client); 
 		 
+	 }
+	 
+	 @GetMapping("/client/verifylogin/{log}")
+	 public boolean verifyClientByUsername(@PathVariable("log")String log){
+		 if(!clientservice.verifyLogin(log,log).isPresent()) return false;
+		 return true;
+		 
+	 }
+	 
+	 @GetMapping("/client/search/email/{email}")
+	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
+		 if(clientservice.getOneByEmail(email).isPresent())
+	         throw new CosmeticaException(email);
+		 return clientservice.getOneByEmail(email); 
 	 }
 
 }

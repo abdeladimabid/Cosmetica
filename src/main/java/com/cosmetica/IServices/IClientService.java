@@ -29,7 +29,7 @@ public interface IClientService {
 	
 	public Optional<Client> verifyLogin(String username, String email);
 	
-	public List<Client> getOneByEmail(String email);
+	public Optional<Client> getOneByEmail(String email);
 	
 	public List<Client> getOneByUsernameOrEmail(String username,String email);
 	

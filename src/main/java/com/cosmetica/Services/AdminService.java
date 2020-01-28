@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IAdminDao;
 import com.cosmetica.Entities.Admin;
+import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IAdminService;
 
 @Service
@@ -45,8 +46,10 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public boolean verifyPassword(Admin admin, String password) {
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+	public boolean verifyPassword(int id, String password) {
+		if(!dao.findById(id).isPresent())throw new CosmeticaException(id );
+		Admin admin = dao.findById(id).get();
+		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		String hash = new BCryptPasswordEncoder().encode(password+salt);
 		return admin.getPassword().matches(hash);
 	}
@@ -57,8 +60,8 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public List<Admin> getOneByEmail(String email) {
-		return dao.findByEmailContaining(email); 
+	public Optional<Admin> getOneByEmail(String email) {
+		return dao.findByEmail(email); 
 	}
 
 	@Override
