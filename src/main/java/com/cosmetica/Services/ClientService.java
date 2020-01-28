@@ -80,8 +80,8 @@ public class ClientService implements IClientService{
 	}
 
 	@Override
-	public List<Client> getOneByEmail(String email) {
-		return dao.findByEmailContaining(email); 
+	public Optional<Client> getOneByEmail(String email) {
+		return dao.findByEmail(email); 
 	}
 
 	@Override
