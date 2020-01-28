@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class ProductController {
 		 
 	 }
 	 
-	 @GetMapping("/product/search/id/{product_id}")
+	 @GetMapping("/product/{product_id}")
 	 public Optional <Product> oneProduct(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())
@@ -42,12 +43,18 @@ public class ProductController {
 		 
 	 }
 
-	 @PostMapping("/product")
+	 @PostMapping("/add/product")
 	 public void addProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
 		 
 	 }
-	 @DeleteMapping("/remove/{product_id}")
+	 @PutMapping("/modify/product")
+	 public void modifyProduct(@RequestBody Product produit) {
+		 productservice.saveOrUpdate(produit);
+		 
+	 }
+	 
+	 @DeleteMapping("/remove/product/{product_id}")
 	 public void removeProduct(@PathVariable("product_id")int product_id) {
 		 if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );

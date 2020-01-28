@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/search/id/{admin_id}")
+	 @GetMapping("/admin/{admin_id}")
 	 public Optional <Admin> oneAdminById(@PathVariable("admin_id")int admin_id){
 		 
 		 if(!adminservice.getOneById(admin_id).isPresent())
@@ -39,7 +40,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/search/un/{username}")
+	 @GetMapping("/admin/{username}")
 	 public List <Admin> oneAdminByUsername(@PathVariable("username")String username){
 		 
 		 if(adminservice.getOneByUsername(username).isEmpty())
@@ -48,13 +49,17 @@ public class AdminController {
 		 
 	 }
 
-	 @PostMapping("/admin")
+	 @PostMapping("/add/admin")
 	 public void addAdmin(@RequestBody Admin admin) {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
-	 
-	 @DeleteMapping("/admin/remove/{admin_id}")
+	 @PutMapping("/modify/admin")
+	 public void modifyAdmin(@RequestBody Admin admin) {
+		 adminservice.saveOrUpdate(admin);
+		 
+	 }
+	 @DeleteMapping("/remove/admin/{admin_id}")
 	 public void removeAdmin(@PathVariable("admin_id")int admin_id) {
 		 if(!adminservice.getOneById(admin_id).isPresent())
 	         throw new CosmeticaException(admin_id );

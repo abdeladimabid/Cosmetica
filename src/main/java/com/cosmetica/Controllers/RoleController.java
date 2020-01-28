@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,12 +41,17 @@ public class RoleController {
 		 
 	 }
 
-	 @PostMapping("/role")
+	 @PostMapping("/add/role")
 	 public void addRole(@RequestBody Role Role) {
 		 Roleservice.saveOrUpdate(Role);
 		 
 	 }
-	 @DeleteMapping("/role/remove/{role_id}")
+	 @PutMapping("/modify/role")
+	 public void modifuRole(@RequestBody Role Role) {
+		 Roleservice.saveOrUpdate(Role);
+		 
+	 }
+	 @DeleteMapping("/remove/role/{role_id}")
 	 public void removeRole(@PathVariable("role_id")int role_id) {
 		 if(!Roleservice.getOneById(role_id).isPresent())
 	         throw new CosmeticaException(role_id );

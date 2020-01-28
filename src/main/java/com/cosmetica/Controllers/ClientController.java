@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/search/id/{client_id}")
+	 @GetMapping("/client/{client_id}")
 	 public Optional <Client> oneClientById(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
@@ -39,7 +40,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/search/un/{username}")
+	 @GetMapping("/client/{username}")
 	 public List <Client> oneClientByUsername(@PathVariable("username")String username){
 		 
 		 if(clientservice.getOneByUsername(username).isEmpty())
@@ -48,13 +49,18 @@ public class ClientController {
 		 
 	 }
 
-	 @PostMapping("/client")
+	 @PostMapping("/add/client")
 	 public void addClient(@RequestBody Client Client) {
 		 clientservice.saveOrUpdate(Client);
 		 
 	 }
+	 @PutMapping("/modify/client")
+	 public void modifyClient(@RequestBody Client Client) {
+		 clientservice.saveOrUpdate(Client);
+		 
+	 }
 	 
-	 @DeleteMapping("/client/remove/{client_id}")
+	 @DeleteMapping("/remove/client/{client_id}")
 	 public void removeClient(@PathVariable("client_id")int client_id) {
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
