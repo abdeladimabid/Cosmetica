@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.Client;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IClientService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class ClientController {
 	
@@ -64,8 +67,18 @@ public class ClientController {
 	 public void removeClient(@PathVariable("client_id")int client_id) {
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
-		 Client Client = clientservice.getOneById(client_id).get();
-		 clientservice.delete(Client); 
+		 Client client = clientservice.getOneById(client_id).get();
+		 clientservice.delete(client); 
+		 
+	 }
+	 
+	 @GetMapping("/cart/client/{client_id}")
+	 public List<Cart> ClientCart(@PathVariable("client_id")int client_id){
+		 if(!clientservice.getOneById(client_id).isPresent())
+	         throw new CosmeticaException(client_id );
+		 Client client = clientservice.getOneById(client_id).get();
+		 List<Cart> carts=clientservice.getClientCart(client);
+		 return carts;
 		 
 	 }
 

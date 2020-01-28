@@ -1,9 +1,11 @@
 package com.cosmetica.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import com.cosmetica.IServices.IProductService;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class ProductController {
 	@Autowired
@@ -97,6 +100,24 @@ public class ProductController {
 		return productservice.productInStock(ref);
 	 
 	 }
+	 
+	 @GetMapping("/product/rating/{rate}")
+     public List<Product> ProductsByRate(@PathVariable("rate")int rate) {
+        List<Product> products = productservice.getAll();
+        List<Product> listprod= new ArrayList<>();
+        for(Product p : products) {
+            if(Math.round(productservice.getProductStars(p))==rate) listprod.add(p);
+        }
+        return listprod;
+     }
+	 
+	 @GetMapping("/product/rate/{product_id}")
+     public float ProductRate(@PathVariable("product_id")int product_id) {
+		 if(!productservice.getOneById(product_id).isPresent())
+	        throw new CosmeticaException(product_id );
+		 	Product product=productservice.getOneById(product_id).get();
+            return productservice.getProductStars(product);
+     }
 	 
 	 
 }
