@@ -1,6 +1,7 @@
 package com.cosmetica.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Category;
 import com.cosmetica.Entities.Product;
+import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ICategoryService;
 
@@ -31,6 +33,14 @@ public class CategoryController {
 
 	}
 	
+	 @GetMapping("/category/{category_id}")
+	 public Optional<Category> onecategory(@PathVariable("category_id")int category_id){
+		 
+		 if(!categoryservice.getOneById(category_id).isPresent())
+	         throw new CosmeticaException(category_id );
+		 return categoryservice.getOneById(category_id);
+		 
+	 }
 	@GetMapping("/cateory/children/{category_id}")
 	public List<Category> allCategoryChlidren(@PathVariable("category_id")int category_id){
 		
@@ -59,6 +69,16 @@ public class CategoryController {
 	         throw new CosmeticaException(category_id );
 		 Category category=categoryservice.getOneById(category_id).get();
 		 categoryservice.delete(category); 
+		 
+	 }
+	 
+	 @GetMapping("/category/products/{category_id}")
+	 public List<Product> getCategoryPruducts(@PathVariable("category_id")int category_id){
+		 if(!categoryservice.getOneById(category_id).isPresent())
+	         throw new CosmeticaException(category_id );
+		   Category category=categoryservice.getOneById(category_id).get();
+		   List<Product> products=categoryservice.getCategoryPruducts(category);
+		   return products;
 		 
 	 }
 
