@@ -58,7 +58,8 @@ public class ProductController {
 	 public void removeProduct(@PathVariable("product_id")int product_id) {
 		 if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );
-		 productservice.delete(product_id); 
+		 Product product=productservice.getOneById(product_id).get();
+		 productservice.delete(product); 
 		 
 	 }
 	 @GetMapping("/product/tags/{product_id}")
