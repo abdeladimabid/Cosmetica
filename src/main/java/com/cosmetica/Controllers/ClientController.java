@@ -34,7 +34,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/{client_id}")
+	 @GetMapping("/client/id/{client_id}")
 	 public Optional <Client> oneClient(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
@@ -89,7 +89,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/search/email/{email}")
+	 @GetMapping("/client/email/{email}")
 	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
 		 if(!clientservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
