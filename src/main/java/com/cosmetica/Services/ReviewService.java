@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IReviewDao;
 import com.cosmetica.Entities.Client;
-import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
-import com.cosmetica.Entities.User;
 import com.cosmetica.IServices.IReviewService;
 
 @Service
@@ -42,7 +40,7 @@ public class ReviewService implements IReviewService{
 
 	@Override
 	public Client getReviewUser(Review review) {
-		return review.getUser_review();
+		return review.getUserReview();
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class ReviewService implements IReviewService{
 		String result = null;
 		
 		Date now = new Date();
-		Long diff = now.getTime() - Review.getInserted_at().getTime();
+		Long diff = now.getTime() - Review.getInsertedAt().getTime();
 		
 		diff = diff / 1000;
 

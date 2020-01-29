@@ -39,6 +39,6 @@ public class InvoiceHeadService implements IInvoiceHeadService{
 	
 	@Override
 	public InvoiceBody getBody(InvoiceHead InvoiceHead) {
-		return InvoiceHead.getHead_body();
+		return InvoiceHead.getHeadBody();
 	}
 }

@@ -26,34 +26,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int category_id;
+	private int categoryId;
 	private String label;
 	
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent", referencedColumnName = "category_id")
+    @JoinColumn(name = "parent", referencedColumnName = "categoryId")
     private Category parent;
  
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Category> children;
 	
-	@OneToMany(mappedBy = "product_category",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "productCategory",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Product> products;
 
 
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 
 	public Category(String label, Category parent) {
 		super();
 		this.label = label;
 		this.parent = parent;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 	}
 
 	public Category() {
@@ -63,17 +63,17 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [category_id=" + category_id + ", label=" + label + ", parent=" + parent + ", children="
-				+ children + ", products=" + products + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at
+		return "Category [category_id=" + categoryId + ", label=" + label + ", parent=" + parent + ", children="
+				+ children + ", products=" + products + ", inserted_at=" + insertedAt + ", updated_at=" + updatedAt
 				+ "]";
 	}
 
-	public int getCategory_id() {
-		return category_id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(int category_id) {
+		this.categoryId = category_id;
 	}
 
 	public Category getParent() {
@@ -100,14 +100,6 @@ public class Category {
 		this.label = label;
 	}
 
-	public Category getParent_id() {
-		return parent;
-	}
-
-	public void setParent_id(Category parent_id) {
-		this.parent = parent_id;
-	}
-
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -116,20 +108,20 @@ public class Category {
 		this.products = products;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date inserted_at) {
+		this.insertedAt = inserted_at;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updated_at) {
+		this.updatedAt = updated_at;
 	}
 	
 	

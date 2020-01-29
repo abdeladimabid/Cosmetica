@@ -60,7 +60,7 @@ public class ClientService implements IClientService{
 
 	@Override
 	public List<Review> getClientReviews(Client client) {
-		return client.getUser_reviews();
+		return client.getUserReviews();
 	}
 
 	@Override

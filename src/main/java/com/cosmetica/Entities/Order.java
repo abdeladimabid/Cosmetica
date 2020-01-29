@@ -21,32 +21,32 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int order_id;
+	private int orderId;
 	private int quantity;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="product_id",nullable = false)
-	private Product order_product;
+	@JoinColumn (name="productId",nullable = false)
+	private Product orderProduct;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="cart_id",nullable = false)
-	private Cart order_cart;
+	@JoinColumn (name="cartId",nullable = false)
+	private Cart orderCart;
 	
 
 	public Order(int quantity, Product order_product, Cart order_cart) {
 		super();
 		this.quantity = quantity;
-		this.order_product = order_product;
-		this.order_cart = order_cart;
-		this.inserted_at = new Date();
+		this.orderProduct = order_product;
+		this.orderCart = order_cart;
+		this.insertedAt = new Date();
 	}
 
 	public Order() {
@@ -54,12 +54,12 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getOrder_id() {
-		return order_id;
+	public int getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public int getQuantity() {
@@ -70,45 +70,43 @@ public class Order {
 		this.quantity = quantity;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public Product getOrder_product() {
-		return order_product;
+	public Product getOrderProduct() {
+		return orderProduct;
 	}
 
-	public void setOrder_product(Product order_product) {
-		this.order_product = order_product;
+	public void setOrderProduct(Product orderProduct) {
+		this.orderProduct = orderProduct;
 	}
 
-	public Cart getOrder_cart() {
-		return order_cart;
+	public Cart getOrderCart() {
+		return orderCart;
 	}
 
-	public void setOrder_cart(Cart order_cart) {
-		this.order_cart = order_cart;
+	public void setOrderCart(Cart orderCart) {
+		this.orderCart = orderCart;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [order_id=" + order_id + ", quantity=" + quantity
-				+ ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + ", order_product=" + order_product
-				+ ", order_cart=" + order_cart + "]";
+		return "Order [orderId=" + orderId + ", quantity=" + quantity + ", insertedAt=" + insertedAt + ", updatedAt="
+				+ updatedAt + ", orderProduct=" + orderProduct + ", orderCart=" + orderCart + "]";
 	}
-	
 	
 	
 	
