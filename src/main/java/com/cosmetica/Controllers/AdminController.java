@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Admin;
+import com.cosmetica.Entities.Role;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IAdminService;
 
@@ -33,7 +34,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/{admin_id}")
+	 @GetMapping("/admin/id/{admin_id}")
 	 public Optional <Admin> oneAdmin(@PathVariable("admin_id")int admin_id){
 		 
 		 if(!adminservice.getOneById(admin_id).isPresent())
@@ -42,7 +43,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/{username}")
+	 @GetMapping("/admin/un/{username}")
 	 public List <Admin> AdminByUsername(@PathVariable("username")String username){
 		 
 		 if(adminservice.getOneByUsername(username).isEmpty())
@@ -56,11 +57,13 @@ public class AdminController {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
+	 
 	 @PutMapping("/modify/admin")
 	 public void modifyAdmin(@RequestBody Admin admin) {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
+	 
 	 @DeleteMapping("/remove/admin/{admin_id}")
 	 public void removeAdmin(@PathVariable("admin_id")int admin_id) {
 		 if(!adminservice.getOneById(admin_id).isPresent())
@@ -69,5 +72,23 @@ public class AdminController {
 		 adminservice.delete(admin); 
 		 
 	 }
+	 
+//	 @GetMapping("/admin/email/{email}")
+//	 public List<admin> AdminRole(@PathVariable("email")String email){
+//		 if(adminservice.getByEmail(email).isEmpty())
+//	         throw new CosmeticaException(email);
+//		 return List<Admin> admin = adminservice.getOneById(id).get();
+//		 
+//	 }
+	 
+	 @GetMapping("/admin/role/{id}")
+	 public Role AdminRole(@PathVariable("id")int id){
+		 if(!adminservice.getOneById(id).isPresent())
+	         throw new CosmeticaException(id );
+		 Admin admin = adminservice.getOneById(id).get();
+		 return admin.getUserRole();
+		 
+	 }
+	 
 
 }
