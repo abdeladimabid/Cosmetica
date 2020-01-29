@@ -16,37 +16,37 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="invoice_head")
+@Table(name="invoiceHead")
 public class InvoiceHead {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int invoice_head_id;
+	private int invoiceHeadId;
 	private int ref;
 	private String hash;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="invoice_type_id",nullable = false)
+	@JoinColumn (name="invoiceTypeId",nullable = false)
 	private InvoiceType type;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="invoice_body_id",nullable = false)
-	private InvoiceBody head_body;
+	@JoinColumn (name="invoiceBodyId",nullable = false)
+	private InvoiceBody headBody;
 
 	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, InvoiceBody head_body) {
 		super();
 		this.ref = ref;
 		this.type = type;
-		this.head_body = head_body;
-		this.inserted_at = new Date();
+		this.headBody = head_body;
+		this.insertedAt = new Date();
 	}
 
 	public InvoiceHead() {
@@ -54,12 +54,12 @@ public class InvoiceHead {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getInvoice_head_id() {
-		return invoice_head_id;
+	public int getInvoiceHeadId() {
+		return invoiceHeadId;
 	}
 
-	public void setInvoice_head_id(int invoice_head_id) {
-		this.invoice_head_id = invoice_head_id;
+	public void setInvoiceHeadId(int invoiceHeadId) {
+		this.invoiceHeadId = invoiceHeadId;
 	}
 
 	public int getRef() {
@@ -78,20 +78,20 @@ public class InvoiceHead {
 		this.hash = hash;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public InvoiceType getType() {
@@ -102,18 +102,19 @@ public class InvoiceHead {
 		this.type = type;
 	}
 
-	public InvoiceBody getHead_body() {
-		return head_body;
+	public InvoiceBody getHeadBody() {
+		return headBody;
 	}
 
-	public void setHead_body(InvoiceBody head_body) {
-		this.head_body = head_body;
+	public void setHeadBody(InvoiceBody headBody) {
+		this.headBody = headBody;
 	}
 
 	@Override
 	public String toString() {
-		return "InvoiceHead [invoice_head_id=" + invoice_head_id + ", ref=" + ref + ", hash=" + hash + ", inserted_at="
-				+ inserted_at + ", updated_at=" + updated_at + ", type=" + type + ", head_cart="+ ", head_body=" + head_body + "]";
+		return "InvoiceHead [invoiceHeadId=" + invoiceHeadId + ", ref=" + ref + ", hash=" + hash + ", insertedAt="
+				+ insertedAt + ", updatedAt=" + updatedAt + ", type=" + type + ", headBody=" + headBody + "]";
 	}
-
+	
+	
 }

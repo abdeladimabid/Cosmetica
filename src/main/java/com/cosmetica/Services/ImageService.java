@@ -1,19 +1,24 @@
 package com.cosmetica.Services;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetica.DAO.IImageDao;
 import com.cosmetica.Entities.Image;
-import com.cosmetica.Entities.Product;
 import com.cosmetica.IServices.IImageService;
+
 @Service
 public class ImageService implements IImageService{
 	
-	public static String uploadDirectory = System.getProperty("user.dir")+ "/uploads";
+	public static String uploadDirectory = System.getProperty("user.dir")+ "\\uploads";
 
 	@Autowired
 	IImageDao dao;
@@ -39,13 +44,13 @@ public class ImageService implements IImageService{
 	}
 	
 
-//	@Override
-//	public void uploadImage(MultipartFile image) throws Exception {
-//		String folder = this.uploadDirectory;
-//		byte[] bytes = image.getBytes();
-//		Path path = Paths.get(folder + image.getOriginalFilename());
-//		Files.write(path, bytes);
-//	}
+	@Override
+	public void uploadImage(MultipartFile image) throws Exception {
+		String folder = this.uploadDirectory;
+		byte[] bytes = image.getBytes();
+		Path path = Paths.get(folder + image.getOriginalFilename());
+		Files.write(path, bytes);
+	}
 
 	public String getUploadDirectory() {
 		return uploadDirectory;

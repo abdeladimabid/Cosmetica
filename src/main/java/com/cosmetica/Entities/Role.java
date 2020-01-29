@@ -25,24 +25,24 @@ public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int role_id;
+	private int roleId;
 	private String label;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 
-	@OneToMany(mappedBy = "user_role",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "userRole",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<User> users;
 	
 	public Role(String label) {
 		super();
 		this.label = label;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 	}
 
 	public Role() {
@@ -50,12 +50,12 @@ public class Role {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getRole_id() {
-		return role_id;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getLabel() {
@@ -66,20 +66,20 @@ public class Role {
 		this.label = label;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public List<User> getUsers() {
@@ -92,8 +92,8 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [role_id=" + role_id + ", label=" + label + ", inserted_at=" + inserted_at + ", updated_at="
-				+ updated_at + ", users=" + users + "]";
+		return "Role [roleId=" + roleId + ", label=" + label + ", insertedAt=" + insertedAt + ", updatedAt=" + updatedAt
+				+ ", users=" + users + "]";
 	}
 	
 	

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Brand {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int brand_id;
+	private int brandId;
 	
 	@Column(unique=true)
 	private String name;
@@ -34,16 +34,16 @@ public class Brand {
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
-	@OneToMany(mappedBy="product_brand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="productBrand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Product>products;
 	
-	@OneToMany(mappedBy="coupon_brand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="couponBrand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Coupon> coupons;
 
 	public Brand(String name, String slogan, String logo) {
@@ -51,7 +51,7 @@ public class Brand {
 		this.name = name;
 		this.slogan = slogan;
 		this.logo = logo;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 	}
 
 	public Brand() {
@@ -59,12 +59,12 @@ public class Brand {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getBrand_id() {
-		return brand_id;
+	public int getBrandId() {
+		return brandId;
 	}
 
-	public void setBrand_id(int brand_id) {
-		this.brand_id = brand_id;
+	public void setBrandId(int brand_id) {
+		this.brandId = brand_id;
 	}
 
 	public String getName() {
@@ -91,20 +91,20 @@ public class Brand {
 		this.logo = logo;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date inserted_at) {
+		this.insertedAt = inserted_at;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updated_at) {
+		this.updatedAt = updated_at;
 	}
 
 	public List<Product> getProducts() {
@@ -125,8 +125,8 @@ public class Brand {
 
 	@Override
 	public String toString() {
-		return "Brand [brand_id=" + brand_id + ", name=" + name + ", slogan=" + slogan + ", logo=" + logo
-				+ ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + ", products=" + products
+		return "Brand [brand_id=" + brandId + ", name=" + name + ", slogan=" + slogan + ", logo=" + logo
+				+ ", inserted_at=" + insertedAt + ", updated_at=" + updatedAt + ", products=" + products
 				+ ", coupons=" + coupons + "]";
 	}
 	

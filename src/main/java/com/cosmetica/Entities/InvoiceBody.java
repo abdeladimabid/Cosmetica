@@ -19,32 +19,32 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="invoice_body")
+@Table(name="invoiceBody")
 public class InvoiceBody {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int invoice_body_id;
-	private Date recieving_date;
-	private String recipient_fname;
-	private String recipient_lname;
-	private String recipient_phone;
-	private String recipient_adress;
+	private int invoiceBodyId;
+	private Date recievingDate;
+	private String recipientFname;
+	private String recipientLname;
+	private String recipientPhone;
+	private String recipientAdress;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
-	private Cart body_cart;
+    @JoinColumn(name = "cartId", referencedColumnName = "cartId")
+	private Cart bodyCart;
 	
-	@OneToMany(mappedBy = "head_body",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<InvoiceHead> body_heads;
+	@OneToMany(mappedBy = "headBody",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<InvoiceHead> bodyHeads;
 
 	public InvoiceBody() {
 		super();
@@ -54,101 +54,101 @@ public class InvoiceBody {
 	public InvoiceBody(Date recieving_date, String recipient_fname, String recipient_lname, String recipient_phone,
 			String recipient_adress, Cart body_cart) {
 		super();
-		this.recieving_date = recieving_date;
-		this.recipient_fname = recipient_fname;
-		this.recipient_lname = recipient_lname;
-		this.recipient_phone = recipient_phone;
-		this.recipient_adress = recipient_adress;
-		this.body_cart = body_cart;
-		this.inserted_at = new Date();
+		this.recievingDate = recieving_date;
+		this.recipientFname = recipient_fname;
+		this.recipientLname = recipient_lname;
+		this.recipientPhone = recipient_phone;
+		this.recipientAdress = recipient_adress;
+		this.bodyCart = body_cart;
+		this.insertedAt = new Date();
 	}
 
-	public Cart getBody_cart() {
-		return body_cart;
+	public int getInvoiceBodyId() {
+		return invoiceBodyId;
 	}
 
-	public void setBody_cart(Cart body_cart) {
-		this.body_cart = body_cart;
+	public void setInvoiceBodyId(int invoiceBodyId) {
+		this.invoiceBodyId = invoiceBodyId;
 	}
 
-	public int getInvoice_body_id() {
-		return invoice_body_id;
+	public Date getRecievingDate() {
+		return recievingDate;
 	}
 
-	public void setInvoice_body_id(int invoice_body_id) {
-		this.invoice_body_id = invoice_body_id;
+	public void setRecievingDate(Date recievingDate) {
+		this.recievingDate = recievingDate;
 	}
 
-	public Date getRecieving_date() {
-		return recieving_date;
+	public String getRecipientFname() {
+		return recipientFname;
 	}
 
-	public void setRecieving_date(Date recieving_date) {
-		this.recieving_date = recieving_date;
+	public void setRecipientFname(String recipientFname) {
+		this.recipientFname = recipientFname;
 	}
 
-	public String getRecipient_fname() {
-		return recipient_fname;
+	public String getRecipientLname() {
+		return recipientLname;
 	}
 
-	public void setRecipient_fname(String recipient_fname) {
-		this.recipient_fname = recipient_fname;
+	public void setRecipientLname(String recipientLname) {
+		this.recipientLname = recipientLname;
 	}
 
-	public String getRecipient_lname() {
-		return recipient_lname;
+	public String getRecipientPhone() {
+		return recipientPhone;
 	}
 
-	public void setRecipient_lname(String recipient_lname) {
-		this.recipient_lname = recipient_lname;
+	public void setRecipientPhone(String recipientPhone) {
+		this.recipientPhone = recipientPhone;
 	}
 
-	public String getRecipient_phone() {
-		return recipient_phone;
+	public String getRecipientAdress() {
+		return recipientAdress;
 	}
 
-	public void setRecipient_phone(String recipient_phone) {
-		this.recipient_phone = recipient_phone;
+	public void setRecipientAdress(String recipientAdress) {
+		this.recipientAdress = recipientAdress;
 	}
 
-	public String getRecipient_adress() {
-		return recipient_adress;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setRecipient_adress(String recipient_adress) {
-		this.recipient_adress = recipient_adress;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Cart getBodyCart() {
+		return bodyCart;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setBodyCart(Cart bodyCart) {
+		this.bodyCart = bodyCart;
 	}
 
-	public List<InvoiceHead> getBody_heads() {
-		return body_heads;
+	public List<InvoiceHead> getBodyHeads() {
+		return bodyHeads;
 	}
 
-	public void setBody_heads(List<InvoiceHead> body_heads) {
-		this.body_heads = body_heads;
+	public void setBodyHeads(List<InvoiceHead> bodyHeads) {
+		this.bodyHeads = bodyHeads;
 	}
 
 	@Override
 	public String toString() {
-		return "InvoiceBody [invoice_body_id=" + invoice_body_id + ", recieving_date=" + recieving_date
-				+ ", recipient_fname=" + recipient_fname + ", recipient_lname=" + recipient_lname + ", recipient_phone="
-				+ recipient_phone + ", recipient_adress=" + recipient_adress + ", inserted_at=" + inserted_at
-				+ ", updated_at=" + updated_at + ", body_cart=" + body_cart + ", body_heads=" + body_heads + "]";
+		return "InvoiceBody [invoiceBodyId=" + invoiceBodyId + ", recievingDate=" + recievingDate + ", recipientFname="
+				+ recipientFname + ", recipientLname=" + recipientLname + ", recipientPhone=" + recipientPhone
+				+ ", recipientAdress=" + recipientAdress + ", insertedAt=" + insertedAt + ", updatedAt=" + updatedAt
+				+ ", bodyCart=" + bodyCart + ", bodyHeads=" + bodyHeads + "]";
 	}
 
 	

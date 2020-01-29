@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cosmetica.Entities.Client;
-import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
-import com.cosmetica.Entities.User;
 
 
 public interface IReviewService {

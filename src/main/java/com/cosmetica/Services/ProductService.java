@@ -36,17 +36,17 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public void delete(int product_id) {
-		dao.deleteById(product_id);
+	public void delete(Product product) {
+		dao.delete(product);
 	}
 	
 	@Override
 	public List<Tag> getProductTags(Product product){
-		return product.getProduct_tags();
+		return product.getProductTags();
 	}
 	
 	public List<Review> getProductReviews(Product product){
-		return product.getProduct_reviews();
+		return product.getProductReviews();
 	}
 	public List<Image> getProductImages(Product product){
 		return product.getImages();
@@ -56,7 +56,7 @@ public class ProductService implements IProductService{
 		int count=0;
 		float stars=0;
 		
-		List<Review> reviews = product.getProduct_reviews();
+		List<Review> reviews = product.getProductReviews();
 		for (Review r : reviews) {
 			count++;
 			stars=stars+r.getStars();
@@ -66,8 +66,20 @@ public class ProductService implements IProductService{
 	}
 	
 	public boolean productInStock(String ref) {
-		if(!dao.findByProductref(ref).isPresent()) return false;
+		if(!dao.findByProductRef(ref).isPresent()) return false;
 		return true;
+	}
+	
+	public List<Product> getProductsBetween(double p1, double p2){
+		return dao.findByRegularPriceBetween(p1, p2);
+	}
+	
+	public List<Product> getFeaturedProducts(){
+		return dao.findByFeaturedNotLike(0);
+	}
+	
+	public List<Product> getNewArrivals(){
+		return dao.findAllOrderByInsertedAt();
 	}
 	
 //	public List<Product> productsSuggestionX(Product product){

@@ -39,7 +39,7 @@ public class InvoiceBodyService implements IInvoiceBodyService{
 	
 	@Override
 	public Cart getBodyCart(InvoiceBody InvoiceBody){
-		return InvoiceBody.getBody_cart();
+		return InvoiceBody.getBodyCart();
 	}
 	
 	

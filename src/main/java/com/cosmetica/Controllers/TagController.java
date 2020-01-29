@@ -1,13 +1,16 @@
 package com.cosmetica.Controllers;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +19,9 @@ import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ITagService;
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class TagController {
 
@@ -25,8 +30,8 @@ public class TagController {
 	
 	@GetMapping("/tags")
 	 public List<Tag> allTags() {
-		List<Tag> Tag = tagservice.getAll();
-		return Tag;
+		List<Tag> Tags = tagservice.getAll();
+		return Tags;
 		 
 	 }
 	 
@@ -39,13 +44,17 @@ public class TagController {
 		 
 	 }
 
-	 @PostMapping("/tag")
+	 @PostMapping("/add/tag")
 	 public void addTag(@RequestBody Tag Tag) {
 		 tagservice.saveOrUpdate(Tag);
 		 
 	 }
+	 @PutMapping("/modify/tag")
+	 public void modifyTag(@RequestBody Tag Tag) {
+		 tagservice.saveOrUpdate(Tag); 
+	 }
 	 
-	 @DeleteMapping("/tag/remove/{tag_id}")
+	 @DeleteMapping("/remove/tag/{tag_id}")
 	 public void removeTag(@PathVariable("tag_id")int tag_id) {
 		 if(!tagservice.getOneById(tag_id).isPresent())
 	         throw new CosmeticaException(tag_id );
@@ -53,5 +62,6 @@ public class TagController {
 		 tagservice.delete(Tag); 
 		 
 	 }
+	
 
 }

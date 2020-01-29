@@ -21,21 +21,21 @@ public class Image {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int image_id;
+	private int imageId;
 	private String alt;
 	private String path;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="product_id",nullable = false)
-	private Product product_image;
+	@JoinColumn (name="productId",nullable = false)
+	private Product productImage;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 
 	public Image() {
 		super();
@@ -46,16 +46,8 @@ public class Image {
 		super();
 		this.alt = alt;
 		this.path = path;
-		this.product_image = product;
-		this.inserted_at = new Date();
-	}
-
-	public int getImage_id() {
-		return image_id;
-	}
-
-	public void setImage_id(int image_id) {
-		this.image_id = image_id;
+		this.productImage = product;
+		this.insertedAt = new Date();
 	}
 
 	public String getAlt() {
@@ -74,37 +66,43 @@ public class Image {
 		this.path = path;
 	}
 
-
-	public Product getProduct_image() {
-		return product_image;
+	public int getImageId() {
+		return imageId;
 	}
 
-	public void setProduct_image(Product product_image) {
-		this.product_image = product_image;
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Product getProductImage() {
+		return productImage;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setProductImage(Product productImage) {
+		this.productImage = productImage;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override
 	public String toString() {
-		return "Image [image_id=" + image_id + ", alt=" + alt + ", path=" + path + ", product_image=" + product_image
-				+ ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + "]";
+		return "Image [imageId=" + imageId + ", alt=" + alt + ", path=" + path + ", productImage=" + productImage
+				+ ", insertedAt=" + insertedAt + ", updatedAt=" + updatedAt + "]";
 	}
-
 	
 	
 	

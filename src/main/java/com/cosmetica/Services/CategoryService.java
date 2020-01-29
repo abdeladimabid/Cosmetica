@@ -19,7 +19,7 @@ public class CategoryService implements ICategoryService{
 
 	@Override
 	public List<Category> getAll(){
-		return dao.findAll();
+		return dao.findByParentIsNull();
 	}
 
 	@Override

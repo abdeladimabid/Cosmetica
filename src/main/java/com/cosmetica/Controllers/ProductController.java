@@ -1,13 +1,16 @@
 package com.cosmetica.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +24,7 @@ import com.cosmetica.IServices.IProductService;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class ProductController {
 	@Autowired
@@ -28,12 +32,12 @@ public class ProductController {
 	
 	 @GetMapping("/products")
 	 public List<Product > allProducts() {
-		List<Product> produit = productservice.getAll();
-		return produit;
+		List<Product> products = productservice.getAll();
+		return products;
 		 
 	 }
 	 
-	 @GetMapping("/product/search/id/{product_id}")
+	 @GetMapping("/product/{product_id}")
 	 public Optional <Product> oneProduct(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())
@@ -42,16 +46,23 @@ public class ProductController {
 		 
 	 }
 
-	 @PostMapping("/product")
+	 @PostMapping("/add/product")
 	 public void addProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
 		 
 	 }
-	 @DeleteMapping("/remove/{product_id}")
+	 @PutMapping("/modify/product")
+	 public void modifyProduct(@RequestBody Product produit) {
+		 productservice.saveOrUpdate(produit);
+		 
+	 }
+	 
+	 @DeleteMapping("/remove/product/{product_id}")
 	 public void removeProduct(@PathVariable("product_id")int product_id) {
 		 if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );
-		 productservice.delete(product_id); 
+		 Product product=productservice.getOneById(product_id).get();
+		 productservice.delete(product); 
 		 
 	 }
 	 @GetMapping("/product/tags/{product_id}")
@@ -85,12 +96,61 @@ public class ProductController {
 		 }
 	 
 	 @GetMapping("/product/instock/{ref}")
-	 public boolean ProductInStock(@PathVariable("ref")String ref) {
+	 public boolean productInStock(@PathVariable("ref")String ref) {
 		return productservice.productInStock(ref);
 	 
 	 }
+
+	 @GetMapping("/products/between/{p1}/{p2}")		//getProductInRange
+	 public List<Product> productsBetween(@PathVariable double p1, @PathVariable double p2) {
+		return productservice.getProductsBetween(p1, p2);
+  
+	 @GetMapping("/product/rating/{rate}")
+     public List<Product> ProductsByRate(@PathVariable("rate")int rate) {
+        List<Product> products = productservice.getAll();
+        List<Product> listprod= new ArrayList<>();
+        for(Product p : products) {
+            if(Math.round(productservice.getProductStars(p))==rate) listprod.add(p);
+        }
+        return listprod;
+     }
 	 
+	 @GetMapping("/product/rate/{product_id}")
+     public float ProductRate(@PathVariable("product_id")int product_id) {
+		 if(!productservice.getOneById(product_id).isPresent())
+	        throw new CosmeticaException(product_id );
+		 	Product product=productservice.getOneById(product_id).get();
+            return productservice.getProductStars(product);
+     }
 	 
+	 }
+	 
+	 @GetMapping("/featured/products")		//getFeaturedProducts
+	 public List<Product> featuredProducts() {
+		return productservice.getFeaturedProducts();
+	 
+	 }
+
+	 @GetMapping("/new/products")		//getNewArrivals
+	 public List<Product> newProducts() {
+		return productservice.getNewArrivals();
+	 
+	 }
+	 
+//	 @GetMapping("/top/products")
+//	 public List<Product > topProducts() {
+//		List<Product> produits = productservice.getAll();
+//		List<Product> sortedProducts = new ArrayList<>();
+//		for(Product p : produits) {
+//			float rate = productservice.getProductStars(p);
+//			
+//		}
+//		return produit;
+//		 
+//	 }
+	 
+//	 getDealOfTheDay
+//	 getTopProducts
 }
 
 

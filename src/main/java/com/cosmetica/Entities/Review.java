@@ -19,20 +19,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="reviews")
-@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "user_review","product_review"})
+@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "userReview","productReview"})
 public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int review_id;
+	private int reviewId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="user_id",nullable = false)
-	private Client user_review;
+	@JoinColumn (name="userId",nullable = false)
+	private Client userReview;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="product_id",nullable = false)
-	private Product product_review;
+	@JoinColumn (name="productId",nullable = false)
+	private Product productReview;
 	
 	private int stars;
 	private String title;
@@ -41,22 +41,22 @@ public class Review {
 
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 
 	public Review(Client user_review, Product product_review, int stars, String title, String body) {
 		super();
-		this.user_review = user_review;
-		this.product_review = product_review;
+		this.userReview = user_review;
+		this.productReview = product_review;
 		this.stars = stars;
 		this.title = title;
 		this.body = body;
 		this.status = 0;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 	}
 
 	public Review() {
@@ -64,28 +64,28 @@ public class Review {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getReview_id() {
-		return review_id;
+	public int getReviewId() {
+		return reviewId;
 	}
 
-	public void setReview_id(int review_id) {
-		this.review_id = review_id;
+	public void setReviewId(int reviewId) {
+		this.reviewId = reviewId;
 	}
 
-	public Client getUser_review() {
-		return user_review;
+	public Client getUserReview() {
+		return userReview;
 	}
 
-	public void setUser_review(Client user_review) {
-		this.user_review = user_review;
+	public void setUserReview(Client userReview) {
+		this.userReview = userReview;
 	}
 
-	public Product getProduct_review() {
-		return product_review;
+	public Product getProductReview() {
+		return productReview;
 	}
 
-	public void setProduct_review(Product product_review) {
-		this.product_review = product_review;
+	public void setProductReview(Product productReview) {
+		this.productReview = productReview;
 	}
 
 	public int getStars() {
@@ -120,30 +120,28 @@ public class Review {
 		this.status = status;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override
 	public String toString() {
-		return "Review [review_id=" + review_id + ", user_review=" + user_review + ", product_review=" + product_review
-				+ ", stars=" + stars + ", title=" + title + ", body=" + body + ", status=" + status + ", inserted_at="
-				+ inserted_at + ", updated_at=" + updated_at + "]";
+		return "Review [reviewId=" + reviewId + ", userReview=" + userReview + ", productReview=" + productReview
+				+ ", stars=" + stars + ", title=" + title + ", body=" + body + ", status=" + status + ", insertedAt="
+				+ insertedAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
 	
 	
 

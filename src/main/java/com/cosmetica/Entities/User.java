@@ -24,7 +24,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int user_id;
+	private int userId;
 	
 	@Column(unique=true)
 	protected String username;
@@ -38,16 +38,16 @@ public class User {
 	protected boolean active;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="role_id",nullable = false)
-	protected Role user_role;
+	@JoinColumn (name="roleId",nullable = false)
+	protected Role userRole;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	protected Date inserted_at;
+	protected Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	protected Date updated_at;
+	protected Date updatedAt;
 	
 
 	public User(String username, String firstname, String lastname, String email, String password, String token,
@@ -60,130 +60,135 @@ public class User {
 		this.password = password;
 		this.token = token;
 		this.active = active;
-		this.user_role = role;
-		this.inserted_at = new Date();
+		this.userRole = role;
+		this.insertedAt = new Date();
 		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		this.password = new BCryptPasswordEncoder().encode(password+salt);
 	}
-
-	public Role getUser_role() {
-		return user_role;
-	}
-
-	public void setUser_role(Role user_role) {
-		this.user_role = user_role;
-	}
+	
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public int getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getUser_firstname() {
-		return firstname;
-	}
-
-	public void setUser_firstname(String user_firstname) {
-		this.firstname = user_firstname;
-	}
-
-	public String getUser_lastname() {
-		return lastname;
-	}
-
-	public void setUser_lastname(String user_lastname) {
-		this.lastname = user_lastname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public Date getInserted_at() {
-		return inserted_at;
-	}
-
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
-	}
-
-	public Date getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
-	}
 
 	public String getFirstname() {
 		return firstname;
 	}
 
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 
 	public String getLastname() {
 		return lastname;
 	}
 
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
+	public Role getUserRole() {
+		return userRole;
+	}
+
+
+	public void setUserRole(Role userRole) {
+		this.userRole = userRole;
+	}
+
+
+	public Date getInsertedAt() {
+		return insertedAt;
+	}
+
+
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
+	}
+
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", firstname=" + firstname + ", lastname="
+		return "User [userId=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", email=" + email + ", password=" + password + ", token=" + token + ", active=" + active
-				+ ", user_role=" + user_role + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + "]";
+				+ ", userRole=" + userRole + ", insertedAt=" + insertedAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
-
 	
 	
 }
