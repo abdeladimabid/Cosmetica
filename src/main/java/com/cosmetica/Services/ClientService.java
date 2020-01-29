@@ -78,6 +78,11 @@ public class ClientService implements IClientService{
 	public Optional<Client> verifyLogin(String username, String email) {
 		return dao.findByUsernameOrEmail(username, email);
 	}
+	
+	@Override
+	public List <Client> getByEmailOrUsername(String email, String username) { // method to search a client by full email or %username%
+		return dao.findByEmailOrUsernameContaining(email, username);
+	}
 
 	@Override
 	public Optional<Client> getOneByEmail(String email) {

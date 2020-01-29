@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.InvoiceBody;
+import com.cosmetica.Entities.InvoiceHead;
 
 public interface IInvoiceBodyService {
 	
@@ -17,6 +18,8 @@ public interface IInvoiceBodyService {
 	public void delete(InvoiceBody invoiceBody);
 	
 	public Cart getBodyCart(InvoiceBody InvoiceBody);
+
+	public List<InvoiceHead> getBodyHeads(InvoiceBody InvoiceBody);
 	
 	
 }

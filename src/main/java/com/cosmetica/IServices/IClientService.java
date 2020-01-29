@@ -32,5 +32,7 @@ public interface IClientService {
 	public Optional<Client> getOneByEmail(String email);
 	
 	public List<Client> getByFirstnameOrLastname(String firstname, String lastname);
+	
+	public List <Client> getByEmailOrUsername(String email, String username);
 
 }
