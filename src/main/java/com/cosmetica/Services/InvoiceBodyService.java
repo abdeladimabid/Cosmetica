@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cosmetica.DAO.IInvoiceBodyDao;
 import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.InvoiceBody;
+import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.IServices.IInvoiceBodyService;
 
 @Service
@@ -40,6 +41,11 @@ public class InvoiceBodyService implements IInvoiceBodyService{
 	@Override
 	public Cart getBodyCart(InvoiceBody InvoiceBody){
 		return InvoiceBody.getBodyCart();
+	}
+	
+	@Override
+	public List<InvoiceHead> getBodyHeads(InvoiceBody InvoiceBody){
+		return InvoiceBody.getBodyHeads();
 	}
 	
 	

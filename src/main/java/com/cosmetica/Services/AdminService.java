@@ -65,13 +65,16 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public List<Admin> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmailContaining(username, email);
+	public List<Admin> getByUsernameOrEmail(String email, String username) {	// method to search a admin by full email or %username%
+		return dao.findByEmailOrUsernameContaining(email, username);
 	}
 
 	@Override
 	public List<Admin> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastnameContaining(firstname, lastname);
+		List<Admin> first = dao.findByFirstnameContaining(firstname);
+		List<Admin> last = dao.findByLastnameContaining(lastname);
+		first.addAll(last);
+		return first;
 	}
 
 }
