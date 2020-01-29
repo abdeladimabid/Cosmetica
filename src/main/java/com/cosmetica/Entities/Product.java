@@ -306,6 +306,22 @@ public class Product {
 		this.stars = stars;
 	}
 
+	public String getProductRef() {
+		return productRef;
+	}
+
+	public void setProductRef(String productRef) {
+		this.productRef = productRef;
+	}
+
+	public float getStars() {
+		return stars;
+	}
+
+	public void setStars(float stars) {
+		this.stars = stars;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productRef=" + productRef + ", productName=" + productName
@@ -319,6 +335,5 @@ public class Product {
 	}
 
 	
-
 
 }
