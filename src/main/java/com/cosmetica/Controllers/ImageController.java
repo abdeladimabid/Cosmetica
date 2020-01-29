@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IImageService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class ImageController {
 	@Autowired
@@ -25,12 +28,12 @@ public class ImageController {
 	
 	 @GetMapping("/images")
 	 public List<Image> allImages() {
-		List<Image> img = imgservice.getAll();
-		return img;
+		List<Image> imgs = imgservice.getAll();
+		return imgs;
 		 
 	 }
 	 
-	 @GetMapping("/image/search/id/{image_id}")
+	 @GetMapping("/image/{image_id}")
 	 public Optional <Image> oneImage(@PathVariable("image_id")int image_id){
 		 
 		 if(!imgservice.getOneById(image_id).isPresent())
