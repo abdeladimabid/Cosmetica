@@ -1,6 +1,5 @@
 package com.cosmetica.Controllers;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Brand;
 import com.cosmetica.Entities.Coupon;
-import com.cosmetica.Entities.Product;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ICouponService;
 

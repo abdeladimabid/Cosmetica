@@ -124,7 +124,7 @@ public class ProductController {
             return productservice.getProductStars(product);
      }
 	
-	 
+
 	 @GetMapping("/featured/products")	//get Featured Products
 	 public List<Product> featuredProducts() {
 		return productservice.getFeaturedProducts();
