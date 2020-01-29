@@ -23,12 +23,12 @@ import com.cosmetica.Services.InvoiceBodyService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
-public class DevisController {
+public class InvoiceBodyController {
 	
 	@Autowired
 	InvoiceBodyService invoicebodyservice;
 	
-	@GetMapping("/factures")							//get all invoiceBodys
+	@GetMapping("/invoicebodys")							//get all invoiceBodys
 	 public List<InvoiceBody> allinvoicebodys() {
 		List<InvoiceBody> invoicebodys = invoicebodyservice.getAll();
 		return invoicebodys;

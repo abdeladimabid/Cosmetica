@@ -1,5 +1,5 @@
 package com.cosmetica.Controllers;
 
-public class BonController {
+public class InvoiceHeadController {
 
 }
