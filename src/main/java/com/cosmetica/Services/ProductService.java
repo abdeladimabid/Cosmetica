@@ -81,6 +81,21 @@ public class ProductService implements IProductService{
 	public List<Product> getNewArrivals(){
 		return dao.findAllOrderByInsertedAt();
 	}
+
+	@Override
+	public List<Product> getTopProducts() {
+		return dao.findTopProducts();
+	}
+
+	@Override
+	public List<Product> getHotDeals() {
+		return dao.findHotDeals();
+	}
+
+	@Override
+	public Product getDealOfTheDay() {
+		return dao.findDealOfTheDay();
+	}
 	
 //	public List<Product> productsSuggestionX(Product product){
 //		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
