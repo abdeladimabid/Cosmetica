@@ -28,7 +28,7 @@ public class DevisController {
 	@Autowired
 	InvoiceBodyService invoicebodyservice;
 	
-	@GetMapping("/invoicebodys")							//get all invoiceBodys
+	@GetMapping("/factures")							//get all invoiceBodys
 	 public List<InvoiceBody> allinvoicebodys() {
 		List<InvoiceBody> invoicebodys = invoicebodyservice.getAll();
 		return invoicebodys;
