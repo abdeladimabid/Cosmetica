@@ -71,10 +71,10 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public boolean verifyPassword(User user, String password) {
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+	public String verifyPassword(String password) {
+		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		String hash = new BCryptPasswordEncoder().encode(password+salt);
-		return user.getPassword().matches(hash);
+		return hash;
 	}
 
 }

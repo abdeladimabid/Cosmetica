@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.IServices.IAdminService;
+import com.cosmetica.IServices.IUserService;
 import com.cosmetica.Services.CosmeticaUserDetailsService;
+import com.cosmetica.Services.UserService;
 
 @RestController
 @RequestMapping("COSMETICA")
@@ -24,13 +27,17 @@ public class AuthentificationController {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
-	
+
+	@Autowired
+	IAdminService ius;
 
 	@RequestMapping(value="/authenticate" ,method =RequestMethod.POST)
 	public ResponseEntity<?> authenticate(@RequestBody AuthentificationRequest authentificationRequest) throws Exception
 	{
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authentificationRequest.getUsername(), authentificationRequest.getPassword()));
+			String password = authentificationRequest.getPassword();
+			String hashed = ius.verifyPassword(password);
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authentificationRequest.getUsername(), hashed));
 				
 		} catch (BadCredentialsException e) {
 			// TODO: handle exception

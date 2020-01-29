@@ -17,8 +17,6 @@ public interface IUserService {
 
 	public void delete(User user);
 	
-	public boolean verifyPassword(User user, String password);
-	
 	public Optional<User> verifyLogin(String username, String email);
 	
 	public Optional<User> getOneByEmail(String email);
@@ -28,5 +26,7 @@ public interface IUserService {
 	public List<User> getOneByUsernameOrEmail(String username,String email);
 	
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname);
+
+	public String verifyPassword(String password);
 
 }
