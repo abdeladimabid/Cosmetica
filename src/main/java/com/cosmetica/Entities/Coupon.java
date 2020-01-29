@@ -19,48 +19,48 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="coupons")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "coupon_brand"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "couponBrand"})
 public class Coupon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int coupon_id;
+	private int couponId;
 	
 	private String code;
 	private String description;
-	private boolean active;
-	private int discount_value;	
+	private int active;
+	private int discountValue;	
 	
 	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date start_date;
+	private Date startDate;
 	
 	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date end_date;
+	private Date endDate;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="brand_id",nullable = false)
-	private Brand coupon_brand;
+	@JoinColumn (name="brandId",nullable = false)
+	private Brand couponBrand;
 
-	public Coupon(String code, String description, boolean active, int discount_value, Date start_date, Date end_date,
+	public Coupon(String code, String description, int active, int discount_value, Date start_date, Date end_date,
 			Brand brand) {
 		super();
 		this.code = code;
 		this.description = description;
 		this.active = active;
-		this.discount_value = discount_value;
-		this.start_date = start_date;
-		this.end_date = end_date;
-		this.coupon_brand = brand;
-		this.inserted_at = new Date();
+		this.discountValue = discount_value;
+		this.startDate = start_date;
+		this.endDate = end_date;
+		this.couponBrand = brand;
+		this.insertedAt = new Date();
 	}
 
 	public Coupon() {
@@ -68,12 +68,12 @@ public class Coupon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getCoupon_id() {
-		return coupon_id;
+	public int getCouponId() {
+		return couponId;
 	}
 
-	public void setCoupon_id(int coupon_id) {
-		this.coupon_id = coupon_id;
+	public void setCouponId(int coupon_id) {
+		this.couponId = coupon_id;
 	}
 
 	public String getCode() {
@@ -92,69 +92,69 @@ public class Coupon {
 		this.description = description;
 	}
 
-	public boolean isActive() {
+	public int isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 
-	public int getDiscount_value() {
-		return discount_value;
+	public int getDiscountValue() {
+		return discountValue;
 	}
 
-	public void setDiscount_value(int discount_value) {
-		this.discount_value = discount_value;
+	public void setDiscountValue(int discountValue) {
+		this.discountValue = discountValue;
 	}
 
-	public Date getStart_date() {
-		return start_date;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getEnd_date() {
-		return end_date;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public Brand getCoupon_brand() {
-		return coupon_brand;
+	public Brand getCouponBrand() {
+		return couponBrand;
 	}
 
-	public void setCoupon_brand(Brand coupon_brand) {
-		this.coupon_brand = coupon_brand;
+	public void setCouponBrand(Brand couponBrand) {
+		this.couponBrand = couponBrand;
 	}
 
 	@Override
 	public String toString() {
-		return "Coupon [coupon_id=" + coupon_id + ", code=" + code + ", description=" + description + ", active="
-				+ active + ", discount_value=" + discount_value + ", start_date=" + start_date + ", end_date="
-				+ end_date + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at + ", coupon_brand="
-				+ coupon_brand + "]";
+		return "Coupon [couponId=" + couponId + ", code=" + code + ", description=" + description + ", active=" + active
+				+ ", discountValue=" + discountValue + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", insertedAt=" + insertedAt + ", updatedAt=" + updatedAt + ", couponBrand=" + couponBrand + "]";
 	}
+
 
 
 

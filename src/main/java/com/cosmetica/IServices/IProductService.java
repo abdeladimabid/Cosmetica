@@ -27,7 +27,11 @@ public interface IProductService {
 	public List<Review> getProductReviews(Product product);
 	
 	public float getProductStars(Product product);
+	
+	public List<Product> getProductsBetween(double p1, double p2);
   
-
+	public List<Product> getFeaturedProducts();
+	
+	public List<Product> getNewArrivals();
 
 }

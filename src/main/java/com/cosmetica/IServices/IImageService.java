@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Optional;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cosmetica.Entities.Image;
 
 
@@ -19,6 +21,6 @@ public interface IImageService {
 	
 	public String getUploadDirectory();
 
-//	public void uploadImage(MultipartFile image) throws Exception;
+	public void uploadImage(MultipartFile image) throws Exception;
 	
 }

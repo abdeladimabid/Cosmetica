@@ -24,63 +24,62 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cart {@Id
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cart_id;
+	private int cartId;
 	private int status;
 	private String hash;
 
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="client_id",nullable = false)
-	private Client cart_user;
+	@JoinColumn (name="clientId",nullable = false)
+	private Client cartUser;
 	
-	@OneToMany(mappedBy = "order_cart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "orderCart",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Order> orders;
 	
-	@OneToOne(mappedBy = "body_cart")
-	private InvoiceBody cart_body;
+	@OneToOne(mappedBy = "bodyCart")
+	private InvoiceBody cartBody;
 
 
 	public Cart() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Cart(Client cart_user, List<Order> orders) {
 		super();
-		this.cart_user = cart_user;
+		this.cartUser = cart_user;
 		this.orders = orders;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 		this.status=0;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [cart_id=" + cart_id + ", status=" + status + ", hash=" + hash + ", inserted_at=" + inserted_at
-				+ ", updated_at=" + updated_at + ", cart_user=" + cart_user + ", orders=" + orders + ", cart_body="
-				+ cart_body + "]";
+		return "Cart [cart_id=" + cartId + ", status=" + status + ", hash=" + hash + ", inserted_at=" + insertedAt
+				+ ", updated_at=" + updatedAt + ", cart_user=" + cartUser + ", orders=" + orders + ", cart_body="
+				+ cartBody + "]";
 	}
 
-	public InvoiceBody getCart_body() {
-		return cart_body;
+	public InvoiceBody getCartBody() {
+		return cartBody;
 	}
 
-	public void setCart_body(InvoiceBody cart_body) {
-		this.cart_body = cart_body;
+	public void setCartBody(InvoiceBody cart_body) {
+		this.cartBody = cart_body;
 	}
 
-	public int getCart_id() {
-		return cart_id;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setCart_id(int cart_id) {
-		this.cart_id = cart_id;
+	public void setCartId(int cart_id) {
+		this.cartId = cart_id;
 	}
 
 	public int getStatus() {
@@ -99,12 +98,12 @@ public class Cart {@Id
 		this.hash = hash;
 	}
 
-	public User getCart_user() {
-		return cart_user;
+	public User getCartUser() {
+		return cartUser;
 	}
 
-	public void setCart_user(Client cart_user) {
-		this.cart_user = cart_user;
+	public void setCartUser(Client cart_user) {
+		this.cartUser = cart_user;
 	}
 
 	public List<Order> getOrders() {
@@ -115,20 +114,20 @@ public class Cart {@Id
 		this.orders = orders;
 	}
 
-	public Date getInserted_at() {
-		return inserted_at;
+	public Date getInsertedAt() {
+		return insertedAt;
 	}
 
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
+	public void setInsertedAt(Date inserted_at) {
+		this.insertedAt = inserted_at;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updated_at) {
+		this.updatedAt = updated_at;
 	}
 	
 	

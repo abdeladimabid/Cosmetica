@@ -40,13 +40,13 @@ public class CouponService implements ICouponService{
 	
 	@Override
 	public Brand getBrand(Coupon Coupon) {
-		return Coupon.getCoupon_brand();
+		return Coupon.getCouponBrand();
 	}
 	
 	@Override
 	public boolean validateCoupon(Coupon Coupon) {
 		 Date now = new Date();
-		 if(Coupon.getEnd_date().before(now)) {
+		 if(Coupon.getEndDate().before(now)) {
 			 return false;
 		 } else {
 			 return true;
