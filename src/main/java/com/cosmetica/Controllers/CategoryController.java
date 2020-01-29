@@ -1,6 +1,8 @@
 package com.cosmetica.Controllers;
 
 import java.util.List;
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Category;
 import com.cosmetica.Entities.Product;
-import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ICategoryService;
 

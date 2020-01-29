@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.Client;
+import com.cosmetica.Entities.Review;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IClientService;
 
@@ -34,7 +35,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/{client_id}")
+	 @GetMapping("/client/id/{client_id}")
 	 public Optional <Client> oneClient(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
@@ -89,11 +90,37 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/search/email/{email}")
+	 @GetMapping("/client/email/{email}")
 	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
 		 if(!clientservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
 		 return clientservice.getOneByEmail(email); 
 	 }
+		
 
+	 @GetMapping("/client/reviews/{client_id}")
+		public List<Review> clientReviews(@PathVariable("client_id")int client_id){
+			if(!clientservice.getOneById(client_id).isPresent())
+		         throw new CosmeticaException(client_id );
+			 Client client = clientservice.getOneById(client_id).get();
+			 List<Review> reviews =clientservice.getClientReviews(client);
+			 return reviews;
+			
+		}
+	 @GetMapping("/client/amountspent/{client_id}")
+	 public Double clientAmountSpent(@PathVariable("client_id")int client_id) {
+		 if(!clientservice.getOneById(client_id).isPresent())
+	         throw new CosmeticaException(client_id );
+		 Client client = clientservice.getOneById(client_id).get();
+		 return clientservice.getClientAmountSpent(client);
+		 
+	 }
+	 
+	 @GetMapping("/client/name/{name}")
+	 public List<Client> clientByFirstnameOrLastname(@PathVariable("name")String name){
+		 return clientservice.getByFirstnameOrLastname(name, name);
+		 
+	 }
+		
+		
 }

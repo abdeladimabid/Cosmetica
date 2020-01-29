@@ -21,7 +21,7 @@ public interface IClientService {
 	
 	public List<Cart> getClientCart(Client client);
 	
-	public boolean verifyPassword(Client client, String password);
+	public boolean verifyPassword(Client client, String password);//not yet
 	
 	public List<Review> getClientReviews(Client client);
 	
@@ -31,8 +31,6 @@ public interface IClientService {
 	
 	public Optional<Client> getOneByEmail(String email);
 	
-	public List<Client> getOneByUsernameOrEmail(String username,String email);
-	
-	public List<Client> getOneByFirstnameOrLastname(String firstname,String lastname);
+	public List<Client> getByFirstnameOrLastname(String firstname, String lastname);
 
 }

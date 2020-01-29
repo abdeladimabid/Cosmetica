@@ -104,6 +104,7 @@ public class ProductController {
 	 @GetMapping("/products/between/{p1}/{p2}")		//getProductInRange
 	 public List<Product> productsBetween(@PathVariable double p1, @PathVariable double p2) {
 		return productservice.getProductsBetween(p1, p2);
+	 }
   
 	 @GetMapping("/product/rating/{rate}")
      public List<Product> ProductsByRate(@PathVariable("rate")int rate) {
@@ -123,7 +124,6 @@ public class ProductController {
             return productservice.getProductStars(product);
      }
 	 
-	 }
 	 
 	 @GetMapping("/featured/products")		//getFeaturedProducts
 	 public List<Product> featuredProducts() {
