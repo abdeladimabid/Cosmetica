@@ -39,7 +39,11 @@ public class UserService implements IUserService{
 	public Optional<User> getOneByEmail(String email) { 
 		return dao.findByEmail(email); 
 		}
-	  
+	
+	public Optional<User> findByUsername(String username){
+		return dao.findByUsername(username);
+	}
+	
 	@Override
 	public List<User> getOneByUsernameOrEmail(String username,String email){
 		return dao.findByUsernameOrEmailContaining(username, email);

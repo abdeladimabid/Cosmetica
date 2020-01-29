@@ -37,7 +37,7 @@ public class User {
 	protected String token;
 	protected boolean active;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn (name="roleId",nullable = false)
 	protected Role userRole;
 	

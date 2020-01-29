@@ -23,6 +23,8 @@ public interface IUserService {
 	
 	public Optional<User> getOneByEmail(String email);
 	
+	public Optional<User> findByUsername(String username);
+	
 	public List<User> getOneByUsernameOrEmail(String username,String email);
 	
 	public List<User> getOneByFirstnameOrLastname(String firstname,String lastname);
