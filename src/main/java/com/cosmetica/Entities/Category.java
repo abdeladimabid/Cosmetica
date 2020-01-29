@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="categories")
-@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "products","children"})
+@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "products", "children"})
+
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

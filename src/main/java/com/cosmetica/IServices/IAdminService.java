@@ -18,11 +18,11 @@ public interface IAdminService {
 
 	public void delete(Admin admin);
 	
-	public boolean verifyPassword(Admin admin, String password);
+	public boolean verifyPassword(int admin, String password);
 	
 	public Optional<Admin> verifyLogin(String username, String email);
 	
-	public List<Admin> getOneByEmail(String email);
+	public Optional<Admin> getOneByEmail(String email);
 	
 	public List<Admin> getOneByUsernameOrEmail(String username,String email);
 	

@@ -36,8 +36,8 @@ public class UserService implements IUserService{
 		}
 	  
 	@Override 
-	public List<User> getOneByEmail(String email) { 
-		return dao.findByEmailContaining(email); 
+	public Optional<User> getOneByEmail(String email) { 
+		return dao.findByEmail(email); 
 		}
 	  
 	@Override

@@ -42,10 +42,10 @@ public class ClientController {
 		 return clientservice.getOneById(client_id);
 		 
 	 }
-	 
-	 @GetMapping("/client/{username}")
-	 public List <Client> ClientByUsername(@PathVariable("username")String username){
-		 
+
+	 @GetMapping("/client/un/{username}")
+	 public List <Client> ClientsByUsername(@PathVariable("username")String username){
+		
 		 if(clientservice.getOneByUsername(username).isEmpty())
 	         throw new CosmeticaException(username);
 		 return clientservice.getOneByUsername(username);
@@ -80,6 +80,20 @@ public class ClientController {
 		 List<Cart> carts=clientservice.getClientCart(client);
 		 return carts;
 		 
+	 }
+	 
+	 @GetMapping("/client/verifylogin/{log}")
+	 public boolean verifyClientByUsername(@PathVariable("log")String log){
+		 if(!clientservice.verifyLogin(log,log).isPresent()) return false;
+		 return true;
+		 
+	 }
+	 
+	 @GetMapping("/client/search/email/{email}")
+	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
+		 if(!clientservice.getOneByEmail(email).isPresent())
+	         throw new CosmeticaException(email);
+		 return clientservice.getOneByEmail(email); 
 	 }
 
 }
