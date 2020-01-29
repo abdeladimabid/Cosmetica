@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetica.Entities.Image;
 import com.cosmetica.Exceptions.CosmeticaException;
@@ -38,21 +39,23 @@ public class ImageController {
 		 if(!imgservice.getOneById(image_id).isPresent())
 	         throw new CosmeticaException(image_id );
 		 return imgservice.getOneById(image_id);
-		 
+	
 	 }
 
-	 @PostMapping("/add/image")
-	 public void addImage(@RequestBody Image img) {
-		 imgservice.saveOrUpdate(img);
-		 
-	 }
-	 @PutMapping("/modify/image")
-	 public void modifyImage(@RequestBody Image img) {
-		 imgservice.saveOrUpdate(img);
+	 @PostMapping("/image")
+	 public void addImage(@RequestBody MultipartFile image) throws Exception {
+		 imgservice.uploadImage(image);;
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/image/{image_id}")
+	 @GetMapping("/image/dir")
+	 public String imageDir(){
+
+		 return imgservice.getUploadDirectory();
+	
+	 }
+	 
+	 @DeleteMapping("/remove/{image_id}")
 	 public void removeImage(@PathVariable("image_id")int image_id) {
 		 if(!imgservice.getOneById(image_id).isPresent())
 	         throw new CosmeticaException(image_id );

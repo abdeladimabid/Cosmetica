@@ -28,50 +28,51 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int product_id;
-	private String productref;// needs to be fixed
-	private String product_name;
-	private String product_title;
-	private String product_sub_title;
+	private int productId;
+	private String productRef;// needs to be fixed
+	private String productName;
+	private String productTitle;
+	private String productSubTitle;
 	private String description;
-	private Double regular_price;
+	private Double regularPrice;
 	private int discount;
 	private int quantity;
 	private int status;
+	private int featured;
 	private int tax;
 	private String hash;
-	private String meta_title;
-	private String meta_keywords;
+	private String metaTitle;
+	private String metaKeywords;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date inserted_at;
+	private Date insertedAt;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
-	private Date updated_at;
+	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="category_id",nullable = false)
-	private Category product_category;
+	@JoinColumn (name="categoryId",nullable = false)
+	private Category productCategory;
 	
 	@ManyToMany
-	@JoinTable(name="product_tags",joinColumns=@JoinColumn(name="product_id"),inverseJoinColumns =@JoinColumn(name="tag_id"))
-	private List<Tag> product_tags;
+	@JoinTable(name="productTags",joinColumns=@JoinColumn(name="productId"),inverseJoinColumns =@JoinColumn(name="tagId"))
+	private List<Tag> productTags;
 
-	@OneToMany(mappedBy = "product_image",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "productImage",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Image> images;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name="brand_id",nullable = false)
-	private Brand product_brand;
+	@JoinColumn (name="brandId",nullable = false)
+	private Brand productBrand;
 
-	@OneToMany(mappedBy = "order_product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "orderProduct",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Order> orders;
 	
 	
-	@OneToMany(mappedBy = "product_review",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Review> product_reviews;
+	@OneToMany(mappedBy = "productReview",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Review> productReviews;
 
 	
 	public Product() {
@@ -83,73 +84,63 @@ public class Product {
 			String description, Double regular_price, int quantity, String meta_title, String meta_keywords,
 			Category category, List<Tag> tags, List<Image> images, Brand brand, int tax) {
 		super();
-		this.productref = product_ref;
-		this.product_name = product_name;
-		this.product_title = product_title;
-		this.product_sub_title = product_sub_title;
+		this.productRef = product_ref;
+		this.productName = product_name;
+		this.productTitle = product_title;
+		this.productSubTitle = product_sub_title;
 		this.description = description;
-		this.regular_price = regular_price;
+		this.regularPrice = regular_price;
 		this.quantity = quantity;
-		this.meta_title = meta_title;
-		this.meta_keywords = meta_keywords;
-		this.product_category = category;
-		this.product_tags = tags;
+		this.metaTitle = meta_title;
+		this.metaKeywords = meta_keywords;
+		this.productCategory = category;
+		this.productTags = tags;
 		this.images = images;
-		this.product_brand = brand;
+		this.productBrand = brand;
 		this.tax = tax;
-		this.inserted_at = new Date();
+		this.insertedAt = new Date();
 		this.status = 0;
+		this.featured=0;
 	}
 
-	public int getStatus() {
-		return status;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
-
-	public int getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
-	}
-
-	
-
 
 	public String getProductref() {
-		return productref;
+		return productRef;
 	}
 
 	public void setProductref(String productref) {
-		this.productref = productref;
+		this.productRef = productref;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public String getProduct_title() {
-		return product_title;
+	public String getProductTitle() {
+		return productTitle;
 	}
 
-	public void setProduct_title(String product_title) {
-		this.product_title = product_title;
+	public void setProductTitle(String productTitle) {
+		this.productTitle = productTitle;
 	}
 
-	public String getProduct_sub_title() {
-		return product_sub_title;
+	public String getProductSubTitle() {
+		return productSubTitle;
 	}
 
-	public void setProduct_sub_title(String product_sub_title) {
-		this.product_sub_title = product_sub_title;
+	public void setProductSubTitle(String productSubTitle) {
+		this.productSubTitle = productSubTitle;
 	}
 
 	public String getDescription() {
@@ -160,12 +151,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public Double getRegular_price() {
-		return regular_price;
+	public Double getRegularPrice() {
+		return regularPrice;
 	}
 
-	public void setRegular_price(Double regular_price) {
-		this.regular_price = regular_price;
+	public void setRegularPrice(Double regularPrice) {
+		this.regularPrice = regularPrice;
 	}
 
 	public int getDiscount() {
@@ -184,92 +175,20 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public String getHash() {
-		return hash;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public String getMeta_title() {
-		return meta_title;
+	public int getFeatured() {
+		return featured;
 	}
 
-	public void setMeta_title(String meta_title) {
-		this.meta_title = meta_title;
-	}
-
-	public String getMeta_keywords() {
-		return meta_keywords;
-	}
-
-	public void setMeta_keywords(String meta_keywords) {
-		this.meta_keywords = meta_keywords;
-	}
-
-	public Date getInserted_at() {
-		return inserted_at;
-	}
-
-	public void setInserted_at(Date inserted_at) {
-		this.inserted_at = inserted_at;
-	}
-
-	public Date getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
-	}
-
-	public Category getProduct_category() {
-		return product_category;
-	}
-
-	public void setProduct_category(Category product_category) {
-		this.product_category = product_category;
-	}
-
-	public List<Tag> getProduct_tags() {
-		return product_tags;
-	}
-
-	public void setProduct_tags(List<Tag> product_tags) {
-		this.product_tags = product_tags;
-	}
-
-	public List<Image> getImages() {
-		return images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
-
-	public Brand getProduct_brand() {
-		return product_brand;
-	}
-
-	public void setProduct_brand(Brand product_brand) {
-		this.product_brand = product_brand;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public List<Review> getProduct_reviews() {
-		return product_reviews;
-	}
-
-	public void setProduct_reviews(List<Review> product_reviews) {
-		this.product_reviews = product_reviews;
+	public void setFeatured(int featured) {
+		this.featured = featured;
 	}
 
 	public int getTax() {
@@ -280,18 +199,105 @@ public class Product {
 		this.tax = tax;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [product_id=" + product_id + ", productRef=" + productref + ", product_name=" + product_name
-				+ ", product_title=" + product_title + ", product_sub_title=" + product_sub_title + ", description="
-				+ description + ", regular_price=" + regular_price + ", discount=" + discount + ", quantity=" + quantity
-				+ ", status=" + status + ", tax=" + tax + ", hash=" + hash + ", meta_title=" + meta_title
-				+ ", meta_keywords=" + meta_keywords + ", inserted_at=" + inserted_at + ", updated_at=" + updated_at
-				+ ", product_category=" + product_category + ", product_tags=" + product_tags + ", images=" + images
-				+ ", product_brand=" + product_brand + ", orders=" + orders + ", product_reviews=" + product_reviews
-				+ "]";
+	public String getHash() {
+		return hash;
 	}
 
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getMetaTitle() {
+		return metaTitle;
+	}
+
+	public void setMetaTitle(String metaTitle) {
+		this.metaTitle = metaTitle;
+	}
+
+	public String getMetaKeywords() {
+		return metaKeywords;
+	}
+
+	public void setMetaKeywords(String metaKeywords) {
+		this.metaKeywords = metaKeywords;
+	}
+
+	public Date getInsertedAt() {
+		return insertedAt;
+	}
+
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Category getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(Category productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	public List<Tag> getProductTags() {
+		return productTags;
+	}
+
+	public void setProductTags(List<Tag> productTags) {
+		this.productTags = productTags;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+	public Brand getProductBrand() {
+		return productBrand;
+	}
+
+	public void setProductBrand(Brand productBrand) {
+		this.productBrand = productBrand;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public List<Review> getProductReviews() {
+		return productReviews;
+	}
+
+	public void setProductReviews(List<Review> productReviews) {
+		this.productReviews = productReviews;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productref=" + productRef + ", productName=" + productName
+				+ ", productTitle=" + productTitle + ", productSubTitle=" + productSubTitle + ", description="
+				+ description + ", regularPrice=" + regularPrice + ", discount=" + discount + ", quantity=" + quantity
+				+ ", status=" + status + ", featured=" + featured + ", tax=" + tax + ", hash=" + hash + ", metaTitle="
+				+ metaTitle + ", metaKeywords=" + metaKeywords + ", insertedAt=" + insertedAt + ", updatedAt="
+				+ updatedAt + ", productCategory=" + productCategory + ", productTags=" + productTags + ", images="
+				+ images + ", productBrand=" + productBrand + ", orders=" + orders + ", productReviews="
+				+ productReviews + "]";
+	}
 
 
 

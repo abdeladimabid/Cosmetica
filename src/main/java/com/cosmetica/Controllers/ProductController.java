@@ -96,11 +96,15 @@ public class ProductController {
 		 }
 	 
 	 @GetMapping("/product/instock/{ref}")
-	 public boolean ProductInStock(@PathVariable("ref")String ref) {
+	 public boolean productInStock(@PathVariable("ref")String ref) {
 		return productservice.productInStock(ref);
 	 
 	 }
-	 
+
+	 @GetMapping("/products/between/{p1}/{p2}")		//getProductInRange
+	 public List<Product> productsBetween(@PathVariable double p1, @PathVariable double p2) {
+		return productservice.getProductsBetween(p1, p2);
+  
 	 @GetMapping("/product/rating/{rate}")
      public List<Product> ProductsByRate(@PathVariable("rate")int rate) {
         List<Product> products = productservice.getAll();
@@ -119,7 +123,34 @@ public class ProductController {
             return productservice.getProductStars(product);
      }
 	 
+	 }
 	 
+	 @GetMapping("/featured/products")		//getFeaturedProducts
+	 public List<Product> featuredProducts() {
+		return productservice.getFeaturedProducts();
+	 
+	 }
+
+	 @GetMapping("/new/products")		//getNewArrivals
+	 public List<Product> newProducts() {
+		return productservice.getNewArrivals();
+	 
+	 }
+	 
+//	 @GetMapping("/top/products")
+//	 public List<Product > topProducts() {
+//		List<Product> produits = productservice.getAll();
+//		List<Product> sortedProducts = new ArrayList<>();
+//		for(Product p : produits) {
+//			float rate = productservice.getProductStars(p);
+//			
+//		}
+//		return produit;
+//		 
+//	 }
+	 
+//	 getDealOfTheDay
+//	 getTopProducts
 }
 
 

@@ -25,9 +25,13 @@ public interface IProductService {
 	public boolean productInStock(String ref);
 	
 	public List<Review> getProductReviews(Product product);
-	
-	public float getProductStars(Product product);//not yet
-  
 
+	public float getProductStars(Product product);
+	
+	public List<Product> getProductsBetween(double p1, double p2);
+
+	public List<Product> getFeaturedProducts();
+	
+	public List<Product> getNewArrivals();
 
 }

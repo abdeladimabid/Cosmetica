@@ -41,17 +41,17 @@ public class OrderService implements IOrderService{
 	
 	@Override
 	public User getOrderUser(Order Order) {
-		return Order.getOrder_cart().getCart_user();
+		return Order.getOrderCart().getCartUser();
 	}
 	
 	@Override
 	public Product getOrderProduct(Order Order) {
-		return Order.getOrder_product();
+		return Order.getOrderProduct();
 	}
 	
 	@Override
 	public Cart getOrderCart(Order Order) {
-		return Order.getOrder_cart();
+		return Order.getOrderCart();
 	}
 
 }

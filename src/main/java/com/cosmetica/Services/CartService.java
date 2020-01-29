@@ -41,7 +41,7 @@ public class CartService implements ICartService{
 
 	@Override
 	public User getCartUser(Cart cart) {
-		return cart.getCart_user();
+		return cart.getCartUser();
 	}
 	
 	@Override
@@ -50,10 +50,10 @@ public class CartService implements ICartService{
 		List<Order> orders = cart.getOrders();
 		for (Order o : orders) {
 			//if order does not have a discount 
-			if(o.getOrder_product().getDiscount()==0){
-			amount = amount+o.getQuantity()*o.getOrder_product().getRegular_price();}
+			if(o.getOrderProduct().getDiscount()==0){
+			amount = amount+o.getQuantity()*o.getOrderProduct().getRegularPrice();}
 			else {//if order does have a discount
-			amount = amount+o.getQuantity()*o.getOrder_product().getRegular_price()*(o.getOrder_product().getDiscount()/100);	
+			amount = amount+o.getQuantity()*o.getOrderProduct().getRegularPrice()*(o.getOrderProduct().getDiscount()/100);	
 			}
 		}
 		return amount;
@@ -66,7 +66,7 @@ public class CartService implements ICartService{
 	
 	@Override
 	public InvoiceBody getCartInvoiceHeads(Cart cart) {
-		return cart.getCart_body();
+		return cart.getCartBody();
 	}
 	
 }

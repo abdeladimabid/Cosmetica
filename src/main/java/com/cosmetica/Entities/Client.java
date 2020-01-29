@@ -16,12 +16,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Client extends User{
 
 	private String adresse;
-	private double amount_spent;
+	private double amountSpent;
 	
-	@OneToMany(mappedBy = "user_review",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Review> user_reviews;
+	@OneToMany(mappedBy = "userReview",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Review> userReviews;
 
-	@OneToMany(mappedBy = "cart_user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cartUser",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Cart> carts;
 
 	public Client() {
@@ -39,7 +39,7 @@ public class Client extends User{
 			boolean active, Role role, String adresse) {
 		super(username, firstname, lastname, email, password, token, active, role);
 		this.adresse = adresse;
-		this.amount_spent = 0;
+		this.amountSpent = 0;
 	}
 
 	public String getAdresse() {
@@ -50,20 +50,20 @@ public class Client extends User{
 		this.adresse = adresse;
 	}
 
-	public double getAmount_spent() {
-		return amount_spent;
+	public double getAmountSpent() {
+		return amountSpent;
 	}
 
-	public void setAmount_spent(double amount_spent) {
-		this.amount_spent = amount_spent;
+	public void setAmountSpent(double amount_spent) {
+		this.amountSpent = amount_spent;
 	}
 
-	public List<Review> getUser_reviews() {
-		return user_reviews;
+	public List<Review> getUserReviews() {
+		return userReviews;
 	}
 
-	public void setUser_reviews(List<Review> user_reviews) {
-		this.user_reviews = user_reviews;
+	public void setUserReviews(List<Review> user_reviews) {
+		this.userReviews = user_reviews;
 	}
 
 	public List<Cart> getCarts() {
@@ -76,7 +76,7 @@ public class Client extends User{
 
 	@Override
 	public String toString() {
-		return "Client [adresse=" + adresse + ", amount_spent=" + amount_spent + ", user_reviews=" + user_reviews
+		return "Client [adresse=" + adresse + ", amount_spent=" + amountSpent + ", user_reviews=" + userReviews
 				+ ", carts=" + carts + "]";
 	}
 
