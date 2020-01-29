@@ -36,8 +36,8 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public void delete(int product_id) {
-		dao.deleteById(product_id);
+	public void delete(Product product) {
+		dao.delete(product);
 	}
 	
 	@Override

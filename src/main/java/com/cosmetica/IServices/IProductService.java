@@ -16,7 +16,7 @@ public interface IProductService {
 
 	public void saveOrUpdate(Product product);
 
-	public void delete(int product_id);
+	public void  delete(Product product);
 	
 	public List<Tag> getProductTags(Product product);
 	
@@ -25,11 +25,11 @@ public interface IProductService {
 	public boolean productInStock(String ref);
 	
 	public List<Review> getProductReviews(Product product);
-	
+
 	public float getProductStars(Product product);
 	
 	public List<Product> getProductsBetween(double p1, double p2);
-  
+
 	public List<Product> getFeaturedProducts();
 	
 	public List<Product> getNewArrivals();
