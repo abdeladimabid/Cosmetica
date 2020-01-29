@@ -84,14 +84,14 @@ public class ClientService implements IClientService{
 		return dao.findByEmail(email); 
 	}
 
+	
 	@Override
-	public List<Client> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmailContaining(username, email);
-	}
-
-	@Override
-	public List<Client> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastnameContaining(firstname, lastname);
+	public List<Client> getByFirstnameOrLastname(String firstname, String lastname) {
+		List<Client> first = dao.findByFirstnameContaining(firstname);
+		List<Client> last = dao.findByLastnameContaining(lastname);
+		first.addAll(last);
+		return first;
+		
 	}
 	
 

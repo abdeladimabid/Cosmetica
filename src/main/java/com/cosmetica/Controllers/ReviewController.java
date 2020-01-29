@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.cosmetica.Entities.Client;
 import com.cosmetica.Entities.Review;
 
 import com.cosmetica.Exceptions.CosmeticaException;
@@ -67,15 +67,15 @@ public class ReviewController {
 		 
 	 }
 
-//	 @GetMapping("/review/user/{review_id}")//hna reviews ma3erfnash lou luser dyalou
-//	 public Client userReviews(@PathVariable("review_id")int review_id) {
-//		 
-//		 if(!reviewservice.getOneById(review_id).isPresent())
-//	         throw new CosmeticaException(review_id );
-//		 Review review =reviewservice.getOneById(review_id).get();
-//		 return reviewservice.getReviewUser(review);
-//		 
-//	 }
+	 @GetMapping("/review/user/{review_id}")
+	 public Client userReviews(@PathVariable("review_id")int review_id) {
+		 
+		 if(!reviewservice.getOneById(review_id).isPresent())
+	         throw new CosmeticaException(review_id );
+		 Review review =reviewservice.getOneById(review_id).get();
+		 return reviewservice.getReviewUser(review);
+		 
+	 }
 	 @GetMapping("/review/date/{review_id}")
 	 public String getReviewTimeSincePublished(@PathVariable("review_id")int review_id){
 		 
