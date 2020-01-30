@@ -18,7 +18,7 @@ import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.InvoiceBody;
 import com.cosmetica.Entities.InvoiceHead;
 import com.cosmetica.Exceptions.CosmeticaException;
-import com.cosmetica.Services.InvoiceBodyService;
+import com.cosmetica.IServices.IInvoiceBodyService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,7 +26,7 @@ import com.cosmetica.Services.InvoiceBodyService;
 public class InvoiceBodyController {
 	
 	@Autowired
-	InvoiceBodyService invoicebodyservice;
+	IInvoiceBodyService invoicebodyservice;
 	
 	  /*InvoiceBody is basically the recipient group of infos : 
 	  **Receiving date, Recipient first name and last name, Recipient phone and address.

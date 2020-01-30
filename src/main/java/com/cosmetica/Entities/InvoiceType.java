@@ -16,13 +16,16 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="invoiceType")
+@JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "heads"})
 public class InvoiceType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int invoiceTypeId;
-	private int label;
+	private String label;
 
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
@@ -42,6 +45,13 @@ public class InvoiceType {
 	}
 
 
+	public InvoiceType(String label) {
+		super();
+		this.label = label;
+		this.insertedAt = new Date();
+	}
+
+
 	public int getInvoiceTypeId() {
 		return invoiceTypeId;
 	}
@@ -52,12 +62,12 @@ public class InvoiceType {
 	}
 
 
-	public int getLabel() {
+	public String getLabel() {
 		return label;
 	}
 
 
-	public void setLabel(int label) {
+	public void setLabel(String label) {
 		this.label = label;
 	}
 
