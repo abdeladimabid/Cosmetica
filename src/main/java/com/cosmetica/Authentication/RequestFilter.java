@@ -19,6 +19,7 @@ import com.cosmetica.Services.CosmeticaUserDetailsService;
 
 @Component
 public class RequestFilter extends OncePerRequestFilter {
+
 	@Autowired
     private CosmeticaUserDetailsService userDetailsService;
 

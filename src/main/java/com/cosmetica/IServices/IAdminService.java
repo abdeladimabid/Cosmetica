@@ -23,9 +23,9 @@ public interface IAdminService {
 	
 	public Optional<Admin> getOneByEmail(String email);
 	
-	public List<Admin> getOneByUsernameOrEmail(String username,String email);
-	
 	public List<Admin> getOneByFirstnameOrLastname(String firstname,String lastname);
 
 	public String verifyPassword(String password) throws NoSuchAlgorithmException;
+  
+	public List<Admin> getByUsernameOrEmail(String username, String email);
 }

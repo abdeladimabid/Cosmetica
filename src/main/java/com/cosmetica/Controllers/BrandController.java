@@ -28,14 +28,14 @@ public class BrandController {
 	@Autowired
 	IBrandService brandservice;
 	
-	@GetMapping("/brands")
+	@GetMapping("/brands")							//get all brands
 	 public List<Brand> allBrands() {
 		List<Brand> brands = brandservice.getAll();
 		return brands;
 		 
 	 }
 	 
-	 @GetMapping("/brand/{brand_id}")
+	 @GetMapping("/brand/{brand_id}")				//search a brand by Brand_Id, takes a brand_Id in parameters
 	 public Optional <Brand> oneBrand(@PathVariable("brand_id")int brand_id){
 		 
 		 if(!brandservice.getOneById(brand_id).isPresent())
@@ -44,7 +44,7 @@ public class BrandController {
 		 
 	 }
 	 
-	 @GetMapping("/brand/{username}")
+	 @GetMapping("/brand/{username}")				//search a brand by Brand_Name, takes a brand_Name in parameters
 	 public List <Brand> BrandByUsername(@PathVariable("username")String username){
 		 
 		 if(brandservice.getOneByBrandName(username).isEmpty())
@@ -53,18 +53,18 @@ public class BrandController {
 		 
 	 }
 
-	 @PostMapping("/add/brand")
+	 @PostMapping("/add/brand")						//add a new brand , takes a brand in parameters
 	 public void addBrand(@RequestBody Brand Brand) {
 		 brandservice.saveOrUpdate(Brand);
 		 
 	 }
-	 @PutMapping("/modify/brand")
+	 @PutMapping("/modify/brand")					//modify a brand , takes the new brand in parameters
 	 public void modifyBrand(@RequestBody Brand Brand) {
 		 brandservice.saveOrUpdate(Brand);
 		 
 	 }
 	 
-	 @DeleteMapping("/brand/remove/{brand_id}")
+	 @DeleteMapping("/brand/remove/{brand_id}")		//remove a brand , takes a brand_Id in parameters
 	 public void removeBrand(@PathVariable("brand_id")int brand_id) {
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -73,7 +73,7 @@ public class BrandController {
 		 
 	 }
 	 
-	 @GetMapping("/brand/coupons/id/{brand_id}")
+	 @GetMapping("/brand/coupons/id/{brand_id}")	//get a brand coupons by Brand_Id, takes a brand_Id in parameters
 	 public List<Coupon> brandCouponsById(@PathVariable("brand_id")int brand_id) {
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -81,7 +81,7 @@ public class BrandController {
 		 return brandservice.getBrandCoupons(Brand); 
 	 }
 	 
-	 @GetMapping("/brand/coupons/un/{username}")
+	 @GetMapping("/brand/coupons/un/{username}")	//get a brand coupons by BrandName, takes a brand_Name in parameters
 	 public List<Coupon> brandCouponsByUsername(@PathVariable("username")String username) {
 		 if(brandservice.getOneByBrandName(username).isEmpty())
 	         throw new CosmeticaException(username );
@@ -89,7 +89,7 @@ public class BrandController {
 		 return brandservice.getBrandCoupons(Brand.get(0)); 
 	 }
 
-	 @GetMapping("/brand/products/id/{brand_id}")
+	 @GetMapping("/brand/products/id/{brand_id}")	//get a brand products by Brand_Id, takes a brand_Id in parameters
 	 public List<Product> brandProductsById(@PathVariable("brand_id")int brand_id) {
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -97,7 +97,7 @@ public class BrandController {
 		 return brandservice.getBrandProducts(Brand); 
 	 }
 	 
-	 @GetMapping("/brand/products/un/{username}")
+	 @GetMapping("/brand/products/un/{username}")	//get a brand products by Brand_Name, takes a brand_Name in parameters
 	 public List<Product> brandProductsByUsername(@PathVariable("username")String username) {
 		 if(brandservice.getOneByBrandName(username).isEmpty())
 	         throw new CosmeticaException(username );
