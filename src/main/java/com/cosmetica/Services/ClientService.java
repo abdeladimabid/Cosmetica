@@ -52,10 +52,10 @@ public class ClientService implements IClientService{
 	}
 
 	@Override
-	public boolean verifyPassword(Client client, String password) {
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+	public String verifyPassword(String password) {
+		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		String hash = new BCryptPasswordEncoder().encode(password+salt);
-		return client.getPassword().matches(hash);
+		return hash;
 	}
 
 	@Override

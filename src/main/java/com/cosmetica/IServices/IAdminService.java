@@ -1,5 +1,6 @@
 package com.cosmetica.IServices;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,13 @@ public interface IAdminService {
 
 	public void delete(Admin admin);
 	
-	public boolean verifyPassword(int admin, String password);
-	
 	public Optional<Admin> verifyLogin(String username, String email);
 	
 	public Optional<Admin> getOneByEmail(String email);
 	
 	public List<Admin> getOneByFirstnameOrLastname(String firstname,String lastname);
 
+	public String verifyPassword(String password) throws NoSuchAlgorithmException;
+  
 	public List<Admin> getByUsernameOrEmail(String username, String email);
 }

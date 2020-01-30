@@ -48,7 +48,8 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable()
-		.authorizeRequests().antMatchers("/authenticate").permitAll()
+		.authorizeRequests().antMatchers("/COSMETICA/authenticate").permitAll().and()
+		.authorizeRequests().antMatchers("/COSMETICA/brands/**").hasAuthority("user")
 		.anyRequest().authenticated()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(jwtrequestfilter, UsernamePasswordAuthenticationFilter.class);

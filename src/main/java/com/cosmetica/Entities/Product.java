@@ -288,7 +288,6 @@ public class Product {
 	public void setProductReviews(List<Review> productReviews) {
 		this.productReviews = productReviews;
 	}
-
 	public String getProductRef() {
 		return productRef;
 	}
