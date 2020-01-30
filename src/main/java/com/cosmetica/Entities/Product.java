@@ -289,23 +289,6 @@ public class Product {
 		this.productReviews = productReviews;
 	}
 	
-
-	public String getProductRef() {
-		return productRef;
-	}
-
-	public void setProductRef(String productRef) {
-		this.productRef = productRef;
-	}
-
-	public float getStars() {
-		return stars;
-	}
-
-	public void setStars(float stars) {
-		this.stars = stars;
-	}
-
 	public String getProductRef() {
 		return productRef;
 	}
