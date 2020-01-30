@@ -28,14 +28,14 @@ public class OrderController {
 	@Autowired
 	IOrderService orderservice;
 	
-	 @GetMapping("/orders")
+	 @GetMapping("/order/all")							//get all orders
 	 public List<Order > allOrders() {
 		List<Order> orders = orderservice.getAll();
 		return orders;
 		 
 	 }
 	 
-	 @GetMapping("/order/{order_id}")
+	 @GetMapping("/order/{order_id}")					//get order by id, takes an order_id in parameters
 	 public Optional <Order> oneOrder(@PathVariable("order_id")int order_id){
 		 
 		 if(!orderservice.getOneById(order_id).isPresent())
@@ -44,18 +44,18 @@ public class OrderController {
 		 
 	 }
 
-	 @PostMapping("/add/order")
+	 @PostMapping("/client/order/add")					//add an order, takes an order in parameters
 	 public void addOrder(@RequestBody Order order) {
 		 orderservice.saveOrUpdate(order);
 		 
 	 }
-	 @PutMapping("/modify/Order")
+	 @PutMapping("/client/order/modify")				//modify an order, takes an order in parameters
 	 public void modifyOrder(@RequestBody Order Order) {
 		 orderservice.saveOrUpdate(Order);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/order/{order_id}")
+	 @DeleteMapping("/client/order/remove/{order_id}")	//remove an order, takes an order in parameters
 	 public void removeOrder(@PathVariable("order_id")int order_id) {
 		 if(!orderservice.getOneById(order_id).isPresent())
 	         throw new CosmeticaException(order_id );
@@ -64,7 +64,7 @@ public class OrderController {
 		 
 	 }
 	
-	 @GetMapping("/order/user/{order_id}")
+	 @GetMapping("/order/user/{order_id}")				//get order's user, takes an id_order in parameters
 	 public User OrderUser(@PathVariable("order_id")int order_id) {
 		 if(!orderservice.getOneById(order_id).isPresent())
 			 throw new CosmeticaException(order_id );
@@ -73,7 +73,7 @@ public class OrderController {
 	        	 
 	 }
 
-	 @GetMapping("/order/product/{order_id}")
+	 @GetMapping("/order/product/{order_id}")			//get an orders product, takes an id_order in parameters
 	 public Product OrderProduct(@PathVariable("order_id")int order_id) {
 		 if(!orderservice.getOneById(order_id).isPresent())
 			 throw new CosmeticaException(order_id );
@@ -82,7 +82,7 @@ public class OrderController {
 			
 		}
 	 
-	 @GetMapping("/order/cart/{order_id}")
+	 @GetMapping("/order/cart/{order_id}")				//get an orders cart, takes an id_order in parameters
 	 public Cart getOrderCart(@PathVariable("order_id")int order_id) {
 		 if(!orderservice.getOneById(order_id).isPresent())
 			 throw new CosmeticaException(order_id );

@@ -31,7 +31,7 @@ public class CartController {
 	@Autowired
 	ICartService cartservice;
 	
-	 @GetMapping("/carts")
+	 @GetMapping("/superadmin/cart/all")
 	 public List<Cart > allCarts() {
 		List<Cart> carts = cartservice.getAll();
 		return carts;
@@ -47,18 +47,18 @@ public class CartController {
 		 
 	 }
 
-	 @PostMapping("/add/cart")
+	 @PostMapping("/client/add/cart")
 	 public void addCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
-	 @PutMapping("/modify/cart")
+	 @PutMapping("/client/modify/cart")
 	 public void modifyCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/cart/{cart_id}")
+	 @DeleteMapping("/client/remove/cart/{cart_id}")
 	 public void removeCart(@PathVariable("cart_id")int cart_id) {
 		 if(!cartservice.getOneById(cart_id).isPresent())
 	         throw new CosmeticaException(cart_id );
