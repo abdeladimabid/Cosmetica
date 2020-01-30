@@ -33,5 +33,11 @@ public interface IProductService {
 	public List<Product> getFeaturedProducts();
 	
 	public List<Product> getNewArrivals();
+	
+	public List<Product> getTopProducts();
+	
+	public List<Product> getHotDeals();
+	
+	public Product getDealOfTheDay();
 
 }
