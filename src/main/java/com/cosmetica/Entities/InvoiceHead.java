@@ -41,9 +41,8 @@ public class InvoiceHead {
 	@JoinColumn (name="invoiceBodyId",nullable = false)
 	private InvoiceBody headBody;
 
-	public InvoiceHead(int ref, InvoiceType type, Cart head_cart, InvoiceBody head_body) {
+	public InvoiceHead(InvoiceType type, InvoiceBody head_body) {
 		super();
-		this.ref = ref;
 		this.type = type;
 		this.headBody = head_body;
 		this.insertedAt = new Date();

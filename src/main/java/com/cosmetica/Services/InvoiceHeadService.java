@@ -41,4 +41,19 @@ public class InvoiceHeadService implements IInvoiceHeadService{
 	public InvoiceBody getBody(InvoiceHead InvoiceHead) {
 		return InvoiceHead.getHeadBody();
 	}
+	
+	@Override
+	public InvoiceHead getLastFac() {
+		return dao.getLastInsertedFac();
+	}
+	
+	@Override
+	public InvoiceHead getLastBon() {
+		return dao.getLastInsertedBon();
+	}
+	
+	@Override
+	public InvoiceHead getLastDev() {
+		return dao.getLastInsertedDev();
+	}
 }
