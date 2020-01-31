@@ -50,12 +50,12 @@ public class Coupon {
 	@JoinColumn (name="brandId",nullable = false)
 	private Brand couponBrand;
 
-	public Coupon(String code, String description, int active, int discount_value, Date start_date, Date end_date,
+	public Coupon(String code, String description, int discount_value, Date start_date, Date end_date,
 			Brand brand) {
 		super();
 		this.code = code;
 		this.description = description;
-		this.active = active;
+		this.active = 0;
 		this.discountValue = discount_value;
 		this.startDate = start_date;
 		this.endDate = end_date;

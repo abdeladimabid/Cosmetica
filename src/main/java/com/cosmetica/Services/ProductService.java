@@ -1,7 +1,11 @@
 package com.cosmetica.Services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
 import com.cosmetica.Entities.Image;
+import com.cosmetica.Entities.Match;
 import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.Tag;
@@ -111,5 +116,72 @@ public class ProductService implements IProductService{
 //			
 //			}
 	
+	//new method
+    @Override
+    public List<Product> productsSuggestionX(Product product){
+        List<Product> products = dao.getXSell(product.getProductId());
+        List<Match> matches = new ArrayList<>();
+        List<Match> primary = new ArrayList<>();
+        
+        for (Product p : products) {				//create an arraylist that contains the Query returned products _as table.Match_ and how many Tag matches _as table.tag_ they have with the product given in parameters
+            List<Tag> tags = p.getProductTags();
+            tags.retainAll(product.getProductTags());
+            Match match = new Match();
+            match.setMatch(p);
+            match.setTags(tags.size());
+            matches.add(match);
+            }
+        
+        Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
+        
+        for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
+        	if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
+        		primary.add(m);
+        	}
+        }
+        							     
+        primary = primary.stream().limit(10).collect(Collectors.toList());
+        products = new ArrayList<>();
+        
+        for(Match m : primary) {	
+        		products.add(m.getMatch());}
+        
+        return products;
+
+            }
+    
+    //new method
+    @Override
+    public List<Product> productsSuggestionU(Product product){
+    	List<Product> products = dao.getUpSell(product.getProductId());
+    	List<Match> matches = new ArrayList<>();
+    	List<Match> primary = new ArrayList<>();
+    	
+    	for (Product p : products) {				//create an arraylist that contains the Query returned products _as table.Match_ and how many Tag matches _as table.tag_ they have with the product given in parameters
+    		List<Tag> tags = p.getProductTags();
+    		tags.retainAll(product.getProductTags());
+    		Match match = new Match();
+    		match.setMatch(p);
+    		match.setTags(tags.size());
+    		matches.add(match);
+    	}
+    	
+    	Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
+    	
+    	for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
+    		if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
+    			primary.add(m);
+    		}
+    	}
+    	
+    	primary = primary.stream().limit(10).collect(Collectors.toList());
+    	products = new ArrayList<>();
+    	
+    	for(Match m : primary) {	
+    		products.add(m.getMatch());}
+    	
+    	return products;
+    	
+    }
 
 }

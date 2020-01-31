@@ -28,7 +28,7 @@ public class CouponController {
 	@Autowired
 	ICouponService couponservice;
 	
-	 @GetMapping("/coupons")
+	 @GetMapping("/saller/coupon/all")
 	 public List<Coupon > allCoupons() {
 		List<Coupon> coupons = couponservice.getAll();
 		return coupons;
@@ -43,7 +43,7 @@ public class CouponController {
 		 
 	 }
 	 
-	 @GetMapping("/brand/coupon/{coupon_id}")
+	 @GetMapping("/coupon/brand/{coupon_id}")
 	 public Brand BrandCoupon(@PathVariable("coupon_id")int coupon_id,Coupon Coupon) {
 		 if(!couponservice.getOneById(coupon_id).isPresent())
 	         throw new CosmeticaException(coupon_id );
@@ -52,24 +52,19 @@ public class CouponController {
 		 
 	 }
 	 
-	 
-	 
-	 @PostMapping("/add/coupon")
+	 @PostMapping("/saller/add/coupon/add")
 	 public void addCoupon(@RequestBody Coupon coupon) {
-//		 Date d = new Date();
-//		 Coupon cou = couponservice.getOneById(1).get();
-//		 Brand b = couponservice.getBrand(cou);
-//		 Coupon c = new Coupon("code","description",false,20,d,null,b);
 		 couponservice.saveOrUpdate(coupon);
 		 
 	 }
-	 @PutMapping("/modify/coupon")
+	 
+	 @PutMapping("/saller/coupon/modify")
 	 public void modifyCoupon(@RequestBody Coupon coupon) {
 		 couponservice.saveOrUpdate(coupon);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/coupon/{coupon_id}")
+	 @DeleteMapping("/saller/coupon/remove/{coupon_id}")
 	 public void removeCoupon(@PathVariable("coupon_id")int coupon_id) {
 		 if(!couponservice.getOneById(coupon_id).isPresent())
 	         throw new CosmeticaException(coupon_id );
@@ -85,8 +80,46 @@ public class CouponController {
 	         throw new CosmeticaException(coupon_id );
 		 Coupon coupon=couponservice.getOneById(coupon_id).get();
 		 return couponservice.validateCoupon(coupon);
-		 
+		  
+	 }
+	 
+	 @PostMapping("/saller/activate/{coupon_id}")
+	 public void activateCoupon(@PathVariable("coupon_id")int coupon_id) {
+		 if(!couponservice.getOneById(coupon_id).isPresent())
+	         throw new CosmeticaException(coupon_id );
+		 Coupon coupon=couponservice.getOneById(coupon_id).get();
+		 coupon.setActive(1);
 		 
 	 }
+	 
+	 @PostMapping("/saller/deactivate/{coupon_id}")
+	 public void deactivateCoupon(@PathVariable("coupon_id")int coupon_id) {
+		 if(!couponservice.getOneById(coupon_id).isPresent())
+	         throw new CosmeticaException(coupon_id );
+		 Coupon coupon=couponservice.getOneById(coupon_id).get();
+		 coupon.setActive(0);
+		 
+	 }
+	 
+	//new method
+	    @PostMapping("/coupon/validate")                //validate an a coupon, takes an coupon_id in parameters
+	        public void validate(@RequestBody int id) {
+	         if(!couponservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	         Coupon coupon = couponservice.getOneById(id).get();
+	         coupon.setActive(1);;
+	         couponservice.saveOrUpdate(coupon);
 
+	        }
+
+	//new method
+	    @PostMapping("/coupon/invalidate")                //unvalidate a coupon, takes an coupon_id in parameters
+	        public void invalidate(@RequestBody int id) {
+	        if(!couponservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	        Coupon coupon = couponservice.getOneById(id).get();
+	        coupon.setActive(0);;
+	        couponservice.saveOrUpdate(coupon);
+
+	        }
 }

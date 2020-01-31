@@ -28,14 +28,14 @@ public class ClientController {
 	@Autowired
 	IClientService clientservice;
 
-	@GetMapping("/clients")
+	@GetMapping("/superadmin/client/all")
 	 public List<Client> allClients() {
 		List<Client> clients = clientservice.getAll();
 		return clients;
 		 
 	 }
 	 
-	 @GetMapping("/client/id/{client_id}")
+	 @GetMapping("/supervisor/client/id/{client_id}")
 	 public Optional <Client> oneClient(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
@@ -44,7 +44,7 @@ public class ClientController {
 		 
 	 }
 
-	 @GetMapping("/client/un/{username}")
+	 @GetMapping("/supervisor/client/un/{username}")
 	 public List <Client> ClientsByUsername(@PathVariable("username")String username){
 		
 		 if(clientservice.getOneByUsername(username).isEmpty())
@@ -53,19 +53,19 @@ public class ClientController {
 		 
 	 }
 
-	 @PostMapping("/add/client")
+	 @PostMapping("/superadmin/add/client")
 	 public void addClient(@RequestBody Client Client) {
 		 clientservice.saveOrUpdate(Client);
 		 
 	 }
 	 
-	 @PutMapping("/modify/client")
+	 @PutMapping("/client/modify")
 	 public void modifyClient(@RequestBody Client Client) {
 		 clientservice.saveOrUpdate(Client);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/client/{client_id}")
+	 @DeleteMapping("/superadmin/client/remove/{client_id}")
 	 public void removeClient(@PathVariable("client_id")int client_id) {
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
@@ -74,7 +74,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/cart/client/{client_id}")
+	 @GetMapping("/client/cart/{client_id}")
 	 public List<Cart> ClientCart(@PathVariable("client_id")int client_id){
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
@@ -91,7 +91,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/email/{email}")
+	 @GetMapping("/supervisor/client/email/{email}")
 	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
 		 if(!clientservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
@@ -99,7 +99,7 @@ public class ClientController {
 	 }
 		
 
-	 @GetMapping("/client/reviews/{client_id}")
+	 @GetMapping("/supervisor/client/reviews/{client_id}")
 		public List<Review> clientReviews(@PathVariable("client_id")int client_id){
 			if(!clientservice.getOneById(client_id).isPresent())
 		         throw new CosmeticaException(client_id );
@@ -117,11 +117,42 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/name/{name}")
+	 @GetMapping("/supervisor/client/name/{name}")
 	 public List<Client> clientByFirstnameOrLastname(@PathVariable("name")String name){
 		 return clientservice.getByFirstnameOrLastname(name, name);
 		 
 	 }
-		
+	//new method
+	    @PostMapping("/client/validate")                //validate an a client, takes an client_id in parameters
+	    public void validate(@RequestBody int id) {
+	     if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	     Client client = clientservice.getOneById(id).get();
+	     client.setActive(true);
+	     clientservice.saveOrUpdate(client);
+
+	    }
+
+	//new method
+	    @PostMapping("/client/invalidate")                //unvalidate a client, takes an client_id in parameters
+	    public void invalidateed(@RequestBody int id) {
+	    if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	    Client client = clientservice.getOneById(id).get();
+	    client.setActive(false);
+	    clientservice.saveOrUpdate(client);
+
+	    }
+
+	//new method
+	    @PostMapping("/client/modifypassword")        //modify a client's password, takes an id_client in parameters
+	    public void modifypass(@RequestBody int id, String password) {
+	     if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	     Client client = clientservice.getOneById(id).get();
+	     client.setPassword(password);
+	     clientservice.saveOrUpdate(client);
+
+	}
 		
 }

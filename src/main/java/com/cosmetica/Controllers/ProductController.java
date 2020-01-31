@@ -30,7 +30,7 @@ public class ProductController {
 	@Autowired
 	IProductService productservice;
 	
-	 @GetMapping("/products")						//get all Products
+	 @GetMapping("/product/all")						//get all Products
 	 public List<Product > allProducts() {
 		List<Product> products = productservice.getAll();
 		return products;
@@ -46,18 +46,18 @@ public class ProductController {
 		 
 	 }
 
-	 @PostMapping("/add/product")					//add a new Product, new Product is given in parameters
+	 @PostMapping("/saller/add/product")					//add a new Product, new Product is given in parameters
 	 public void addProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
 		 
 	 }
-	 @PutMapping("/modify/product")					//modify a Product, new Product is given in parameters
+	 @PutMapping("/saller/modify/product")					//modify a Product, new Product is given in parameters
 	 public void modifyProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/product/{product_id}")	//remove a Product, id_Product is given in parameters
+	 @DeleteMapping("/saller/remove/product/{product_id}")	//remove a Product, id_Product is given in parameters
 	 public void removeProduct(@PathVariable("product_id")int product_id) {
 		 if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );
@@ -125,36 +125,75 @@ public class ProductController {
      }
 	
 
-	 @GetMapping("/featured/products")	//get Featured Products
+	 @GetMapping("/product/featured")	//get Featured Products
 	 public List<Product> featuredProducts() {
 		return productservice.getFeaturedProducts();
 	 
 	 }
 
-	 @GetMapping("/new/products")		//get 10 New Arrivals
+	 @GetMapping("/product/new")		//get 10 New Arrivals
 	 public List<Product> newProducts() {
 		return productservice.getNewArrivals();
 	 
 	 }
 	 
-	 @GetMapping("/top/products")		//get Top 10 Rated Products 
+	 @GetMapping("/product/top")		//get Top 10 Rated Products 
 	 public List<Product > topProducts() {
 		return productservice.getTopProducts();
 		 
 	 }
 	 
-	 @GetMapping("/hotdeals/products")	//get Hot Deals "top 10 deals with big discounts" 
+	 @GetMapping("/product/hotdeals")	//get Hot Deals "top 10 deals with big discounts" 
 	 public List<Product > hotDeals() {
 		return productservice.getHotDeals();
 		 
 	 }
 	 
-	 @GetMapping("/deal/products")		//get Deal Of The Day "best deal with big discount"
+	 @GetMapping("/product/deal")		//get Deal Of The Day "best deal with big discount"
 	 public Product dealOfTheDay() {
 		return productservice.getDealOfTheDay();
 		 
 	 }
 
+	//new method
+     @PostMapping("/product/validate")                //validate an a product, takes an product_id in parameters
+        public void validate(@RequestBody int id) {
+         if(!productservice.getOneById(id).isPresent())
+            throw new CosmeticaException(id);
+         Product product = productservice.getOneById(id).get();
+         product.setStatus(1);;
+         productservice.saveOrUpdate(product);
+
+        }
+
+//new method
+    @PostMapping("/product/invalidate")                //unvalidate a product, takes an product_id in parameters
+        public void invalidate(@RequestBody int id) {
+        if(!productservice.getOneById(id).isPresent())
+            throw new CosmeticaException(id);
+        Product product = productservice.getOneById(id).get();
+        product.setStatus(0);
+        productservice.saveOrUpdate(product);
+
+        }
+
+//new method
+    @GetMapping("/product/xsell/{product_id}")    //get a Product's rate, id_Product is given in parameters
+        public List<Product> ProductXsell(@PathVariable("product_id")int product_id) {
+            if(!productservice.getOneById(product_id).isPresent())
+                throw new CosmeticaException(product_id );
+            Product product=productservice.getOneById(product_id).get();
+            return productservice.productsSuggestionX(product);
+        }
+    
+  //new method
+    @GetMapping("/product/usell/{product_id}")    //get a Product's rate, id_Product is given in parameters
+        public List<Product> ProductUsell(@PathVariable("product_id")int product_id) {
+            if(!productservice.getOneById(product_id).isPresent())
+                throw new CosmeticaException(product_id );
+            Product product=productservice.getOneById(product_id).get();
+            return productservice.productsSuggestionU(product);
+        }
 }
 
 
