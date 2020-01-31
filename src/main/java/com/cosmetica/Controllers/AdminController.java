@@ -27,6 +27,8 @@ public class AdminController {
 	
 	@Autowired
 	IAdminService adminservice;
+	@Autowired
+	IRoleService roleserv;
 	
 	@Autowired
 	IRoleService roleserv;
@@ -101,47 +103,45 @@ public class AdminController {
 		 
 	 }
 	 
-//new method
-	 @PostMapping("/admin/superadmin/this/isacomplicated/link/to/add/a/superasmin")	//creates a superadmin, takes a new Admin in parameters
-	 public void addSuperAdmin() {
-		 Role role =roleserv.getOneById(1).get();
-		 Admin admin = new Admin("superadmin","abdel","admin","cosmetica@gmail.com","admin","",true,role);
-		 adminservice.saveOrUpdate(admin);
-		 
-	 }
-	 
-//new method
-	 @PostMapping("/admin/modifypassword")		//modify an admins password, takes a new Admin in parameters
-	 public void modifypass(@RequestBody int id, String password) {
-		 if(!adminservice.getOneById(id).isPresent())
-	         throw new CosmeticaException(id);
-		 Admin admin = adminservice.getOneById(id).get();
-		 admin.setPassword(password);
-		 adminservice.saveOrUpdate(admin);
-		 
-	 }
+	//new method
+     @PostMapping("/admin/superadmin/this/isacomplicated/link/to/add/a/superasmin")    //creates a superadmin, takes a new Admin in parameters
+     public void addSuperAdmin() {
+         Role role =roleserv.getOneById(1).get();
+         Admin admin = new Admin("superadmin","abdel","admin","cosmetica@gmail.com","admin","",true,role);
+         adminservice.saveOrUpdate(admin);
+
+     }
 
 //new method
-	@PostMapping("/admin/validate")				//validate an admin, takes an Admin_id in parameters
-	public void validate(@RequestBody int id) {
-	 if(!adminservice.getOneById(id).isPresent())
+     @PostMapping("/admin/modifypassword")        //modify an admins password, takes a new Admin in parameters
+     public void modifypass(@RequestBody int id, String password) {
+         if(!adminservice.getOneById(id).isPresent())
+             throw new CosmeticaException(id);
+         Admin admin = adminservice.getOneById(id).get();
+         admin.setPassword(password);
+         adminservice.saveOrUpdate(admin);
+
+     }
+
+//new method
+    @PostMapping("/admin/validate")                //validate an admin, takes an Admin_id in parameters
+    public void validate(@RequestBody int id) {
+     if(!adminservice.getOneById(id).isPresent())
         throw new CosmeticaException(id);
-	 Admin admin = adminservice.getOneById(id).get();
-	 admin.setActive(true);
-	 adminservice.saveOrUpdate(admin);
-	 
-	}
+     Admin admin = adminservice.getOneById(id).get();
+     admin.setActive(true);
+     adminservice.saveOrUpdate(admin);
+
+    }
 
 //new method
-	@PostMapping("/admin/invalidate")				//unvalidate an admin, takes an Admin_id in parameters
-	public void invalidate(@RequestBody int id) {
-	if(!adminservice.getOneById(id).isPresent())
-		throw new CosmeticaException(id);
-	Admin admin = adminservice.getOneById(id).get();
-	admin.setActive(false);
-	adminservice.saveOrUpdate(admin);
-	
-	}
-	 
+    @PostMapping("/admin/invalidate")                //unvalidate an admin, takes an Admin_id in parameters
+    public void invalidate(@RequestBody int id) {
+    if(!adminservice.getOneById(id).isPresent())
+        throw new CosmeticaException(id);
+    Admin admin = adminservice.getOneById(id).get();
+    admin.setActive(false);
+    adminservice.saveOrUpdate(admin);
 
+    }
 }

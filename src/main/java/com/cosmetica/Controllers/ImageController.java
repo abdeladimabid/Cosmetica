@@ -28,7 +28,7 @@ public class ImageController {
 	@Autowired
 	IImageService imgservice;
 	
-	 @GetMapping("/images")
+	 @GetMapping("/image/all")
 	 public List<Image> allImages() {
 		List<Image> imgs = imgservice.getAll();
 		return imgs;
@@ -44,21 +44,21 @@ public class ImageController {
 	
 	 }
 
-	 @PostMapping("/upload/image")
+	 @PostMapping("/saller/upload/image")
 	 public void addImage(@RequestBody MultipartFile image) throws Exception {
 		 imgservice.uploadImage(image);
 		 
 	 }
 	 
 	 
-	 @GetMapping("/image/dir")
+	 @GetMapping("/saller/image/dir")
 	 public String imageDir(){
 
 		 return imgservice.getUploadDirectory();
 	
 	 }
 	 
-	 @DeleteMapping("/remove/{image_id}")
+	 @DeleteMapping("/saller/remove/{image_id}")
 	 public void removeImage(@PathVariable("image_id")int image_id) {
 		 if(!imgservice.getOneById(image_id).isPresent())
 	         throw new CosmeticaException(image_id );
@@ -66,19 +66,17 @@ public class ImageController {
 		 imgservice.delete(img); 
 		 
 	 }
-		 
-//new method
-	 @GetMapping("/image/product{image_id}")
-	 public Product productImage(@PathVariable("image_id")int image_id){
-		 
-		 if(!imgservice.getOneById(image_id).isPresent())
-			 throw new CosmeticaException(image_id );
-		 
-		 Image image = imgservice.getOneById(image_id).get();
-		 return image.getProductImage();
-		 
-	 }
 
-	
+	//new method
+     @GetMapping("/image/product{image_id}")
+     public Product productImage(@PathVariable("image_id")int image_id){
+
+         if(!imgservice.getOneById(image_id).isPresent())
+             throw new CosmeticaException(image_id );
+
+         Image image = imgservice.getOneById(image_id).get();
+         return image.getProductImage();
+
+     }
 
 }

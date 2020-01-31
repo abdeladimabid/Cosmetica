@@ -35,7 +35,7 @@ public class InvoiceBodyController {
 	  **Based on the type of invoice the user needs. */
 	
 	
-	@GetMapping("/bodys")						//get all invoiceBodys
+	@GetMapping("/superadmin/body/all")						//get all invoiceBodys
 	 public List<InvoiceBody> allinvoicebodys() {
 		List<InvoiceBody> invoicebodys = invoicebodyservice.getAll();
 		return invoicebodys;
@@ -51,18 +51,19 @@ public class InvoiceBodyController {
 		 
 	 }
 
-	 @PostMapping("/add/invoicebody")					//add recipient info , takes an invoiceBody in parameters
+	 @PostMapping("/client/body/add")					//add recipient info , takes an invoiceBody in parameters
 	 public void addinvoicebody(@RequestBody InvoiceBody invoicebody) {
 		 invoicebodyservice.saveOrUpdate(invoicebody);
 		 
 	 }
-	 @PutMapping("/modify/invoicebody")					//modify recipient info , takes the new invoiceBody in parameters
+	 
+	 @PutMapping("/client/body/modify")					//modify recipient info , takes the new invoiceBody in parameters
 	 public void modifyinvoicebody(@RequestBody InvoiceBody invoicebody) {
 		 invoicebodyservice.saveOrUpdate(invoicebody);
 		 
 	 }
 	 
-	 @DeleteMapping("/body/remove/{invoicebody_id}")		//remove a invoiceBody , takes an invoicebody_Id in parameters
+	 @DeleteMapping("/client/body/remove/{invoicebody_id}")		//remove a invoiceBody , takes an invoicebody_Id in parameters
 	 public void removeinvoicebody(@PathVariable("invoicebody_id")int invoicebody_id) {
 		 if(!invoicebodyservice.getOneById(invoicebody_id).isPresent())
 	         throw new CosmeticaException(invoicebody_id );

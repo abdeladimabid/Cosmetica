@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class InvoiceHeadController {
 	  **We bind the Head to a specific head.*/
 	
 	
-	@GetMapping("/heads")						//get all invoiceHeads
+	@GetMapping("/superadmin/head/all")			//get all invoiceHeads
 	 public List<InvoiceHead> allinvoiceHeads() {
 		List<InvoiceHead> invoiceHeads = invoiceHeadservice.getAll();
 		return invoiceHeads;
@@ -59,8 +60,14 @@ public class InvoiceHeadController {
 		 InvoiceHead invoiceHead = invoiceHeadservice.getOneById(invoiceHead_id).get();
 		 return invoiceHeadservice.getBody(invoiceHead); 
 	 }
+	 
+	 @PutMapping("/superadmin/head/modify")		//modify a head , takes the new invoiceHead in parameters
+	 public void modifyinvoicehead(@RequestBody InvoiceHead invoicehead) {
+		 invoiceHeadservice.saveOrUpdate(invoicehead);
+		 
+	 }
 
-	 @PostMapping("/add/invoicehead")			//create invoice info , takes an invoiceHead in parameters
+	 @PostMapping("/client/head/add")			//create invoice info , takes an invoiceHead in parameters
 	 public void addinvoiceHead(@RequestBody InvoiceHead invoiceHead) {
 		 String type = invoiceHead.getType().getLabel();
 		 if(type.equals("facture")) {
@@ -82,7 +89,7 @@ public class InvoiceHeadController {
 		 
 	 }
 	 
-	 @GetMapping("/test/instert")	//for testing purposes ONLY
+	 @GetMapping("/test/instert/of/theImposibleHead")	//for testing purposes ONLY
 	 public void addinvoice() {
 		 InvoiceType it = invoiceHeadservice.getLastFac().getType();
 		 InvoiceBody ib = invoiceHeadservice.getLastFac().getHeadBody();
@@ -107,7 +114,7 @@ public class InvoiceHeadController {
 		 
 	 }
 	 
-	 @DeleteMapping("/head/remove/{invoiceHead_id}")		//remove a invoiceHead , takes an invoiceHead_Id in parameters
+	 @DeleteMapping("/head/remove/{invoiceHead_id}")	//remove a invoiceHead , takes an invoiceHead_Id in parameters
 	 public void removeinvoiceHead(@PathVariable("invoiceHead_id")int invoiceHead_id) {
 		 if(!invoiceHeadservice.getOneById(invoiceHead_id).isPresent())
 	         throw new CosmeticaException(invoiceHead_id );

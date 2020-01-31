@@ -28,14 +28,14 @@ public class TagController {
 	@Autowired
 	ITagService tagservice;
 	
-	@GetMapping("/tags")
+	@GetMapping("/saller/tag/all")						//get all tags
 	 public List<Tag> allTags() {
 		List<Tag> Tags = tagservice.getAll();
 		return Tags;
 		 
 	 }
 	 
-	 @GetMapping("/tag/{tag_id}")
+	 @GetMapping("/saller/tag/{tag_id}")				//get tag by id, id_tag is given in parameters
 	 public Optional <Tag> oneTag(@PathVariable("tag_id")int tag_id){
 		 
 		 if(!tagservice.getOneById(tag_id).isPresent())
@@ -44,17 +44,18 @@ public class TagController {
 		 
 	 }
 
-	 @PostMapping("/add/tag")
+	 @PostMapping("/saller/tag/add")					//add tag, new tag is given in parameters
 	 public void addTag(@RequestBody Tag Tag) {
 		 tagservice.saveOrUpdate(Tag);
 		 
 	 }
-	 @PutMapping("/modify/tag")
+	 
+	 @PutMapping("/saller/tag/modify")					//modify tag, new tag is given in parameters
 	 public void modifyTag(@RequestBody Tag Tag) {
 		 tagservice.saveOrUpdate(Tag); 
 	 }
 	 
-	 @DeleteMapping("/remove/tag/{tag_id}")
+	 @DeleteMapping("/saller/tag/remove/{tag_id}")		//delete tag by id, id_tag is given in parameters
 	 public void removeTag(@PathVariable("tag_id")int tag_id) {
 		 if(!tagservice.getOneById(tag_id).isPresent())
 	         throw new CosmeticaException(tag_id );
