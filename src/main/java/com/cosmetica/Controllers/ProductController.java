@@ -51,6 +51,7 @@ public class ProductController {
 		 productservice.saveOrUpdate(produit);
 		 
 	 }
+	 
 	 @PutMapping("/modify/product")					//modify a Product, new Product is given in parameters
 	 public void modifyProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
@@ -154,6 +155,39 @@ public class ProductController {
 		return productservice.getDealOfTheDay();
 		 
 	 }
+	 
+//new method
+	 @PostMapping("/product/validate")				//validate an a product, takes an product_id in parameters
+		public void validate(@RequestBody int id) {
+		 if(!productservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+		 Product product = productservice.getOneById(id).get();
+		 product.setStatus(1);;
+		 productservice.saveOrUpdate(product);
+		 
+		}
+
+//new method
+	@PostMapping("/product/invalidate")				//unvalidate a product, takes an product_id in parameters
+		public void invalidate(@RequestBody int id) {
+		if(!productservice.getOneById(id).isPresent())
+			throw new CosmeticaException(id);
+		Product product = productservice.getOneById(id).get();
+		product.setStatus(0);
+		productservice.saveOrUpdate(product);
+		
+		}
+
+//new method
+	@GetMapping("/product/xsell/{product_id}")	//get a Product's rate, id_Product is given in parameters
+		public List<Product> ProductXsell(@PathVariable("product_id")int product_id) {
+			if(!productservice.getOneById(product_id).isPresent())
+				throw new CosmeticaException(product_id );
+			Product product=productservice.getOneById(product_id).get();
+			return productservice.productsSuggestionX(product);
+		}
+
+
 
 }
 

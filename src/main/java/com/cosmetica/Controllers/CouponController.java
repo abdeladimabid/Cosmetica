@@ -88,5 +88,27 @@ public class CouponController {
 		 
 		 
 	 }
+	 
+//new method
+	@PostMapping("/coupon/validate")				//validate an a coupon, takes an coupon_id in parameters
+		public void validate(@RequestBody int id) {
+		 if(!couponservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+		 Coupon coupon = couponservice.getOneById(id).get();
+		 coupon.setActive(1);;
+		 couponservice.saveOrUpdate(coupon);
+		 
+		}
+
+//new method
+	@PostMapping("/coupon/invalidate")				//unvalidate a coupon, takes an coupon_id in parameters
+		public void invalidate(@RequestBody int id) {
+		if(!couponservice.getOneById(id).isPresent())
+			throw new CosmeticaException(id);
+		Coupon coupon = couponservice.getOneById(id).get();
+		coupon.setActive(0);;
+		couponservice.saveOrUpdate(coupon);
+		
+		}
 
 }

@@ -52,6 +52,7 @@ public class CartController {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
+	 
 	 @PutMapping("/modify/cart")
 	 public void modifyCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
@@ -102,8 +103,29 @@ public class CartController {
 		   Cart cart=cartservice.getOneById(cart_id).get();
 		 return cartservice.getTotalAmount(cart);
 		 
-		 
 	 }
+	 
+//new method
+	 @PostMapping("/cart/validate")
+	public void validatee(@RequestBody int cart_id) {
+	if(!cartservice.getOneById(cart_id).isPresent())
+        throw new CosmeticaException(cart_id );
+	   Cart cart=cartservice.getOneById(cart_id).get();
+	   cart.setStatus(1);
+	 cartservice.saveOrUpdate(cart);
+	 
+	}
+
+//new method
+	 @PostMapping("/cart/invalidate")
+	public void invalidate(@RequestBody int cart_id) {
+	if(!cartservice.getOneById(cart_id).isPresent())
+		throw new CosmeticaException(cart_id );
+	Cart cart=cartservice.getOneById(cart_id).get();
+	cart.setStatus(0);
+	cartservice.saveOrUpdate(cart);
+	
+	}
 	 
 	 
 }

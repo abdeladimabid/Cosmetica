@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.Entities.Admin;
 import com.cosmetica.Entities.Brand;
 import com.cosmetica.Entities.Coupon;
 import com.cosmetica.Entities.Product;

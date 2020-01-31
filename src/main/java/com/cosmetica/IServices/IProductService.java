@@ -40,4 +40,6 @@ public interface IProductService {
 	
 	public Product getDealOfTheDay();
 
+	public List<Product> productsSuggestionX(Product product); //new method
+
 }

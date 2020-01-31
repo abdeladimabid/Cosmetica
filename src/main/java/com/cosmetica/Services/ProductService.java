@@ -1,14 +1,21 @@
 package com.cosmetica.Services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
 import com.cosmetica.Entities.Image;
+import com.cosmetica.Entities.Match;
 import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.Tag;
@@ -97,19 +104,30 @@ public class ProductService implements IProductService{
 		return dao.findDealOfTheDay();
 	}
 	
-//	public List<Product> productsSuggestionX(Product product){
-//		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
-//		List<Tag> tags;
-//		int[][] matches;
-//		for (Product p : products) {
-//			tags=p.getProduct_tags();
-//			tags.retainAll(product.getProduct_tags());
-//				     
-//				}
-//					//make a table with product id and how many matching tags, 
-//					//make a table with best 5 rated products and return it
-//			
-//			}
+//new method	
+	@Override
+	public List<Product> productsSuggestionX(Product product){
+		List<Product> products = dao.getxpro(product.getProductCategory().getCategoryId());
+		List<Tag> tags;
+		
+		List<Match> matches = new ArrayList<>();
+		Match match = new Match();
+		for (Product p : products) {
+			tags=p.getProductTags();
+			tags.retainAll(product.getProductTags());
+			match.setMatch(p);
+			match.setTags(tags.size());
+			matches.add(match);
+			}
+		Collections.sort(matches);
+		matches = matches.stream().limit(10).collect(Collectors.toList());
+		products = new ArrayList<>();
+		for(Match m : matches) {
+			products.add(m.getMatch());
+		}
+		return products;
+			
+			}
 	
 
 }
