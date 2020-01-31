@@ -30,6 +30,9 @@ public class AdminController {
 	@Autowired
 	IRoleService roleserv;
 	
+	@Autowired
+	IRoleService roleserv;
+	
 	@GetMapping("/admins")							//get all admins
 	 public List<Admin> allAdmins() {
 		List<Admin> admins = adminservice.getAll();
@@ -61,7 +64,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @PutMapping("/modify/admin")					//modify an admin, takes the new Admin in parameters
+	 @PutMapping("/modify/admin")				//modify an admin, takes the new Admin in parameters
 	 public void modifyAdmin(@RequestBody Admin admin) {
 		 adminservice.saveOrUpdate(admin);
 		 

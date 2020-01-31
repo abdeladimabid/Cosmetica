@@ -96,6 +96,7 @@ public class ReviewController {
 		 return reviewservice.getReviewTimeSincePublished(review);
 		 
 	 }
+
 	//new method
 	    @PostMapping("/review/validate")                //validate an a review, takes an review_id in parameters
 	        public void validate(@RequestBody int id) {
@@ -117,5 +118,5 @@ public class ReviewController {
 	        reviewservice.saveOrUpdate(review);
 
 	        }
-	 
+
 }

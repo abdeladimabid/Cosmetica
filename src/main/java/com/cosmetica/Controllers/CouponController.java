@@ -100,7 +100,7 @@ public class CouponController {
 		 coupon.setActive(0);
 		 
 	 }
-	 
+
 	//new method
 	    @PostMapping("/coupon/validate")                //validate an a coupon, takes an coupon_id in parameters
 	        public void validate(@RequestBody int id) {
@@ -120,6 +120,5 @@ public class CouponController {
 	        Coupon coupon = couponservice.getOneById(id).get();
 	        coupon.setActive(0);;
 	        couponservice.saveOrUpdate(coupon);
-
 	        }
 }

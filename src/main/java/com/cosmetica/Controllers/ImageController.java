@@ -19,6 +19,7 @@ import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Product;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IImageService;
+import com.cosmetica.Services.ImageService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,7 +46,7 @@ public class ImageController {
 
 	 @PostMapping("/saller/upload/image")
 	 public void addImage(@RequestBody MultipartFile image) throws Exception {
-		 imgservice.uploadImage(image);;
+		 imgservice.uploadImage(image);
 		 
 	 }
 	 
@@ -65,6 +66,7 @@ public class ImageController {
 		 imgservice.delete(img); 
 		 
 	 }
+
 	//new method
      @GetMapping("/image/product{image_id}")
      public Product productImage(@PathVariable("image_id")int image_id){
@@ -76,7 +78,5 @@ public class ImageController {
          return image.getProductImage();
 
      }
-	
-	
 
 }

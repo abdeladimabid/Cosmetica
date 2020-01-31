@@ -52,6 +52,7 @@ public class CartController {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
+
 	 @PutMapping("/client/modify/cart")
 	 public void modifyCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
@@ -102,8 +103,8 @@ public class CartController {
 		   Cart cart=cartservice.getOneById(cart_id).get();
 		 return cartservice.getTotalAmount(cart);
 		 
-		 
 	 }
+
 	//new method
      @PostMapping("/cart/validate")
     public void validatee(@RequestBody int cart_id) {
@@ -125,5 +126,6 @@ public class CartController {
     cartservice.saveOrUpdate(cart);
 
     }
+
 	 
 }

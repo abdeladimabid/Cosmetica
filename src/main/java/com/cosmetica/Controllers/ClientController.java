@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.Entities.Admin;
 import com.cosmetica.Entities.Cart;
 import com.cosmetica.Entities.Client;
 import com.cosmetica.Entities.Review;
@@ -122,6 +123,7 @@ public class ClientController {
 		 return clientservice.getByFirstnameOrLastname(name, name);
 		 
 	 }
+
 	//new method
 	    @PostMapping("/client/validate")                //validate an a client, takes an client_id in parameters
 	    public void validate(@RequestBody int id) {

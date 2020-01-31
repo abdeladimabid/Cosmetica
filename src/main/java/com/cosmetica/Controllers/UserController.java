@@ -62,6 +62,28 @@ public class UserController {
 		 userservice.delete(user); 
 		 
 	 }
+//	 
+////new method
+//	 @PostMapping("/mamamia/validate")				//validate an a mamamia, takes an mamamia_id in parameters
+//		public void validate(@RequestBody int id) {
+//		 if(!mamamiaservice.getOneById(id).isPresent())
+//	        throw new CosmeticaException(id);
+//		 mamamia mamamia = mamamiaservice.getOneById(id).get();
+//		 mamamia.set;
+//		 mamamiaservice.saveOrUpdate(mamamia);
+//		 
+//		}
+//
+////new method
+//	@PostMapping("/mamamia/invalidate")				//unvalidate a mamamia, takes an mamamia_id in parameters
+//		public void invalidate(@RequestBody int id) {
+//		if(!mamamiaservice.getOneById(id).isPresent())
+//			throw new CosmeticaException(id);
+//		mamamia mamamia = mamamiaservice.getOneById(id).get();
+//		mamamia.set;
+//		mamamiaservice.saveOrUpdate(mamamia);
+//		
+//		}
 
 
 }

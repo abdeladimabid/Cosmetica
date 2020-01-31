@@ -13,6 +13,7 @@ public interface IProductDao extends JpaRepository<Product , Integer> {
 	Optional<Product> findByProductRef(String ref);
 	List<Product> findByRegularPriceBetween(double p1, double p2);
 	List<Product> findByFeaturedNotLike(int o);
+	List<Product> findByCategory(String category);
 	@Query( value = "SELECT * FROM products ORDER BY inserted_at DESC LIMIT 10",
 			nativeQuery = true)
 			List<Product> findAllOrderByInsertedAt();

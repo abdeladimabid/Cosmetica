@@ -35,7 +35,4 @@ public class Match implements Comparable<Match>{
     public int compareTo(Match o) {
         return this.getTags().compareTo(o.getTags());
     }
-
-
-
 }
