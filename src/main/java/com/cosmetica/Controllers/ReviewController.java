@@ -96,5 +96,26 @@ public class ReviewController {
 		 return reviewservice.getReviewTimeSincePublished(review);
 		 
 	 }
+	//new method
+	    @PostMapping("/review/validate")                //validate an a review, takes an review_id in parameters
+	        public void validate(@RequestBody int id) {
+	         if(!reviewservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	         Review review = reviewservice.getOneById(id).get();
+	         review.setStatus(1);;
+	         reviewservice.saveOrUpdate(review);
+
+	        }
+
+	//new method
+	    @PostMapping("/review/invalidate")                //unvalidate a review, takes an review_id in parameters
+	        public void invalidate(@RequestBody int id) {
+	        if(!reviewservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	        Review review = reviewservice.getOneById(id).get();
+	        review.setStatus(0);
+	        reviewservice.saveOrUpdate(review);
+
+	        }
 	 
 }

@@ -122,6 +122,37 @@ public class ClientController {
 		 return clientservice.getByFirstnameOrLastname(name, name);
 		 
 	 }
-		
+	//new method
+	    @PostMapping("/client/validate")                //validate an a client, takes an client_id in parameters
+	    public void validate(@RequestBody int id) {
+	     if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	     Client client = clientservice.getOneById(id).get();
+	     client.setActive(true);
+	     clientservice.saveOrUpdate(client);
+
+	    }
+
+	//new method
+	    @PostMapping("/client/invalidate")                //unvalidate a client, takes an client_id in parameters
+	    public void invalidateed(@RequestBody int id) {
+	    if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	    Client client = clientservice.getOneById(id).get();
+	    client.setActive(false);
+	    clientservice.saveOrUpdate(client);
+
+	    }
+
+	//new method
+	    @PostMapping("/client/modifypassword")        //modify a client's password, takes an id_client in parameters
+	    public void modifypass(@RequestBody int id, String password) {
+	     if(!clientservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+	     Client client = clientservice.getOneById(id).get();
+	     client.setPassword(password);
+	     clientservice.saveOrUpdate(client);
+
+	}
 		
 }
