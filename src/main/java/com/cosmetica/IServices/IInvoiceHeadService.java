@@ -18,4 +18,10 @@ public interface IInvoiceHeadService {
 	
 	public InvoiceBody getBody(InvoiceHead InvoiceHead);
 
+	public InvoiceHead getLastFac();
+
+	public InvoiceHead getLastBon();
+
+	public InvoiceHead getLastDev();
+
 }

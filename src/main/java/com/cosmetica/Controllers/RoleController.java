@@ -27,14 +27,14 @@ public class RoleController {
 	@Autowired
 	IRoleService Roleservice;
 	
-	@GetMapping("/roles")
+	@GetMapping("/role/all")							//get all roles 
 	 public List<Role > allRoles() {
 		List<Role> roles = Roleservice.getAll();
 		return roles;
 		 
 	 }
 	 
-	 @GetMapping("/role/{role_id}")
+	 @GetMapping("/role/{role_id}")					//get role by id, id_role is given in parameters
 	 public Optional <Role> oneRole(@PathVariable("role_id")int role_id){
 		 
 		 if(!Roleservice.getOneById(role_id).isPresent())
@@ -43,17 +43,17 @@ public class RoleController {
 		 
 	 }
 
-	 @PostMapping("/add/role")
+	 @PostMapping("/superadmin/role/add")						//add a role, new role is given in parameters
 	 public void addRole(@RequestBody Role Role) {
 		 Roleservice.saveOrUpdate(Role);
 		 
 	 }
-	 @PutMapping("/modify/role")
+	 @PutMapping("/superadmin/role/modify")						//modify a role, new role is given in parameters
 	 public void modifyRole(@RequestBody Role Role) {
 		 Roleservice.saveOrUpdate(Role);
 		 
 	 }
-	 @DeleteMapping("/remove/role/{role_id}")
+	 @DeleteMapping("/superadmin/role/remove/{role_id}")		//delete a role, new role is given in parameters
 	 public void removeRole(@PathVariable("role_id")int role_id) {
 		 if(!Roleservice.getOneById(role_id).isPresent())
 	         throw new CosmeticaException(role_id );
@@ -62,7 +62,7 @@ public class RoleController {
 		 
 	 }
 	 
-	 @GetMapping("/roles/{role_id}")// all users that have this role
+	 @GetMapping("/superadmin/role/{role_id}")					// all users that have a certain role, role_id is given in parameters
 	 public List<User> allClientsWithRole(@PathVariable("role_id")int role_id) {
 		 if(!Roleservice.getOneById(role_id).isPresent())throw new CosmeticaException(role_id);
 		 Role role = Roleservice.getOneById(role_id).get();

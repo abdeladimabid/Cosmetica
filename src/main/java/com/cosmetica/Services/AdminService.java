@@ -1,11 +1,14 @@
 package com.cosmetica.Services;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import com.cosmetica.DAO.IAdminDao;
 import com.cosmetica.Entities.Admin;
@@ -46,12 +49,17 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public boolean verifyPassword(int id, String password) {
-		if(!dao.findById(id).isPresent())throw new CosmeticaException(id );
-		Admin admin = dao.findById(id).get();
-		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
-		String hash = new BCryptPasswordEncoder().encode(password+salt);
-		return admin.getPassword().matches(hash);
+	public String verifyPassword(String password) throws NoSuchAlgorithmException {
+		String salted= "21232f297a57a5a743894a0e4a801fc3"+password; //admin in MD5
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(salted.getBytes());
+		byte[] digest = md.digest();
+		StringBuffer sb = new StringBuffer();
+		for(byte b: digest) {
+			sb.append(Integer.toHexString((int)(b & 0xff)));
+		}
+		String hash = sb.toString();
+		return hash;
 	}
 
 	@Override
@@ -65,13 +73,16 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public List<Admin> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmailContaining(username, email);
+	public List<Admin> getByUsernameOrEmail(String email, String username) {	// method to search a admin by full email or %username%
+		return dao.findByEmailOrUsernameContaining(email, username);
 	}
 
 	@Override
 	public List<Admin> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastnameContaining(firstname, lastname);
+		List<Admin> first = dao.findByFirstnameContaining(firstname);
+		List<Admin> last = dao.findByLastnameContaining(lastname);
+		first.addAll(last);
+		return first;
 	}
 
 }

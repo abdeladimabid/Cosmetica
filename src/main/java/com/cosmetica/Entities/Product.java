@@ -43,6 +43,7 @@ public class Product {
 	private String hash;
 	private String metaTitle;
 	private String metaKeywords;
+	private float stars;
 	
 	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
 	@Temporal(TemporalType.DATE)
@@ -101,6 +102,7 @@ public class Product {
 		this.insertedAt = new Date();
 		this.status = 0;
 		this.featured=0;
+		this.stars=0;
 	}
 
 	public int getProductId() {
@@ -286,19 +288,34 @@ public class Product {
 	public void setProductReviews(List<Review> productReviews) {
 		this.productReviews = productReviews;
 	}
+	public String getProductRef() {
+		return productRef;
+	}
+
+	public void setProductRef(String productRef) {
+		this.productRef = productRef;
+	}
+
+	public float getStars() {
+		return stars;
+	}
+
+	public void setStars(float stars) {
+		this.stars = stars;
+	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productref=" + productRef + ", productName=" + productName
+		return "Product [productId=" + productId + ", productRef=" + productRef + ", productName=" + productName
 				+ ", productTitle=" + productTitle + ", productSubTitle=" + productSubTitle + ", description="
 				+ description + ", regularPrice=" + regularPrice + ", discount=" + discount + ", quantity=" + quantity
 				+ ", status=" + status + ", featured=" + featured + ", tax=" + tax + ", hash=" + hash + ", metaTitle="
-				+ metaTitle + ", metaKeywords=" + metaKeywords + ", insertedAt=" + insertedAt + ", updatedAt="
-				+ updatedAt + ", productCategory=" + productCategory + ", productTags=" + productTags + ", images="
-				+ images + ", productBrand=" + productBrand + ", orders=" + orders + ", productReviews="
+				+ metaTitle + ", metaKeywords=" + metaKeywords + ", stars=" + stars + ", insertedAt=" + insertedAt
+				+ ", updatedAt=" + updatedAt + ", productCategory=" + productCategory + ", productTags=" + productTags
+				+ ", images=" + images + ", productBrand=" + productBrand + ", orders=" + orders + ", productReviews="
 				+ productReviews + "]";
 	}
 
-
+	
 
 }

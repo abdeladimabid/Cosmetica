@@ -1,6 +1,8 @@
 package com.cosmetica.Controllers;
 
 import java.util.List;
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Category;
 import com.cosmetica.Entities.Product;
-import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.ICategoryService;
 
@@ -28,7 +29,7 @@ public class CategoryController {
 	@Autowired
 	ICategoryService categoryservice;
 	
-	@GetMapping("/categories")
+	@GetMapping("/categorie/all")
 	public List<Category> allCategories(){
 		List<Category> categories = categoryservice.getAll();
 		return categories;
@@ -54,18 +55,18 @@ public class CategoryController {
 
 	}
 	
-	 @PostMapping("/add/cateory")
+	 @PostMapping("/superadmin/add/cateory")
 	 public void addCategory(@RequestBody Category  category) {
 		 categoryservice.saveOrUpdate(category);
 		 
 	 }
-	 @PutMapping("/modify/cateory")
+	 @PutMapping("/superadmin/modify/cateory")
 	 public void modifyCategory(@RequestBody Category  category) {
 		 categoryservice.saveOrUpdate(category);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/category/{category_id}")
+	 @DeleteMapping("/superadmin/remove/category/{category_id}")
 	 public void removeCategory(@PathVariable("category_id")int category_id) {
 		 if(!categoryservice.getOneById(category_id).isPresent())
 	         throw new CosmeticaException(category_id );

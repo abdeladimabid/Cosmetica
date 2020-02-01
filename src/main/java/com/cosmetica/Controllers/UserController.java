@@ -1,6 +1,7 @@
 package com.cosmetica.Controllers;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cosmetica.Entities.Product;
+
 import com.cosmetica.Entities.User;
 import com.cosmetica.Exceptions.CosmeticaException;
 import com.cosmetica.IServices.IUserService;
@@ -26,14 +27,14 @@ public class UserController {
 	@Autowired
 	IUserService userservice;
 	
-	 @GetMapping("/users")
+	 @GetMapping("/superadmin/user/all")
 	 public List<User > allUsers() {
 		List<User> users = userservice.getAll();
 		return users;
 		 
 	 }
 	 
-	 @GetMapping("/user/{user_id}")
+	 @GetMapping("/superadmin/user/{user_id}")
 	 public Optional <User> oneUser(@PathVariable("user_id")int user_id){
 		 
 		 if(!userservice.getOneById(user_id).isPresent())
@@ -42,18 +43,18 @@ public class UserController {
 		 
 	 }
 
-	 @PostMapping("/add/user")
+	 @PostMapping("/superadmin/user/add")
 	 public void addUser(@RequestBody User produit) {
 		 userservice.saveOrUpdate(produit);
 		 
 	 }
-	 @PutMapping("/modify/user")
+	 @PutMapping("/superadmin/user/modify")
 	 public void modifyUser(@RequestBody User user) {
 		 userservice.saveOrUpdate(user);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/user/{user_id}")
+	 @DeleteMapping("/superadmin/user/remove/{user_id}")
 	 public void removeUser(@PathVariable("user_id")int user_id) {
 		 if(!userservice.getOneById(user_id).isPresent())
 	         throw new CosmeticaException(user_id);

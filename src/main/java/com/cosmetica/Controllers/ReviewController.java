@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.cosmetica.Entities.Client;
 import com.cosmetica.Entities.Review;
 
 import com.cosmetica.Exceptions.CosmeticaException;
@@ -31,7 +31,7 @@ public class ReviewController {
 	@Autowired
 	IReviewService reviewservice;
 	
-	@GetMapping("/reviews")
+	@GetMapping("/review/all")
 	 public List<Review> allReviews() {
 		List<Review> reviews = reviewservice.getAll();
 		return reviews;
@@ -47,18 +47,29 @@ public class ReviewController {
 		 
 	 }
 
-	 @PostMapping("/add/review")
+	 @PostMapping("/client/add/review")
 	 public void addReview(@RequestBody Review review) {
 		 reviewservice.saveOrUpdate(review);
 		 
 	 }
-	 @PutMapping("/modify/review")
+	 
+	 @PostMapping("/supervisor/allow/review/{review_id}")
+	 public void allowReview(@PathVariable("review_id")int review_id) {
+		 
+		 if(!reviewservice.getOneById(review_id).isPresent())
+	         throw new CosmeticaException(review_id );
+		 Review review = reviewservice.getOneById(review_id).get();
+		 review.setStatus(1);
+		 reviewservice.saveOrUpdate(review);
+	 }
+	 
+	 @PutMapping("/client/modify/review")
 	 public void modifyReview(@RequestBody Review review) {
 		 reviewservice.saveOrUpdate(review);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/review/{review_id}")
+	 @DeleteMapping("/review/remove/{review_id}")
 	 public void removeReview(@PathVariable("review_id")int review_id) {
 		 if(!reviewservice.getOneById(review_id).isPresent())
 	         throw new CosmeticaException(review_id );
@@ -67,15 +78,15 @@ public class ReviewController {
 		 
 	 }
 
-//	 @GetMapping("/review/user/{review_id}")//hna reviews ma3erfnash lou luser dyalou
-//	 public Client userReviews(@PathVariable("review_id")int review_id) {
-//		 
-//		 if(!reviewservice.getOneById(review_id).isPresent())
-//	         throw new CosmeticaException(review_id );
-//		 Review review =reviewservice.getOneById(review_id).get();
-//		 return reviewservice.getReviewUser(review);
-//		 
-//	 }
+	 @GetMapping("/review/user/{review_id}")
+	 public Client userReviews(@PathVariable("review_id")int review_id) {
+		 
+		 if(!reviewservice.getOneById(review_id).isPresent())
+	         throw new CosmeticaException(review_id );
+		 Review review =reviewservice.getOneById(review_id).get();
+		 return reviewservice.getReviewUser(review);
+		 
+	 }
 	 @GetMapping("/review/date/{review_id}")
 	 public String getReviewTimeSincePublished(@PathVariable("review_id")int review_id){
 		 
@@ -85,5 +96,26 @@ public class ReviewController {
 		 return reviewservice.getReviewTimeSincePublished(review);
 		 
 	 }
+	//new method
+	    @PostMapping("/review/validate")                //validate an a review, takes an review_id in parameters
+	        public void validate(@RequestBody int id) {
+	         if(!reviewservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	         Review review = reviewservice.getOneById(id).get();
+	         review.setStatus(1);;
+	         reviewservice.saveOrUpdate(review);
+
+	        }
+
+	//new method
+	    @PostMapping("/review/invalidate")                //unvalidate a review, takes an review_id in parameters
+	        public void invalidate(@RequestBody int id) {
+	        if(!reviewservice.getOneById(id).isPresent())
+	            throw new CosmeticaException(id);
+	        Review review = reviewservice.getOneById(id).get();
+	        review.setStatus(0);
+	        reviewservice.saveOrUpdate(review);
+
+	        }
 	 
 }

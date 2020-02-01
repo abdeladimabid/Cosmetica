@@ -52,10 +52,10 @@ public class ClientService implements IClientService{
 	}
 
 	@Override
-	public boolean verifyPassword(Client client, String password) {
-		String salt= " 21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
+	public String verifyPassword(String password) {
+		String salt= "21232f297a57a5a743894a0e4a801fc3"; //admin in MD5
 		String hash = new BCryptPasswordEncoder().encode(password+salt);
-		return client.getPassword().matches(hash);
+		return hash;
 	}
 
 	@Override
@@ -78,20 +78,25 @@ public class ClientService implements IClientService{
 	public Optional<Client> verifyLogin(String username, String email) {
 		return dao.findByUsernameOrEmail(username, email);
 	}
+	
+	@Override
+	public List <Client> getByEmailOrUsername(String email, String username) { // method to search a client by full email or %username%
+		return dao.findByEmailOrUsernameContaining(email, username);
+	}
 
 	@Override
 	public Optional<Client> getOneByEmail(String email) {
 		return dao.findByEmail(email); 
 	}
 
+	
 	@Override
-	public List<Client> getOneByUsernameOrEmail(String username, String email) {
-		return dao.findByUsernameOrEmailContaining(username, email);
-	}
-
-	@Override
-	public List<Client> getOneByFirstnameOrLastname(String firstname, String lastname) {
-		return dao.findByFirstnameOrLastnameContaining(firstname, lastname);
+	public List<Client> getByFirstnameOrLastname(String firstname, String lastname) {
+		List<Client> first = dao.findByFirstnameContaining(firstname);
+		List<Client> last = dao.findByLastnameContaining(lastname);
+		first.addAll(last);
+		return first;
+		
 	}
 	
 
