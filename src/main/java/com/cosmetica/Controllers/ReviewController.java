@@ -31,7 +31,7 @@ public class ReviewController {
 	@Autowired
 	IReviewService reviewservice;
 	
-	@GetMapping("/review/all")
+	@GetMapping("/reviews")
 	 public List<Review> allReviews() {
 		List<Review> reviews = reviewservice.getAll();
 		return reviews;
@@ -47,29 +47,18 @@ public class ReviewController {
 		 
 	 }
 
-	 @PostMapping("/client/add/review")
+	 @PostMapping("/add/review")
 	 public void addReview(@RequestBody Review review) {
 		 reviewservice.saveOrUpdate(review);
 		 
 	 }
-	 
-	 @PostMapping("/supervisor/allow/review/{review_id}")
-	 public void allowReview(@PathVariable("review_id")int review_id) {
-		 
-		 if(!reviewservice.getOneById(review_id).isPresent())
-	         throw new CosmeticaException(review_id );
-		 Review review = reviewservice.getOneById(review_id).get();
-		 review.setStatus(1);
-		 reviewservice.saveOrUpdate(review);
-	 }
-	 
-	 @PutMapping("/client/modify/review")
+	 @PutMapping("/modify/review")
 	 public void modifyReview(@RequestBody Review review) {
 		 reviewservice.saveOrUpdate(review);
 		 
 	 }
 	 
-	 @DeleteMapping("/review/remove/{review_id}")
+	 @DeleteMapping("/remove/review/{review_id}")
 	 public void removeReview(@PathVariable("review_id")int review_id) {
 		 if(!reviewservice.getOneById(review_id).isPresent())
 	         throw new CosmeticaException(review_id );
@@ -97,26 +86,26 @@ public class ReviewController {
 		 
 	 }
 
-	//new method
-	    @PostMapping("/review/validate")                //validate an a review, takes an review_id in parameters
-	        public void validate(@RequestBody int id) {
-	         if(!reviewservice.getOneById(id).isPresent())
-	            throw new CosmeticaException(id);
-	         Review review = reviewservice.getOneById(id).get();
-	         review.setStatus(1);;
-	         reviewservice.saveOrUpdate(review);
+//new method
+	@PostMapping("/review/validate")				//validate an a review, takes an review_id in parameters
+		public void validate(@RequestBody int id) {
+		 if(!reviewservice.getOneById(id).isPresent())
+	        throw new CosmeticaException(id);
+		 Review review = reviewservice.getOneById(id).get();
+		 review.setStatus(1);;
+		 reviewservice.saveOrUpdate(review);
+		 
+		}
 
-	        }
-
-	//new method
-	    @PostMapping("/review/invalidate")                //unvalidate a review, takes an review_id in parameters
-	        public void invalidate(@RequestBody int id) {
-	        if(!reviewservice.getOneById(id).isPresent())
-	            throw new CosmeticaException(id);
-	        Review review = reviewservice.getOneById(id).get();
-	        review.setStatus(0);
-	        reviewservice.saveOrUpdate(review);
-
-	        }
-
+//new method
+	@PostMapping("/review/invalidate")				//unvalidate a review, takes an review_id in parameters
+		public void invalidate(@RequestBody int id) {
+		if(!reviewservice.getOneById(id).isPresent())
+			throw new CosmeticaException(id);
+		Review review = reviewservice.getOneById(id).get();
+		review.setStatus(0);
+		reviewservice.saveOrUpdate(review);
+		
+		}
+	 
 }

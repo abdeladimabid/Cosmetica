@@ -27,14 +27,14 @@ public class UserController {
 	@Autowired
 	IUserService userservice;
 	
-	 @GetMapping("/superadmin/user/all")
+	 @GetMapping("/users")
 	 public List<User > allUsers() {
 		List<User> users = userservice.getAll();
 		return users;
 		 
 	 }
 	 
-	 @GetMapping("/superadmin/user/{user_id}")
+	 @GetMapping("/user/{user_id}")
 	 public Optional <User> oneUser(@PathVariable("user_id")int user_id){
 		 
 		 if(!userservice.getOneById(user_id).isPresent())
@@ -43,18 +43,18 @@ public class UserController {
 		 
 	 }
 
-	 @PostMapping("/superadmin/user/add")
+	 @PostMapping("/add/user")
 	 public void addUser(@RequestBody User produit) {
 		 userservice.saveOrUpdate(produit);
 		 
 	 }
-	 @PutMapping("/superadmin/user/modify")
+	 @PutMapping("/modify/user")
 	 public void modifyUser(@RequestBody User user) {
 		 userservice.saveOrUpdate(user);
 		 
 	 }
 	 
-	 @DeleteMapping("/superadmin/user/remove/{user_id}")
+	 @DeleteMapping("/remove/user/{user_id}")
 	 public void removeUser(@PathVariable("user_id")int user_id) {
 		 if(!userservice.getOneById(user_id).isPresent())
 	         throw new CosmeticaException(user_id);

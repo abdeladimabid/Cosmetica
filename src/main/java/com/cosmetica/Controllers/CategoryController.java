@@ -29,7 +29,7 @@ public class CategoryController {
 	@Autowired
 	ICategoryService categoryservice;
 	
-	@GetMapping("/categorie/all")
+	@GetMapping("/categories")
 	public List<Category> allCategories(){
 		List<Category> categories = categoryservice.getAll();
 		return categories;
@@ -55,18 +55,18 @@ public class CategoryController {
 
 	}
 	
-	 @PostMapping("/superadmin/add/cateory")
+	 @PostMapping("/add/cateory")
 	 public void addCategory(@RequestBody Category  category) {
 		 categoryservice.saveOrUpdate(category);
 		 
 	 }
-	 @PutMapping("/superadmin/modify/cateory")
+	 @PutMapping("/modify/cateory")
 	 public void modifyCategory(@RequestBody Category  category) {
 		 categoryservice.saveOrUpdate(category);
 		 
 	 }
 	 
-	 @DeleteMapping("/superadmin/remove/category/{category_id}")
+	 @DeleteMapping("/remove/category/{category_id}")
 	 public void removeCategory(@PathVariable("category_id")int category_id) {
 		 if(!categoryservice.getOneById(category_id).isPresent())
 	         throw new CosmeticaException(category_id );
