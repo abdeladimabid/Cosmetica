@@ -102,19 +102,10 @@ public class ProductService implements IProductService{
 		return dao.findDealOfTheDay();
 	}
 	
-//	public List<Product> productsSuggestionX(Product product){
-//		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
-//		List<Tag> tags;
-//		int[][] matches;
-//		for (Product p : products) {
-//			tags=p.getProduct_tags();
-//			tags.retainAll(product.getProduct_tags());
-//				     
-//				}
-//					//make a table with product id and how many matching tags, 
-//					//make a table with best 5 rated products and return it
-//			
-//			}
+	@Override
+	public List<Product> getCategoryProducts(int id_category){
+		return dao.findCategoryProducts(id_category);
+	}
 	
 	//new method
     @Override
@@ -132,8 +123,6 @@ public class ProductService implements IProductService{
             matches.add(match);
             }
         
-        Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
-        
         for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
         	if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
         		primary.add(m);
@@ -145,7 +134,9 @@ public class ProductService implements IProductService{
         
         for(Match m : primary) {	
         		products.add(m.getMatch());}
+
         
+        Collections.sort(products, Collections.reverseOrder());	//sort the primary table by matching tags
         return products;
 
             }
@@ -165,8 +156,6 @@ public class ProductService implements IProductService{
     		match.setTags(tags.size());
     		matches.add(match);
     	}
-    	
-    	Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
     	
     	for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
     		if(m.getTags()>=3 && m.getMatch().getStars()>=3) {

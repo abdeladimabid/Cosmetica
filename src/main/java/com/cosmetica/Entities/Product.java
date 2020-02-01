@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="products")
 @JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "orders"})
-public class Product {
+public class Product implements Comparable<Product>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
@@ -314,6 +314,13 @@ public class Product {
 				+ ", updatedAt=" + updatedAt + ", productCategory=" + productCategory + ", productTags=" + productTags
 				+ ", images=" + images + ", productBrand=" + productBrand + ", orders=" + orders + ", productReviews="
 				+ productReviews + "]";
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		Integer t = Math.round(this.getStars());
+		Integer to = Math.round(o.getStars());
+		return t.compareTo(to);
 	}
 
 	
