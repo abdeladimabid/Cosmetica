@@ -29,15 +29,15 @@ public class BrandController {
 	@Autowired
 	IBrandService brandservice;
 	
-	@GetMapping("/brand/all")							//get all brands
+	@GetMapping("/brands")							//get all brands
 	 public List<Brand> allBrands() {
 		List<Brand> brands = brandservice.getAll();
 		return brands;
 		 
 	 }
 	 
-	 @GetMapping("/brand/id/{brand_id}")				//search a brand by Brand_Id, takes a brand_Id in parameters
-	 public Optional <Brand> getoneBrand(@PathVariable("brand_id")int brand_id){
+	 @GetMapping("/brand/{brand_id}")				//search a brand by Brand_Id, takes a brand_Id in parameters
+	 public Optional <Brand> oneBrand(@PathVariable("brand_id")int brand_id){
 		 
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -45,27 +45,27 @@ public class BrandController {
 		 
 	 }
 	 
-	 @GetMapping("/brand/bn/{brandname}")				//search a brand by Brand_Name, takes a brand_Name in parameters
-	 public List <Brand> BrandByBrandname(@PathVariable("brandname")String brandname){
+	 @GetMapping("/brand/{username}")				//search a brand by Brand_Name, takes a brand_Name in parameters
+	 public List <Brand> BrandByUsername(@PathVariable("username")String username){
 		 
-		 if(brandservice.getOneByBrandName(brandname).isEmpty())
-	         throw new CosmeticaException(brandname);
-		 return brandservice.getOneByBrandName(brandname);
+		 if(brandservice.getOneByBrandName(username).isEmpty())
+	         throw new CosmeticaException(username );
+		 return brandservice.getOneByBrandName(username);
 		 
 	 }
 
-	 @PostMapping("/saller/add/brand")						//add a new brand , takes a brand in parameters
+	 @PostMapping("/add/brand")						//add a new brand , takes a brand in parameters
 	 public void addBrand(@RequestBody Brand Brand) {
 		 brandservice.saveOrUpdate(Brand);
 		 
 	 }
-	 @PutMapping("/saller/modify/brand")					//modify a brand , takes the new brand in parameters
+	 @PutMapping("/modify/brand")					//modify a brand , takes the new brand in parameters
 	 public void modifyBrand(@RequestBody Brand Brand) {
 		 brandservice.saveOrUpdate(Brand);
 		 
 	 }
 	 
-	 @DeleteMapping("/saller/brand/remove/{brand_id}")		//remove a brand , takes a brand_Id in parameters
+	 @DeleteMapping("/brand/remove/{brand_id}")		//remove a brand , takes a brand_Id in parameters
 	 public void removeBrand(@PathVariable("brand_id")int brand_id) {
 		 if(!brandservice.getOneById(brand_id).isPresent())
 	         throw new CosmeticaException(brand_id );
@@ -82,11 +82,11 @@ public class BrandController {
 		 return brandservice.getBrandCoupons(Brand); 
 	 }
 	 
-	 @GetMapping("/brand/coupons/bn/{brandname}")	//get a brand coupons by BrandName, takes a brand_Name in parameters
-	 public List<Coupon> brandCouponsByBrandrname(@PathVariable("brandname")String brandname) {
-		 if(brandservice.getOneByBrandName(brandname).isEmpty())
-	         throw new CosmeticaException(brandname );
-		 List<Brand> Brand = brandservice.getOneByBrandName(brandname);
+	 @GetMapping("/brand/coupons/un/{username}")	//get a brand coupons by BrandName, takes a brand_Name in parameters
+	 public List<Coupon> brandCouponsByUsername(@PathVariable("username")String username) {
+		 if(brandservice.getOneByBrandName(username).isEmpty())
+	         throw new CosmeticaException(username );
+		 List<Brand> Brand = brandservice.getOneByBrandName(username);
 		 return brandservice.getBrandCoupons(Brand.get(0)); 
 	 }
 
@@ -98,11 +98,11 @@ public class BrandController {
 		 return brandservice.getBrandProducts(Brand); 
 	 }
 	 
-	 @GetMapping("/brand/products/bn/{brandname}")	//get a brand products by Brand_Name, takes a brand_Name in parameters
-	 public List<Product> brandProductsByUsername(@PathVariable("brandname")String brandname) {
-		 if(brandservice.getOneByBrandName(brandname).isEmpty())
-	         throw new CosmeticaException(brandname );
-		 List<Brand> Brand = brandservice.getOneByBrandName(brandname);
+	 @GetMapping("/brand/products/un/{username}")	//get a brand products by Brand_Name, takes a brand_Name in parameters
+	 public List<Product> brandProductsByUsername(@PathVariable("username")String username) {
+		 if(brandservice.getOneByBrandName(username).isEmpty())
+	         throw new CosmeticaException(username );
+		 List<Brand> Brand = brandservice.getOneByBrandName(username);
 		 return brandservice.getBrandProducts(Brand.get(0)); 
 	 }
 

@@ -15,7 +15,7 @@ public interface IUserDao  extends JpaRepository<User, Integer> {
 	List<User> findByFirstnameOrLastnameContaining(String firstname, String lastname);
 	List<User> findByUsernameOrEmailContaining(String username,String email);
 	List<User> findByEmailOrUsernameContaining(String email, String username);
-	Optional<User> findByUsernameOrEmail(String username, String email);
+	Optional<User> findByUsernameOrEmail(String username,String email);
 	List<User> findByFirstnameContaining(String firstname);
 	List<User> findByLastnameContaining(String lastname);
 	List<User> findByUsernameContaining(String username);

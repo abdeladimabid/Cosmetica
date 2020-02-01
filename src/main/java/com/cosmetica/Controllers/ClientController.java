@@ -29,14 +29,14 @@ public class ClientController {
 	@Autowired
 	IClientService clientservice;
 
-	@GetMapping("/superadmin/client/all")
+	@GetMapping("/clients")
 	 public List<Client> allClients() {
 		List<Client> clients = clientservice.getAll();
 		return clients;
 		 
 	 }
 	 
-	 @GetMapping("/supervisor/client/id/{client_id}")
+	 @GetMapping("/client/id/{client_id}")
 	 public Optional <Client> oneClient(@PathVariable("client_id")int client_id){
 		 
 		 if(!clientservice.getOneById(client_id).isPresent())
@@ -45,7 +45,7 @@ public class ClientController {
 		 
 	 }
 
-	 @GetMapping("/supervisor/client/un/{username}")
+	 @GetMapping("/client/un/{username}")
 	 public List <Client> ClientsByUsername(@PathVariable("username")String username){
 		
 		 if(clientservice.getOneByUsername(username).isEmpty())
@@ -54,19 +54,19 @@ public class ClientController {
 		 
 	 }
 
-	 @PostMapping("/superadmin/add/client")
+	 @PostMapping("/add/client")
 	 public void addClient(@RequestBody Client Client) {
 		 clientservice.saveOrUpdate(Client);
 		 
 	 }
 	 
-	 @PutMapping("/client/modify")
+	 @PutMapping("/modify/client")
 	 public void modifyClient(@RequestBody Client Client) {
 		 clientservice.saveOrUpdate(Client);
 		 
 	 }
 	 
-	 @DeleteMapping("/superadmin/client/remove/{client_id}")
+	 @DeleteMapping("/remove/client/{client_id}")
 	 public void removeClient(@PathVariable("client_id")int client_id) {
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
@@ -75,7 +75,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/client/cart/{client_id}")
+	 @GetMapping("/cart/client/{client_id}")
 	 public List<Cart> ClientCart(@PathVariable("client_id")int client_id){
 		 if(!clientservice.getOneById(client_id).isPresent())
 	         throw new CosmeticaException(client_id );
@@ -92,7 +92,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/supervisor/client/email/{email}")
+	 @GetMapping("/client/email/{email}")
 	 public Optional <Client> ClientsByEmail(@PathVariable("email")String email){
 		 if(!clientservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
@@ -100,7 +100,7 @@ public class ClientController {
 	 }
 		
 
-	 @GetMapping("/supervisor/client/reviews/{client_id}")
+	 @GetMapping("/client/reviews/{client_id}")
 		public List<Review> clientReviews(@PathVariable("client_id")int client_id){
 			if(!clientservice.getOneById(client_id).isPresent())
 		         throw new CosmeticaException(client_id );
@@ -118,43 +118,45 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/supervisor/client/name/{name}")
+	 @GetMapping("/client/name/{name}")
 	 public List<Client> clientByFirstnameOrLastname(@PathVariable("name")String name){
 		 return clientservice.getByFirstnameOrLastname(name, name);
 		 
 	 }
+	 
 
-	//new method
-	    @PostMapping("/client/validate")                //validate an a client, takes an client_id in parameters
-	    public void validate(@RequestBody int id) {
-	     if(!clientservice.getOneById(id).isPresent())
-	        throw new CosmeticaException(id);
-	     Client client = clientservice.getOneById(id).get();
-	     client.setActive(true);
-	     clientservice.saveOrUpdate(client);
-
-	    }
-
-	//new method
-	    @PostMapping("/client/invalidate")                //unvalidate a client, takes an client_id in parameters
-	    public void invalidateed(@RequestBody int id) {
-	    if(!clientservice.getOneById(id).isPresent())
-	        throw new CosmeticaException(id);
-	    Client client = clientservice.getOneById(id).get();
-	    client.setActive(false);
-	    clientservice.saveOrUpdate(client);
-
-	    }
-
-	//new method
-	    @PostMapping("/client/modifypassword")        //modify a client's password, takes an id_client in parameters
-	    public void modifypass(@RequestBody int id, String password) {
-	     if(!clientservice.getOneById(id).isPresent())
-	        throw new CosmeticaException(id);
-	     Client client = clientservice.getOneById(id).get();
-	     client.setPassword(password);
-	     clientservice.saveOrUpdate(client);
-
+//new method
+	@PostMapping("/client/validate")				//validate an a client, takes an client_id in parameters
+	public void validate(@RequestBody int id) {
+	 if(!clientservice.getOneById(id).isPresent())
+        throw new CosmeticaException(id);
+	 Client client = clientservice.getOneById(id).get();
+	 client.setActive(true);
+	 clientservice.saveOrUpdate(client);
+	 
 	}
+
+//new method
+	@PostMapping("/client/invalidate")				//unvalidate a client, takes an client_id in parameters
+	public void invalidateed(@RequestBody int id) {
+	if(!clientservice.getOneById(id).isPresent())
+		throw new CosmeticaException(id);
+	Client client = clientservice.getOneById(id).get();
+	client.setActive(false);
+	clientservice.saveOrUpdate(client);
+	
+	}
+
+//new method
+	@PostMapping("/client/modifypassword")		//modify a client's password, takes an id_client in parameters
+	public void modifypass(@RequestBody int id, String password) {
+	 if(!clientservice.getOneById(id).isPresent())
+        throw new CosmeticaException(id);
+	 Client client = clientservice.getOneById(id).get();
+	 client.setPassword(password);
+	 clientservice.saveOrUpdate(client);
+	 
+}
+		
 		
 }

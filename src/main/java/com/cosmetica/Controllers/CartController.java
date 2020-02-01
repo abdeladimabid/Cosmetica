@@ -31,7 +31,7 @@ public class CartController {
 	@Autowired
 	ICartService cartservice;
 	
-	 @GetMapping("/superadmin/cart/all")
+	 @GetMapping("/carts")
 	 public List<Cart > allCarts() {
 		List<Cart> carts = cartservice.getAll();
 		return carts;
@@ -47,19 +47,19 @@ public class CartController {
 		 
 	 }
 
-	 @PostMapping("/client/add/cart")
+	 @PostMapping("/add/cart")
 	 public void addCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
-
-	 @PutMapping("/client/modify/cart")
+	 
+	 @PutMapping("/modify/cart")
 	 public void modifyCart(@RequestBody Cart cart) {
 		 cartservice.saveOrUpdate(cart);
 		 
 	 }
 	 
-	 @DeleteMapping("/client/remove/cart/{cart_id}")
+	 @DeleteMapping("/remove/cart/{cart_id}")
 	 public void removeCart(@PathVariable("cart_id")int cart_id) {
 		 if(!cartservice.getOneById(cart_id).isPresent())
 	         throw new CosmeticaException(cart_id );
@@ -104,28 +104,28 @@ public class CartController {
 		 return cartservice.getTotalAmount(cart);
 		 
 	 }
-
-	//new method
-     @PostMapping("/cart/validate")
-    public void validatee(@RequestBody int cart_id) {
-    if(!cartservice.getOneById(cart_id).isPresent())
+	 
+//new method
+	 @PostMapping("/cart/validate")
+	public void validatee(@RequestBody int cart_id) {
+	if(!cartservice.getOneById(cart_id).isPresent())
         throw new CosmeticaException(cart_id );
-       Cart cart=cartservice.getOneById(cart_id).get();
-       cart.setStatus(1);
-     cartservice.saveOrUpdate(cart);
-
-    }
+	   Cart cart=cartservice.getOneById(cart_id).get();
+	   cart.setStatus(1);
+	 cartservice.saveOrUpdate(cart);
+	 
+	}
 
 //new method
-     @PostMapping("/cart/invalidate")
-    public void invalidate(@RequestBody int cart_id) {
-    if(!cartservice.getOneById(cart_id).isPresent())
-        throw new CosmeticaException(cart_id );
-    Cart cart=cartservice.getOneById(cart_id).get();
-    cart.setStatus(0);
-    cartservice.saveOrUpdate(cart);
-
-    }
-
+	 @PostMapping("/cart/invalidate")
+	public void invalidate(@RequestBody int cart_id) {
+	if(!cartservice.getOneById(cart_id).isPresent())
+		throw new CosmeticaException(cart_id );
+	Cart cart=cartservice.getOneById(cart_id).get();
+	cart.setStatus(0);
+	cartservice.saveOrUpdate(cart);
+	
+	}
+	 
 	 
 }
