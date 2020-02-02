@@ -50,4 +50,8 @@ public interface IProductService {
 
 	public List<Product> getAllClient();
 
+	public List<Product> getByName(String name);
+	
+	public List<Product> getByNameA(String name);
+
 }
