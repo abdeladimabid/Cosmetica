@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetica.Entities.Client;
+import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 
 import com.cosmetica.Exceptions.CosmeticaException;
+import com.cosmetica.IServices.IProductService;
 import com.cosmetica.IServices.IReviewService;
 
 
@@ -30,6 +32,7 @@ public class ReviewController {
 	
 	@Autowired
 	IReviewService reviewservice;
+	IProductService productservice;
 	
 	@GetMapping("/review/all")
 	 public List<Review> allReviews() {
@@ -102,9 +105,11 @@ public class ReviewController {
 	         if(!reviewservice.getOneById(id).isPresent())
 	            throw new CosmeticaException(id);
 	         Review review = reviewservice.getOneById(id).get();
-	         review.setStatus(1);;
+	         review.setStatus(1);
 	         reviewservice.saveOrUpdate(review);
-
+	         Product product = review.getProductReview();
+	         product.setStars(productservice.getProductStars(product));
+	         productservice.saveOrUpdate(product);
 	        }
 
 	//new method
@@ -115,6 +120,9 @@ public class ReviewController {
 	        Review review = reviewservice.getOneById(id).get();
 	        review.setStatus(0);
 	        reviewservice.saveOrUpdate(review);
+			Product product = review.getProductReview();
+			product.setStars(productservice.getProductStars(product));
+			productservice.saveOrUpdate(product);
 
 	        }
 	 

@@ -1,7 +1,6 @@
 package com.cosmetica.Services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +34,12 @@ public class ProductService implements IProductService{
 	public Optional<Product> getOneById(int id){
 		return dao.findById(id);
 	}
+	
+	@Override
+	public Optional<Product> getOneByRef(String ref){
+		return dao.findByProductRef(ref);
+	}
+	
 	@Override
 	public void saveOrUpdate(Product product) {
 		dao.save(product);
@@ -63,8 +68,9 @@ public class ProductService implements IProductService{
 		
 		List<Review> reviews = product.getProductReviews();
 		for (Review r : reviews) {
+			if(r.getStatus()==1) {
 			count++;
-			stars=stars+r.getStars();
+			stars=stars+r.getStars();}
 		}
 		stars=stars/count;
 		return Precision.round(stars, 1);

@@ -46,4 +46,6 @@ public interface IProductService {
 
 	public List<Product> getCategoryProducts(int id_category);
 
+	public Optional<Product> getOneByRef(String ref);
+
 }

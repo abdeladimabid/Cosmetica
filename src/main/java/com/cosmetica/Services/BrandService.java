@@ -22,6 +22,11 @@ public class BrandService implements IBrandService{
 	public List<Brand> getAll(){
 		return dao.findAll();
 	}
+	
+	@Override
+	public List<Brand> getAllBrands(){
+		return dao.findAllBrands();
+	}
 
 	@Override
 	public Optional<Brand> getOneById(int id){

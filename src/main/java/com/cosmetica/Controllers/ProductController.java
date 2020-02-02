@@ -20,6 +20,7 @@ import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
+import com.cosmetica.Exceptions.DuplicateKeyException;
 import com.cosmetica.IServices.ICategoryService;
 import com.cosmetica.IServices.IProductService;
 
@@ -52,7 +53,9 @@ public class ProductController {
 
 	 @PostMapping("/saller/add/product")					//add a new Product, new Product is given in parameters
 	 public void addProduct(@RequestBody Product produit) {
-		 productservice.saveOrUpdate(produit);
+		 if(productservice.getOneByRef(produit.getProductref()).isPresent()) {
+	         throw new DuplicateKeyException(produit.getProductref());
+	     } else { productservice.saveOrUpdate(produit); }
 		 
 	 }
 
@@ -85,8 +88,8 @@ public class ProductController {
 		if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );
 		 Product product=productservice.getOneById(product_id).get();
-		 List<Review> views=productservice.getProductReviews(product);
-		 return views;
+		 List<Review> reviews=productservice.getProductReviews(product);
+		 return reviews;
 	 
 		 }
 	 

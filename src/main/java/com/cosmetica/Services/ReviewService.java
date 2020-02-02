@@ -1,6 +1,7 @@
 package com.cosmetica.Services;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,10 +47,10 @@ public class ReviewService implements IReviewService{
 	@Override
 	public String getReviewTimeSincePublished(Review Review) {
 		String result = null;
+		ZonedDateTime now = ZonedDateTime.now();
+		Long diff = now.toInstant().toEpochMilli()- Review.getInsertedAt().getTime();
 		
-		Date now = new Date();
-		Long diff = now.getTime() - Review.getInsertedAt().getTime();
-		
+		diff = diff + 3600000;
 		diff = diff / 1000;
 
 		long days = diff / (24 * 60 * 60);
@@ -59,31 +60,36 @@ public class ReviewService implements IReviewService{
 		
 
 		if(minutes <= 0 && hours <= 0 && days <= 0) {
-			result = seconds + " seconds.";
+			result = seconds + " second.";
 		} else if(hours <= 0 && days <= 0) {
-			result = minutes + " minutes, ";
-			result += seconds + " seconds.";
+			result = minutes + " minutes ago ";
 		} else if (days <= 0) {
-			result = hours + " hours, ";
-			result += minutes + " minutes, ";
-			result += seconds + " seconds.";
+			result = hours + " hours ago.";
 
 		} else {
-			result = days + " days, ";
-			result += hours + " hours, ";
-			result += minutes + " minutes, ";
-			result += seconds + " seconds.";
+			result = days + " days ago.";
 		}
 		
 		if(days < 30) {
-			return result;
+			if(days<7) {
+				return result;
+			}else if(days>7 && days<17) {
+				return "1 week ago.";
+			}else if(days>14 && days<21) {
+				return "2 weeks ago.";
+			}else if(days>21 && days<28) {
+				return "3 weeks ago.";
+			}
 		} else {
-			return null;
+			SimpleDateFormat formater = new SimpleDateFormat("dd MMM");
+		    String formattedDate = formater.format(Review.getInsertedAt());
+			return formattedDate;
 		}
-		
+		System.out.println(now);
+		return null;
 	}
 
 	
-
+//stars count f review insert
 
 }

@@ -10,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,21 +25,9 @@ public class Coupon {
 	private String description;
 	private int active;
 	private int discountValue;	
-	
-	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
-	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	
-	@DateTimeFormat(pattern = "dd-MMMM-yyyy")
-	@Temporal(TemporalType.DATE)
 	private Date endDate;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

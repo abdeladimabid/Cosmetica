@@ -28,12 +28,19 @@ public class BrandController {
 	@Autowired
 	IBrandService brandservice;
 	
-	@GetMapping("/brand/all")							//get all brands
+	@GetMapping("/supervisor/brand/all")							//get all brands
 	 public List<Brand> allBrands() {
 		List<Brand> brands = brandservice.getAll();
 		return brands;
 		 
 	 }
+	
+	@GetMapping("/brand/all")							//get all brands
+	public List<Brand> ClientAllBrands() {
+		List<Brand> brands = brandservice.getAllBrands();
+		return brands;
+		
+	}
 	 
 	 @GetMapping("/brand/id/{brand_id}")				//search a brand by Brand_Id, takes a brand_Id in parameters
 	 public Optional <Brand> getoneBrand(@PathVariable("brand_id")int brand_id){
