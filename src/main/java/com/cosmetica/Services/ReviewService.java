@@ -23,6 +23,11 @@ public class ReviewService implements IReviewService{
 	public List<Review> getAll() {
 		return dao.findAll();
 	}
+	
+	@Override
+	public List<Review> getAllClient() {
+		return dao.findAllClient();
+	}
 
 	@Override
 	public Optional<Review> getOneById(int id) {

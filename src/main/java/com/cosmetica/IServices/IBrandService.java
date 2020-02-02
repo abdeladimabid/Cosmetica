@@ -24,4 +24,5 @@ public interface IBrandService {
 	
 	public List<Brand> getOneByBrandName(String username);
 	
+
 }

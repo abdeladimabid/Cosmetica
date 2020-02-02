@@ -20,6 +20,7 @@ import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 
 import com.cosmetica.Exceptions.CosmeticaException;
+import com.cosmetica.Exceptions.ItemDontExistException;
 import com.cosmetica.IServices.IProductService;
 import com.cosmetica.IServices.IReviewService;
 
@@ -34,19 +35,38 @@ public class ReviewController {
 	IReviewService reviewservice;
 	IProductService productservice;
 	
-	@GetMapping("/review/all")
+	@GetMapping("/supervisor/review/all")
 	 public List<Review> allReviews() {
 		List<Review> reviews = reviewservice.getAll();
 		return reviews;
 		 
 	 }
+	
+	@GetMapping("/review/all")
+	public List<Review> allReviewsClient() {
+		List<Review> reviews = reviewservice.getAllClient();
+		return reviews;
+		
+	}
 	 
-	 @GetMapping("/review/{review_id}")
+	 @GetMapping("/supervisor/review/{review_id}")
 	 public Optional <Review> oneReview(@PathVariable("review_id")int review_id){
 		 
 		 if(!reviewservice.getOneById(review_id).isPresent())
 	         throw new CosmeticaException(review_id );
 		 return reviewservice.getOneById(review_id);
+		 
+	 }
+	 
+	 @GetMapping("/review/{review_id}")
+	 public Optional <Review> oneReviewClient(@PathVariable("review_id")int review_id){
+		 
+		 if(!reviewservice.getOneById(review_id).isPresent())
+			 throw new CosmeticaException(review_id );
+		 Review review = reviewservice.getOneById(review_id).get();
+		 if(review.getStatus()==1) {
+			 return reviewservice.getOneById(review_id);
+		 } else throw new ItemDontExistException(review_id);
 		 
 	 }
 
@@ -72,7 +92,7 @@ public class ReviewController {
 		 
 	 }
 	 
-	 @DeleteMapping("/review/remove/{review_id}")
+	 @DeleteMapping("/client/review/remove/{review_id}")
 	 public void removeReview(@PathVariable("review_id")int review_id) {
 		 if(!reviewservice.getOneById(review_id).isPresent())
 	         throw new CosmeticaException(review_id );
@@ -100,7 +120,7 @@ public class ReviewController {
 		 
 	 }
 	//new method
-	    @PostMapping("/review/validate")                //validate an a review, takes an review_id in parameters
+	    @PostMapping("/supervisor/review/validate")                //validate an a review, takes an review_id in parameters
 	        public void validate(@RequestBody int id) {
 	         if(!reviewservice.getOneById(id).isPresent())
 	            throw new CosmeticaException(id);
@@ -113,7 +133,7 @@ public class ReviewController {
 	        }
 
 	//new method
-	    @PostMapping("/review/invalidate")                //unvalidate a review, takes an review_id in parameters
+	    @PostMapping("/supervisor/review/invalidate")                //unvalidate a review, takes an review_id in parameters
 	        public void invalidate(@RequestBody int id) {
 	        if(!reviewservice.getOneById(id).isPresent())
 	            throw new CosmeticaException(id);

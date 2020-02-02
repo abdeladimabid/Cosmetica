@@ -20,6 +20,8 @@ public interface IReviewService {
 	public Client getReviewUser(Review review);
 	
 	public String getReviewTimeSincePublished(Review Review);
+
+	public List<Review> getAllClient();
 	
 	
 	

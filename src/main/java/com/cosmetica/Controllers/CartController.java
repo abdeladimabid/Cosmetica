@@ -104,8 +104,8 @@ public class CartController {
 		 
 		 
 	 }
-	//new method
-     @PostMapping("/cart/validate")
+
+     @PostMapping("/supervisor/cart/validate")
     public void validatee(@RequestBody int cart_id) {
     if(!cartservice.getOneById(cart_id).isPresent())
         throw new CosmeticaException(cart_id );
@@ -115,8 +115,8 @@ public class CartController {
 
     }
 
-//new method
-     @PostMapping("/cart/invalidate")
+
+     @PostMapping("/supervisor/cart/invalidate")
     public void invalidate(@RequestBody int cart_id) {
     if(!cartservice.getOneById(cart_id).isPresent())
         throw new CosmeticaException(cart_id );

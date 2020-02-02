@@ -48,4 +48,6 @@ public interface IProductService {
 
 	public Optional<Product> getOneByRef(String ref);
 
+	public List<Product> getAllClient();
+
 }

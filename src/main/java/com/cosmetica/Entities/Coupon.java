@@ -64,6 +64,10 @@ public class Coupon {
 		return code;
 	}
 
+	public int getActive() {
+		return active;
+	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}

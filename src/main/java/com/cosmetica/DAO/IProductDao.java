@@ -12,19 +12,22 @@ import com.cosmetica.Entities.Product;
 public interface IProductDao extends JpaRepository<Product , Integer> {
 	List<Product> findByRegularPriceBetween(double p1, double p2);
 	List<Product> findByFeaturedNotLike(int o);
-	@Query( value = "SELECT * FROM products ORDER BY inserted_at DESC LIMIT 10",
+	@Query( value = "SELECT * FROM products WHERE status = 1",
+			nativeQuery = true)
+			List<Product> findAllClient();
+	@Query( value = "SELECT * FROM products WHERE status = 1 AND quantity > 0 ORDER BY inserted_at DESC LIMIT 10",
 			nativeQuery = true)
 			List<Product> findAllOrderByInsertedAt();
-	@Query( value = "SELECT * FROM products ORDER BY stars DESC LIMIT 10",
+	@Query( value = "SELECT * FROM products WHERE status = 1 AND quantity > 0 ORDER BY stars DESC LIMIT 10",
 			nativeQuery = true)
 			List<Product> findTopProducts();
-	@Query( value = "SELECT * FROM products ORDER BY discount DESC LIMIT 10",
+	@Query( value = "SELECT * FROM products WHERE status = 1 AND quantity > 0 ORDER BY discount DESC LIMIT 10",
 			nativeQuery = true)
 			List<Product> findHotDeals();
-	@Query( value = "SELECT * FROM products ORDER BY discount DESC LIMIT 1",
+	@Query( value = "SELECT * FROM products WHERE status = 1 AND quantity > 0 ORDER BY discount DESC LIMIT 1",
 			nativeQuery = true)
 			Product findDealOfTheDay();
-	@Query( value = "SELECT * FROM products p WHERE p.category_id= ?1",
+	@Query( value = "SELECT * FROM products p WHERE p.category_id= ?1 AND status = 1 AND quantity >= 1",
 			nativeQuery = true)
 			List<Product> findCategoryProducts(int id_category);
 	@Query( value = "SELECT * FROM products p WHERE p.product_ref= ?1",

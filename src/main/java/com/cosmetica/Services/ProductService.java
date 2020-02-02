@@ -29,6 +29,11 @@ public class ProductService implements IProductService{
 	public List<Product> getAll(){
 		return dao.findAll();
 	}
+	
+	@Override
+	public List<Product> getAllClient(){
+		return dao.findAllClient();
+	}
 
 	@Override
 	public Optional<Product> getOneById(int id){
