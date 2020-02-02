@@ -11,10 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,13 +23,7 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roleId;
 	private String label;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date updatedAt;
 
 	@OneToMany(mappedBy = "userRole",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

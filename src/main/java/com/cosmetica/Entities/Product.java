@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,21 +16,18 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="products")
 @JsonIgnoreProperties(ignoreUnknown = true , value = {"hibernateLazyInitializer", "handler", "orders"})
-public class Product {
+public class Product implements Comparable<Product>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
-	private String productRef;// needs to be fixed
+	@Column(unique=true)    
+	private String productRef;
 	private String productName;
 	private String productTitle;
 	private String productSubTitle;
@@ -44,13 +42,7 @@ public class Product {
 	private String metaTitle;
 	private String metaKeywords;
 	private float stars;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -81,11 +73,11 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String product_ref, String product_name, String product_title, String product_sub_title,
+	public Product(int product_ref, String product_name, String product_title, String product_sub_title,
 			String description, Double regular_price, int quantity, String meta_title, String meta_keywords,
 			Category category, List<Tag> tags, List<Image> images, Brand brand, int tax) {
 		super();
-		this.productRef = product_ref;
+		this.productRef = "P00"+product_ref;
 		this.productName = product_name;
 		this.productTitle = product_title;
 		this.productSubTitle = product_sub_title;
@@ -314,6 +306,13 @@ public class Product {
 				+ ", updatedAt=" + updatedAt + ", productCategory=" + productCategory + ", productTags=" + productTags
 				+ ", images=" + images + ", productBrand=" + productBrand + ", orders=" + orders + ", productReviews="
 				+ productReviews + "]";
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		Integer t = Math.round(this.getStars());
+		Integer to = Math.round(o.getStars());
+		return t.compareTo(to);
 	}
 
 	

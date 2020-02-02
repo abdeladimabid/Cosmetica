@@ -13,10 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,7 +25,8 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
 	private String label;
-	
+	private Date insertedAt;
+	private Date updatedAt;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "parent", referencedColumnName = "categoryId")
@@ -40,15 +37,6 @@ public class Category {
 	
 	@OneToMany(mappedBy = "productCategory",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Product> products;
-
-
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	private Date updatedAt;
 
 	public Category(String label, Category parent) {
 		super();

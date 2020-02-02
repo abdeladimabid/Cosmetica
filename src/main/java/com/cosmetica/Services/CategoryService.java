@@ -1,5 +1,6 @@
 package com.cosmetica.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,16 @@ public class CategoryService implements ICategoryService{
 	
 	@Override
 	public List<Product> getCategoryPruducts(Category Category) {
+		List<Product> products = new ArrayList<>();
+		if (!Category.getChildren().isEmpty()) {
+			List<Category> categories = Category.getChildren();
+			for(Category c : categories) {
+				products.addAll(c.getProducts());
+			}
+			
+			return products;
+		}
+		
 		return Category.getProducts();
 	}
 	
