@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,13 +23,7 @@ public class Tag {
 	
 	@ManyToMany(mappedBy="productTags")
 	private List<Product> products;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date updatedAt;
 
 	public Tag() {

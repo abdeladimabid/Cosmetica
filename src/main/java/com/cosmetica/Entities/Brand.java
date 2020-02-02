@@ -12,10 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,13 +27,7 @@ public class Brand {
 	private String name;
 	private String slogan;
 	private String logo;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date updatedAt;
 	
 	@OneToMany(mappedBy="productBrand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -51,7 +41,7 @@ public class Brand {
 		this.name = name;
 		this.slogan = slogan;
 		this.logo = logo;
-		this.insertedAt = new Date();
+		this.insertedAt = new Date(); 
 	}
 
 	public Brand() {

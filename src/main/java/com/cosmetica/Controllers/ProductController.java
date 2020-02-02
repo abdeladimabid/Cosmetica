@@ -20,6 +20,9 @@ import com.cosmetica.Entities.Product;
 import com.cosmetica.Entities.Review;
 import com.cosmetica.Entities.Tag;
 import com.cosmetica.Exceptions.CosmeticaException;
+import com.cosmetica.Exceptions.DuplicateKeyException;
+import com.cosmetica.Exceptions.ItemDontExistException;
+import com.cosmetica.IServices.ICategoryService;
 import com.cosmetica.IServices.IProductService;
 
 
@@ -27,17 +30,27 @@ import com.cosmetica.IServices.IProductService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("COSMETICA")
 public class ProductController {
+	
 	@Autowired
 	IProductService productservice;
+	@Autowired
+	ICategoryService categoryservice;
 	
-	 @GetMapping("/product/all")						//get all Products
+	 @GetMapping("/supervisor/product/all")						//get all Products
 	 public List<Product > allProducts() {
 		List<Product> products = productservice.getAll();
 		return products;
 		 
 	 }
 	 
-	 @GetMapping("/product/{product_id}")			//get one Product, id_Product is given in parameters
+	 @GetMapping("/product/all")						//get all Products where quantity > 0 and status = 1
+	 public List<Product > ClientallProducts() {
+		 List<Product> products = productservice.getAllClient();
+		 return products;
+		 
+	 }
+	 
+	 @GetMapping("/supervisor/product/{product_id}")			//get one Product, id_Product is given in parameters
 	 public Optional <Product> oneProduct(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())
@@ -45,12 +58,27 @@ public class ProductController {
 		 return productservice.getOneById(product_id);
 		 
 	 }
+	 
+	 @GetMapping("/product/{product_id}")			//get one Product, id_Product is given in parameters
+	 public Optional <Product> oneProductClient(@PathVariable("product_id")int product_id){
+		 
+		 if(!productservice.getOneById(product_id).isPresent())
+			 throw new CosmeticaException(product_id );
+		 Product product = productservice.getOneById(product_id).get();
+		 if(product.getStatus()==1) {
+		 return productservice.getOneById(product_id);
+		 } else throw new ItemDontExistException(product_id);
+		 
+	 }
 
 	 @PostMapping("/saller/add/product")					//add a new Product, new Product is given in parameters
 	 public void addProduct(@RequestBody Product produit) {
-		 productservice.saveOrUpdate(produit);
+		 if(productservice.getOneByRef(produit.getProductref()).isPresent()) {
+	         throw new DuplicateKeyException(produit.getProductref());
+	     } else { productservice.saveOrUpdate(produit); }
 		 
 	 }
+
 	 @PutMapping("/saller/modify/product")					//modify a Product, new Product is given in parameters
 	 public void modifyProduct(@RequestBody Product produit) {
 		 productservice.saveOrUpdate(produit);
@@ -80,8 +108,8 @@ public class ProductController {
 		if(!productservice.getOneById(product_id).isPresent())
 	         throw new CosmeticaException(product_id );
 		 Product product=productservice.getOneById(product_id).get();
-		 List<Review> views=productservice.getProductReviews(product);
-		 return views;
+		 List<Review> reviews=productservice.getProductReviews(product);
+		 return reviews;
 	 
 		 }
 	 
@@ -166,8 +194,8 @@ public class ProductController {
 
         }
 
-//new method
-    @PostMapping("/product/invalidate")                //unvalidate a product, takes an product_id in parameters
+     //new method
+    @PostMapping("/saller/product/invalidate")                //unvalidate a product, takes an product_id in parameters
         public void invalidate(@RequestBody int id) {
         if(!productservice.getOneById(id).isPresent())
             throw new CosmeticaException(id);
@@ -176,6 +204,13 @@ public class ProductController {
         productservice.saveOrUpdate(product);
 
         }
+    
+    @GetMapping("/saller/product/category/{cat_id}")			//get Products of a certain category that you pass in parameters
+    public List<Product> ProductsByCategory(@PathVariable("cat_id")int cat_id) {
+    	if(!categoryservice.getOneById(cat_id).isPresent())
+            throw new CosmeticaException(cat_id);
+        return productservice.getCategoryProducts(cat_id);
+    }
 
 //new method
     @GetMapping("/product/xsell/{product_id}")    //get a Product's rate, id_Product is given in parameters

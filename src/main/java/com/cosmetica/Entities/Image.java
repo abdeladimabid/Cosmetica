@@ -10,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="images")
@@ -24,18 +20,13 @@ public class Image {
 	private int imageId;
 	private String alt;
 	private String path;
+	private Date insertedAt;
+	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name="productId",nullable = false)
 	private Product productImage;
 	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	private Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	private Date updatedAt;
 
 	public Image() {
 		super();
