@@ -12,6 +12,12 @@ import com.cosmetica.Entities.Product;
 public interface IProductDao extends JpaRepository<Product , Integer> {
 	List<Product> findByRegularPriceBetween(double p1, double p2);
 	List<Product> findByFeaturedNotLike(int o);
+	@Query( value = "SELECT * FROM products WHERE product_name LIKE '%?1%' AND status = 1 AND quantity > 0",
+			nativeQuery = true)
+			List<Product> findName(String name);
+	@Query( value = "SELECT * FROM products WHERE product_name LIKE '%?1%'",
+			nativeQuery = true)
+			List<Product> findNameAdmin(String name);
 	@Query( value = "SELECT * FROM products WHERE status = 1",
 			nativeQuery = true)
 			List<Product> findAllClient();

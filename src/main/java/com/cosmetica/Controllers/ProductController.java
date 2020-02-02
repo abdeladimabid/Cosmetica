@@ -50,7 +50,7 @@ public class ProductController {
 		 
 	 }
 	 
-	 @GetMapping("/supervisor/product/{product_id}")			//get one Product, id_Product is given in parameters
+	 @GetMapping("/supervisor/product/id/{product_id}")			//get one Product, id_Product is given in parameters
 	 public Optional <Product> oneProduct(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())
@@ -59,7 +59,7 @@ public class ProductController {
 		 
 	 }
 	 
-	 @GetMapping("/product/{product_id}")			//get one Product, id_Product is given in parameters
+	 @GetMapping("/product/id/{product_id}")			//get one Product, id_Product is given in parameters
 	 public Optional <Product> oneProductClient(@PathVariable("product_id")int product_id){
 		 
 		 if(!productservice.getOneById(product_id).isPresent())
@@ -68,6 +68,24 @@ public class ProductController {
 		 if(product.getStatus()==1) {
 		 return productservice.getOneById(product_id);
 		 } else throw new ItemDontExistException(product_id);
+		 
+	 }
+	 
+	 @GetMapping("/product/name/{product_name}")			//get one Product, id_Product is given in parameters
+	 public List<Product> ProductByNameClient(@PathVariable("product_name")String product_name){
+		 
+		 if(productservice.getByName(product_name).isEmpty())
+			 throw new CosmeticaException(product_name );
+			 return productservice.getByName(product_name);
+		 
+	 }
+	 
+	 @GetMapping("/saller/product/name/{product_name}")			//get one Product, id_Product is given in parameters
+	 public List<Product> ProductByNameSaller(@PathVariable("product_name")String product_name){
+		 
+		 if(productservice.getByNameA(product_name).isEmpty())
+			 throw new CosmeticaException(product_name );
+		 return productservice.getByNameA(product_name);
 		 
 	 }
 

@@ -46,6 +46,15 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
+	public List<Product> getByName(String name){
+		return dao.findName(name);
+	}
+	@Override
+	public List<Product> getByNameA(String name){
+		return dao.findNameAdmin(name);
+	}
+	
+	@Override
 	public void saveOrUpdate(Product product) {
 		dao.save(product);
 	}
