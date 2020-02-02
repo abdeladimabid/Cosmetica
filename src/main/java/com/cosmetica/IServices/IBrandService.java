@@ -23,8 +23,5 @@ public interface IBrandService {
 	public List<Coupon> getBrandCoupons(Brand Brand);
 	
 	public List<Brand> getOneByBrandName(String username);
-
-	public List<Brand> getAllBrands();
 	
-
 }
