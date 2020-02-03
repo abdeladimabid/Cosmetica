@@ -30,14 +30,14 @@ public class AdminController {
 	@Autowired
 	IRoleService roleserv;
 	
-	@GetMapping("/admins")							//get all admins
+	@GetMapping("/superadmin/admin/all")							//get all admins
 	 public List<Admin> allAdmins() {
 		List<Admin> admins = adminservice.getAll();
 		return admins;
 		 
 	 }
 	 
-	 @GetMapping("/admin/id/{admin_id}")			//search an admin using id, takes an Admin_Id in parameters
+	 @GetMapping("/superadmin/admin/id/{admin_id}")			//search an admin using id, takes an Admin_Id in parameters
 	 public Optional <Admin> oneAdmin(@PathVariable("admin_id")int admin_id){
 		 
 		 if(!adminservice.getOneById(admin_id).isPresent())
@@ -46,7 +46,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/un/{username}")			//search an admin using %username%, takes a username in parameters
+	 @GetMapping("/superadmin/admin/un/{username}")			//search an admin using %username%, takes a username in parameters
 	 public List <Admin> AdminByUsername(@PathVariable("username")String username){
 		 
 		 if(adminservice.getOneByUsername(username).isEmpty())
@@ -55,19 +55,19 @@ public class AdminController {
 		 
 	 }
 
-	 @PostMapping("/add/admin")						//add an admin, takes a new Admin in parameters
+	 @PostMapping("/superadmin/add/admin")						//add an admin, takes a new Admin in parameters
 	 public void addAdmin(@RequestBody Admin admin) {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
 	 
-	 @PutMapping("/modify/admin")					//modify an admin, takes the new Admin in parameters
+	 @PutMapping("/superadmin/modify/admin")					//modify an admin, takes the new Admin in parameters
 	 public void modifyAdmin(@RequestBody Admin admin) {
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
 	 
-	 @DeleteMapping("/remove/admin/{admin_id}")		//remove an admin, takes an Admin_Id in parameters
+	 @DeleteMapping("/superadmin/remove/admin/{admin_id}")		//remove an admin, takes an Admin_Id in parameters
 	 public void removeAdmin(@PathVariable("admin_id")int admin_id) {
 		 if(!adminservice.getOneById(admin_id).isPresent())
 	         throw new CosmeticaException(admin_id );
@@ -76,7 +76,7 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/email/{email}")		//search an admin using full email, takes an email in parameters
+	 @GetMapping("/superadmin/admin/email/{email}")		//search an admin using full email, takes an email in parameters
 	 public Admin getOneByEmail(@PathVariable("email")String email){
 		 if(!adminservice.getOneByEmail(email).isPresent())
 	         throw new CosmeticaException(email);
@@ -85,13 +85,13 @@ public class AdminController {
 		 
 	 }
 	 
-	 @GetMapping("/admin/login/{login}")		//search an admin using full email or %username%, takes a login in parameters
+	 @GetMapping("/superadmin/admin/login/{login}")		//search an admin using full email or %username%, takes a login in parameters
 	 public List<Admin> getOneBylogin(@PathVariable("login")String login){
 		 return adminservice.getByUsernameOrEmail(login, login);
 		 
 	 }
 	 
-	 @GetMapping("/admin/role/{id}")			//get admin role, takes an Admin_Id in parameters
+	 @GetMapping("/superadmin/admin/role/{id}")			//get admin role, takes an Admin_Id in parameters
 	 public Role AdminRole(@PathVariable("id")int id){
 		 if(!adminservice.getOneById(id).isPresent())
 	         throw new CosmeticaException(id );
@@ -110,7 +110,7 @@ public class AdminController {
      }
 
 //new method
-     @PostMapping("/admin/modifypassword")        //modify an admins password, takes a new Admin in parameters
+     @PostMapping("/superadmin/admin/modifypassword")        //modify an admins password, takes a new Admin in parameters
      public void modifypass(@RequestBody int id, String password) {
          if(!adminservice.getOneById(id).isPresent())
              throw new CosmeticaException(id);
@@ -121,7 +121,7 @@ public class AdminController {
      }
 
 //new method
-    @PostMapping("/admin/validate")                //validate an admin, takes an Admin_id in parameters
+    @PostMapping("/superadmin/admin/validate")                //validate an admin, takes an Admin_id in parameters
     public void validate(@RequestBody int id) {
      if(!adminservice.getOneById(id).isPresent())
         throw new CosmeticaException(id);
@@ -132,7 +132,7 @@ public class AdminController {
     }
 
 //new method
-    @PostMapping("/admin/invalidate")                //unvalidate an admin, takes an Admin_id in parameters
+    @PostMapping("/superadmin/admin/invalidate")                //unvalidate an admin, takes an Admin_id in parameters
     public void invalidate(@RequestBody int id) {
     if(!adminservice.getOneById(id).isPresent())
         throw new CosmeticaException(id);

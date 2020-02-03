@@ -36,18 +36,12 @@ public class User {
 	protected String password;
 	protected String token;
 	protected boolean active;
+	protected Date insertedAt;
+	protected Date updatedAt;
 
 	@ManyToOne
 	@JoinColumn (name="roleId",nullable = false)
 	protected Role userRole;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	protected Date insertedAt;
-	
-	@DateTimeFormat(pattern = "E, dd-MMMM-yyyy, HH:mm:ss")
-	@Temporal(TemporalType.DATE)
-	protected Date updatedAt;
 	
 
 	public User(String username, String firstname, String lastname, String email, String password, String token,

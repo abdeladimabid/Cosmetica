@@ -44,4 +44,16 @@ public interface IProductService {
 
 	public List<Product> productsSuggestionU(Product product);
 
+	public List<Product> getCategoryProducts(int id_category);
+
+	public Optional<Product> getOneByRef(String ref);
+
+	public List<Product> getAllClient();
+
+	public List<Product> getByName(String name);
+	
+	public List<Product> getByNameA(String name);
+
+	public List<Product> productsSuggestionC(Product product);
+
 }

@@ -1,6 +1,5 @@
 package com.cosmetica.Controllers;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,31 +85,6 @@ public class InvoiceHeadController {
 		 }
 		 
 		 invoiceHeadservice.saveOrUpdate(invoiceHead);
-		 
-	 }
-	 
-	 @GetMapping("/test/instert/of/theImposibleHead")	//for testing purposes ONLY
-	 public void addinvoice() {
-		 InvoiceType it = invoiceHeadservice.getLastFac().getType();
-		 InvoiceBody ib = invoiceHeadservice.getLastFac().getHeadBody();
-		 String type = it.getLabel();
-		 InvoiceHead head = new InvoiceHead(it,ib);
-		 
-		 if(type.equals("facture")) {
-				 int refLast = invoiceHeadservice.getLastFac().getRef();
-				 head.setRef(refLast+1);
-		 } else
-			 if(type.equals("devis")) {
-				 int refLast = invoiceHeadservice.getLastDev().getRef();
-				 head.setRef(refLast+1);
-		 }else
-			 if(type.equals("bon")) {
-				 int refLast = invoiceHeadservice.getLastBon().getRef();
-				 head.setRef(refLast+1);
-		 }else {
-				 head.setRef(1);
-		 }
-		 invoiceHeadservice.saveOrUpdate(head);
 		 
 	 }
 	 

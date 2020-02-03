@@ -1,7 +1,6 @@
 package com.cosmetica.Services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
+import com.cosmetica.Entities.Category;
 import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Match;
 import com.cosmetica.Entities.Product;
@@ -30,11 +30,31 @@ public class ProductService implements IProductService{
 	public List<Product> getAll(){
 		return dao.findAll();
 	}
+	
+	@Override
+	public List<Product> getAllClient(){
+		return dao.findAllClient();
+	}
 
 	@Override
 	public Optional<Product> getOneById(int id){
 		return dao.findById(id);
 	}
+	
+	@Override
+	public Optional<Product> getOneByRef(String ref){
+		return dao.findByProductRef(ref);
+	}
+	
+	@Override
+	public List<Product> getByName(String name){
+		return dao.findName(name);
+	}
+	@Override
+	public List<Product> getByNameA(String name){
+		return dao.findNameAdmin(name);
+	}
+	
 	@Override
 	public void saveOrUpdate(Product product) {
 		dao.save(product);
@@ -63,8 +83,9 @@ public class ProductService implements IProductService{
 		
 		List<Review> reviews = product.getProductReviews();
 		for (Review r : reviews) {
+			if(r.getStatus()==1) {
 			count++;
-			stars=stars+r.getStars();
+			stars=stars+r.getStars();}
 		}
 		stars=stars/count;
 		return Precision.round(stars, 1);
@@ -102,19 +123,10 @@ public class ProductService implements IProductService{
 		return dao.findDealOfTheDay();
 	}
 	
-//	public List<Product> productsSuggestionX(Product product){
-//		List<Product> products = dao.findByCategory(product.getProduct_category().getLabel());
-//		List<Tag> tags;
-//		int[][] matches;
-//		for (Product p : products) {
-//			tags=p.getProduct_tags();
-//			tags.retainAll(product.getProduct_tags());
-//				     
-//				}
-//					//make a table with product id and how many matching tags, 
-//					//make a table with best 5 rated products and return it
-//			
-//			}
+	@Override
+	public List<Product> getCategoryProducts(int id_category){
+		return dao.findCategoryProducts(id_category);
+	}
 	
 	//new method
     @Override
@@ -132,8 +144,6 @@ public class ProductService implements IProductService{
             matches.add(match);
             }
         
-        Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
-        
         for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
         	if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
         		primary.add(m);
@@ -145,7 +155,9 @@ public class ProductService implements IProductService{
         
         for(Match m : primary) {	
         		products.add(m.getMatch());}
+
         
+        Collections.sort(products, Collections.reverseOrder());	//sort the primary table by matching tags
         return products;
 
             }
@@ -166,19 +178,44 @@ public class ProductService implements IProductService{
     		matches.add(match);
     	}
     	
-    	Collections.sort(matches, Collections.reverseOrder());	//sort the primary table by matching tags
+    	matches = matches.stream().limit(500).collect(Collectors.toList());
     	
     	for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
-    		if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
+    		if(m.getTags()>=3 && m.getMatch().getStars()>=3 && m.getMatch().getRegularPrice()>product.getRegularPrice()) {
     			primary.add(m);
     		}
     	}
     	
-    	primary = primary.stream().limit(10).collect(Collectors.toList());
     	products = new ArrayList<>();
     	
     	for(Match m : primary) {	
     		products.add(m.getMatch());}
+    	
+    	Collections.sort(products, Collections.reverseOrder());	
+    	
+    	products = products.stream().limit(10).collect(Collectors.toList());
+    	
+    	return products;
+    	
+    }
+    
+    //new method
+    @Override
+    public List<Product> productsSuggestionC(Product product){  // You may also need, complimentary products suggestion
+    	Category category = product.getProductCategory();
+    	Category parent = category.getParent();
+    	List<Product> products = new ArrayList<>();
+    	List<Category> children = new ArrayList<>();
+
+    		while(parent!=null) {
+    			children.add(parent);
+    			parent=parent.getParent();
+    			
+    		} 
+    	
+    	for(Category c : children) {
+    		products.add(dao.getCSell(c.getCategoryId()));
+    	}
     	
     	return products;
     	
