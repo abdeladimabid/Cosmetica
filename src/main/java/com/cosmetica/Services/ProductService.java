@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cosmetica.DAO.IProductDao;
+import com.cosmetica.Entities.Category;
 import com.cosmetica.Entities.Image;
 import com.cosmetica.Entities.Match;
 import com.cosmetica.Entities.Product;
@@ -177,17 +178,44 @@ public class ProductService implements IProductService{
     		matches.add(match);
     	}
     	
+    	matches = matches.stream().limit(500).collect(Collectors.toList());
+    	
     	for (Match m : matches) {					//retain every product that has more than 3 tags and rated with more than 3 stars and store them in primary table
-    		if(m.getTags()>=3 && m.getMatch().getStars()>=3) {
+    		if(m.getTags()>=3 && m.getMatch().getStars()>=3 && m.getMatch().getRegularPrice()>product.getRegularPrice()) {
     			primary.add(m);
     		}
     	}
     	
-    	primary = primary.stream().limit(10).collect(Collectors.toList());
     	products = new ArrayList<>();
     	
     	for(Match m : primary) {	
     		products.add(m.getMatch());}
+    	
+    	Collections.sort(products, Collections.reverseOrder());	
+    	
+    	products = products.stream().limit(10).collect(Collectors.toList());
+    	
+    	return products;
+    	
+    }
+    
+    //new method
+    @Override
+    public List<Product> productsSuggestionC(Product product){  // You may also need, complimentary products suggestion
+    	Category category = product.getProductCategory();
+    	Category parent = category.getParent();
+    	List<Product> products = new ArrayList<>();
+    	List<Category> children = new ArrayList<>();
+
+    		while(parent!=null) {
+    			children.add(parent);
+    			parent=parent.getParent();
+    			
+    		} 
+    	
+    	for(Category c : children) {
+    		products.add(dao.getCSell(c.getCategoryId()));
+    	}
     	
     	return products;
     	

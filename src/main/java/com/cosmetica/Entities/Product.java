@@ -105,14 +105,6 @@ public class Product implements Comparable<Product>{
 		this.productId = productId;
 	}
 
-	public String getProductref() {
-		return productRef;
-	}
-
-	public void setProductref(String productref) {
-		this.productRef = productref;
-	}
-
 	public String getProductName() {
 		return productName;
 	}

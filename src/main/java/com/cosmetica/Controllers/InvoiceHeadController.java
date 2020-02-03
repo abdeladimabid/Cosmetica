@@ -88,31 +88,6 @@ public class InvoiceHeadController {
 		 
 	 }
 	 
-	 @GetMapping("/test/instert/of/theImposibleHead")	//for testing purposes ONLY
-	 public void addinvoice() {
-		 InvoiceType it = invoiceHeadservice.getLastFac().getType();
-		 InvoiceBody ib = invoiceHeadservice.getLastFac().getHeadBody();
-		 String type = it.getLabel();
-		 InvoiceHead head = new InvoiceHead(it,ib);
-		 
-		 if(type.equals("facture")) {
-				 int refLast = invoiceHeadservice.getLastFac().getRef();
-				 head.setRef(refLast+1);
-		 } else
-			 if(type.equals("devis")) {
-				 int refLast = invoiceHeadservice.getLastDev().getRef();
-				 head.setRef(refLast+1);
-		 }else
-			 if(type.equals("bon")) {
-				 int refLast = invoiceHeadservice.getLastBon().getRef();
-				 head.setRef(refLast+1);
-		 }else {
-				 head.setRef(1);
-		 }
-		 invoiceHeadservice.saveOrUpdate(head);
-		 
-	 }
-	 
 	 @DeleteMapping("/head/remove/{invoiceHead_id}")	//remove a invoiceHead , takes an invoiceHead_Id in parameters
 	 public void removeinvoiceHead(@PathVariable("invoiceHead_id")int invoiceHead_id) {
 		 if(!invoiceHeadservice.getOneById(invoiceHead_id).isPresent())
