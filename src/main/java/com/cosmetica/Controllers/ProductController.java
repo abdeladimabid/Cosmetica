@@ -91,8 +91,8 @@ public class ProductController {
 
 	 @PostMapping("/saller/add/product")					//add a new Product, new Product is given in parameters
 	 public void addProduct(@RequestBody Product produit) {
-		 if(productservice.getOneByRef(produit.getProductref()).isPresent()) {
-	         throw new DuplicateKeyException(produit.getProductref());
+		 if(productservice.getOneByRef(produit.getProductRef()).isPresent()) {
+	         throw new DuplicateKeyException(produit.getProductRef());
 	     } else { productservice.saveOrUpdate(produit); }
 		 
 	 }
@@ -231,7 +231,7 @@ public class ProductController {
     }
 
 //new method
-    @GetMapping("/product/xsell/{product_id}")    //get a Product's rate, id_Product is given in parameters
+    @GetMapping("/product/xsell/{product_id}")    //get similar Products, id_Product is given in parameters
         public List<Product> ProductXsell(@PathVariable("product_id")int product_id) {
             if(!productservice.getOneById(product_id).isPresent())
                 throw new CosmeticaException(product_id );
@@ -240,13 +240,22 @@ public class ProductController {
         }
     
   //new method
-    @GetMapping("/product/usell/{product_id}")    //get a Product's rate, id_Product is given in parameters
+    @GetMapping("/product/usell/{product_id}")    //get a better Product, id_Product is given in parameters
         public List<Product> ProductUsell(@PathVariable("product_id")int product_id) {
             if(!productservice.getOneById(product_id).isPresent())
                 throw new CosmeticaException(product_id );
             Product product=productservice.getOneById(product_id).get();
             return productservice.productsSuggestionU(product);
         }
+    
+    //new method
+    @GetMapping("/product/csell/{product_id}")    //get complementary Products, id_Product is given in parameters
+    public List<Product> productsSuggestionC(@PathVariable("product_id")int product_id) {
+    	if(!productservice.getOneById(product_id).isPresent())
+    		throw new CosmeticaException(product_id );
+    	Product product=productservice.getOneById(product_id).get();
+    	return productservice.productsSuggestionC(product);
+    }
 }
 
 

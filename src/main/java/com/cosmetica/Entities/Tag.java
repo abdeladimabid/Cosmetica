@@ -31,6 +31,12 @@ public class Tag {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Tag(String label) {
+		super();
+		this.label = label;
+		this.insertedAt = new Date();
+	}
+
 	public int getTagId() {
 		return tagId;
 	}

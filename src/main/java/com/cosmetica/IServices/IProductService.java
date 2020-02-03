@@ -54,4 +54,6 @@ public interface IProductService {
 	
 	public List<Product> getByNameA(String name);
 
+	public List<Product> productsSuggestionC(Product product);
+
 }

@@ -39,11 +39,14 @@ public interface IProductDao extends JpaRepository<Product , Integer> {
 	@Query( value = "SELECT * FROM products p WHERE p.product_ref= ?1",
 			nativeQuery = true)
 			Optional<Product> findByProductRef(String ref);
-	@Query( value = "SELECT * FROM products p WHERE p.category_id= (SELECT a.category_id FROM products a WHERE a.product_id= ?1) AND status=1 AND quantity>=1 AND product_id<>?1 AND p.stars>=3  ORDER BY p.stars DESC ",
+	@Query( value = "SELECT * FROM products p WHERE p.category_id= (SELECT a.category_id FROM products a WHERE a.product_id= ?1) AND p.status=1 AND p.quantity>=1 AND p.product_id<>?1 AND p.stars>=3  ORDER BY p.stars DESC LIMIT 1000",
 			nativeQuery = true)
 	       List<Product> getXSell(int id_product); 
 	@Query( value = "SELECT * FROM products p WHERE p.category_id= (SELECT a.category_id FROM products a WHERE a.product_id= ?1) AND p.regular_price > (SELECT a.regular_price FROM products a WHERE a.product_id= ?1) "
-			+ "AND status=1 AND quantity>=1 AND product_id<>?1 AND p.stars>=3  ORDER BY  p.regular_price DESC, p.stars DESC ",
+			+ "AND status=1 AND quantity>=1 AND product_id<>?1 AND p.stars>=3  ORDER BY  p.regular_price DESC, p.stars DESC LIMIT 1000",
 			nativeQuery = true)
 			List<Product> getUpSell(int id_product); 
+	@Query( value = "SELECT * FROM products p WHERE p.category_id= ?1 AND p.status=1 AND p.quantity>=1 AND p.category_id= ?1 AND p.stars>3  ORDER BY p.stars DESC LIMIT 1",
+			nativeQuery = true)
+	       Product getCSell(int id_category); 
 }
