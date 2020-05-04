@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -27,7 +30,9 @@ public class Coupon {
 	private int discountValue;	
 	private Date startDate;
 	private Date endDate;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

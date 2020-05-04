@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -23,7 +26,9 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roleId;
 	private String label;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 
 	@OneToMany(mappedBy = "userRole",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

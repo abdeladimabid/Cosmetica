@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -22,7 +25,9 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
 	private int quantity;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
