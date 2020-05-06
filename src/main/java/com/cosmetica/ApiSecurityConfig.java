@@ -48,6 +48,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable()
+		.authorizeRequests().antMatchers("/swagger-ui.html","/webjars/**","/v2/api-docs","/swagger-resources/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/authenticate").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/review/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/brand/**").permitAll().and()
