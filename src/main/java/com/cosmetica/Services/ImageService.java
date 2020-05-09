@@ -45,10 +45,10 @@ public class ImageService implements IImageService{
 	
 
 	@Override
-	public void uploadImage(MultipartFile image) throws Exception {
-		String folder = this.uploadDirectory;
-		byte[] bytes = image.getBytes();
-		Path path = Paths.get(folder + image.getOriginalFilename());
+	public void uploadImage(MultipartFile imageFile) throws Exception{
+		String folder = this.uploadDirectory+"\\";
+		byte[] bytes = imageFile.getBytes();
+		Path path = Paths.get(folder + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
 	}
 
