@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name="images")
 public class Image {
@@ -20,7 +23,9 @@ public class Image {
 	private int imageId;
 	private String alt;
 	private String path;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

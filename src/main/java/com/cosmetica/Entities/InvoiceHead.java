@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name="invoiceHead")
 public class InvoiceHead {
@@ -20,7 +23,9 @@ public class InvoiceHead {
 	private int invoiceHeadId;
 	private int ref;
 	private String hash;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)

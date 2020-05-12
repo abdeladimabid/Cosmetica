@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -22,7 +25,9 @@ public class InvoiceType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int invoiceTypeId;
 	private String label;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 
 	@OneToMany(mappedBy = "type",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

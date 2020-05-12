@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,8 +38,10 @@ public class User {
 	protected String password;
 	protected String token;
 	protected boolean active;
-	protected Date insertedAt;
-	protected Date updatedAt;
+	@CreationTimestamp
+	private Date insertedAt;
+	@UpdateTimestamp
+	private Date updatedAt;
 
 	@ManyToOne
 	@JoinColumn (name="roleId",nullable = false)

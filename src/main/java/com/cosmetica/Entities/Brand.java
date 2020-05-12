@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -27,7 +30,9 @@ public class Brand {
 	private String name;
 	private String slogan;
 	private String logo;
+	@CreationTimestamp
 	private Date insertedAt;
+	@UpdateTimestamp
 	private Date updatedAt;
 	
 	@OneToMany(mappedBy="productBrand",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
