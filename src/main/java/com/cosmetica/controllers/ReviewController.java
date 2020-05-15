@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.ReviewDTO;
 import com.cosmetica.entities.Client;
 import com.cosmetica.entities.Product;
 import com.cosmetica.entities.Review;
@@ -68,8 +70,20 @@ public class ReviewController {
 	 }
 
 	 @PostMapping("/client/add/review")
-	 public void addReview(@RequestBody Review review) {
-		 reviewservice.saveOrUpdate(review);
+	 public void addReview(@RequestBody ReviewDTO source) {
+		 Review target = new Review();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 reviewservice.saveOrUpdate(target);
+		 
+	 }
+	 
+	 @PutMapping("/client/modify/review")
+	 public void modifyReview(@RequestBody ReviewDTO source) {
+		 Review target = new Review();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 reviewservice.saveOrUpdate(target);
 		 
 	 }
 	 
@@ -81,12 +95,6 @@ public class ReviewController {
 		 Review review = reviewservice.getOneById(reviewId).orElseThrow(() -> new CosmeticaException(reviewId));
 		 review.setStatus(1);
 		 reviewservice.saveOrUpdate(review);
-	 }
-	 
-	 @PutMapping("/client/modify/review")
-	 public void modifyReview(@RequestBody Review review) {
-		 reviewservice.saveOrUpdate(review);
-		 
 	 }
 	 
 	 @DeleteMapping("/client/review/remove/{reviewId}")

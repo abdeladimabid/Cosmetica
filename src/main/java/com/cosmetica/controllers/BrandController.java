@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.BrandDTO;
 import com.cosmetica.entities.Brand;
 import com.cosmetica.entities.Coupon;
 import com.cosmetica.entities.Product;
@@ -53,14 +55,18 @@ public class BrandController {
 	 }
 
 	 @PostMapping("/saller/add/brand")						//add a new brand , takes a brand in parameters
-	 public void addBrand(@RequestBody Brand brand) {
-		 brandservice.saveOrUpdate(brand);
-		 
+	 public void addBrand(@RequestBody BrandDTO source) {
+		 Brand target = new Brand();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 brandservice.saveOrUpdate(target);
 	 }
 	 @PutMapping("/saller/modify/brand")					//modify a brand , takes the new brand in parameters
-	 public void modifyBrand(@RequestBody Brand brand) {
-		 brandservice.saveOrUpdate(brand);
-		 
+	 public void modifyBrand(@RequestBody BrandDTO source) {
+		Brand target = new Brand();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 brandservice.saveOrUpdate(target);
 	 }
 	 
 	 @DeleteMapping("/saller/brand/remove/{brand_id}")		//remove a brand , takes a brand_Id in parameters

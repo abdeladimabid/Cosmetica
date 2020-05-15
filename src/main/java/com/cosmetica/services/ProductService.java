@@ -87,8 +87,7 @@ public class ProductService implements IProductService{
 			count++;
 			stars=stars+r.getStars();}
 		}
-		if(count!=0)
-		stars=stars/count;
+		if(count!=0)stars=stars/count;
 		return Precision.round(stars, 1);
 	}
 	

@@ -18,7 +18,7 @@ import com.cosmetica.iservices.IImageService;
 @Service
 public class ImageService implements IImageService{
 	
-	static final String uploadDirectory = System.getProperty("user.dir")+ "\\uploads";
+	static final String UPLOADDIRECTORY = System.getProperty("user.dir")+ "\\uploads";
 
 	@Autowired
 	IImageDao dao;
@@ -46,14 +46,14 @@ public class ImageService implements IImageService{
 
 	@Override
 	public void uploadImage(MultipartFile imageFile) throws Exception{
-		String folder = ImageService.uploadDirectory+"\\";
+		String folder = ImageService.UPLOADDIRECTORY+"\\";
 		byte[] bytes = imageFile.getBytes();
 		Path path = Paths.get(folder + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
 	}
 
 	public String getUploadDirectory() {
-		return uploadDirectory;
+		return UPLOADDIRECTORY;
 	}
 	
 }

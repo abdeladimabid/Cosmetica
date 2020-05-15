@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.AdminDTO;
 import com.cosmetica.entities.Admin;
 import com.cosmetica.entities.Role;
 import com.cosmetica.exceptions.CosmeticaException;
@@ -54,13 +56,19 @@ public class AdminController {
 	 }
 
 	 @PostMapping("/superadmin/add/admin")						//add an admin, takes a new Admin in parameters
-	 public void addAdmin(@RequestBody Admin admin) {
+	 public void addAdmin(@RequestBody AdminDTO adminDto) {
+		 Admin admin = new Admin();
+		 ModelMapper model = new ModelMapper();
+		 model.map(adminDto, admin);
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }
 	 
 	 @PutMapping("/superadmin/modify/admin")					//modify an admin, takes the new Admin in parameters
-	 public void modifyAdmin(@RequestBody Admin admin) {
+	 public void modifyAdmin(@RequestBody AdminDTO adminDto) {
+		 Admin admin = new Admin();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(adminDto, admin);
 		 adminservice.saveOrUpdate(admin);
 		 
 	 }

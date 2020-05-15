@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.InvoiceTypeDTO;
 import com.cosmetica.entities.InvoiceType;
 import com.cosmetica.exceptions.CosmeticaException;
 import com.cosmetica.iservices.IInvoiceTypeService;
@@ -45,14 +47,20 @@ public class InvoiceTypeController {
 	 }
 
 	 @PostMapping("/superadmin/type/add")					//add recipient info , takes an InvoiceType in parameters
-	 public void addInvoiceType(@RequestBody InvoiceType invoiceType) {
-		 invoiceTypeservice.saveOrUpdate(invoiceType);
+	 public void addInvoiceType(@RequestBody InvoiceTypeDTO source) {
+		 InvoiceType target = new InvoiceType();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 invoiceTypeservice.saveOrUpdate(target);
 		 
 	 }
 	 
 	 @PutMapping("/superadmin/type/modify")					//modify recipient info , takes the new InvoiceType in parameters
-	 public void modifyInvoiceType(@RequestBody InvoiceType invoiceType) {
-		 invoiceTypeservice.saveOrUpdate(invoiceType);
+	 public void modifyInvoiceType(@RequestBody InvoiceTypeDTO source) {
+		 InvoiceType target = new InvoiceType();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 invoiceTypeservice.saveOrUpdate(target);
 		 
 	 }
 	 

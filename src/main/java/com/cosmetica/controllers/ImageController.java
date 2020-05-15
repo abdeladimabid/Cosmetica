@@ -3,6 +3,8 @@ package com.cosmetica.controllers;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +21,7 @@ import com.cosmetica.entities.Image;
 import com.cosmetica.entities.Product;
 import com.cosmetica.exceptions.CosmeticaException;
 import com.cosmetica.iservices.IImageService;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -44,9 +47,11 @@ public class ImageController {
 
 	 @PostMapping("/saller/upload/image")
 	 public void addImage(@RequestPart("file") MultipartFile image){
+		 Logger logr = Logger.getLogger("CosmeticaLog");
 		 try {
 			imgservice.uploadImage(image);
 		} catch (Exception e) {
+			logr.log(Level.WARNING, "Couldn't Upload image, Reason : " + e);
 			e.printStackTrace();
 		}
 		 

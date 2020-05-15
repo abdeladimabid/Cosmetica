@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.ClientDTO;
 import com.cosmetica.entities.Cart;
 import com.cosmetica.entities.Client;
 import com.cosmetica.entities.Review;
@@ -53,14 +55,19 @@ public class ClientController {
 	 }
 
 	 @PostMapping("/superadmin/add/client")
-	 public void addClient(@RequestBody Client client) {
-		 clientservice.saveOrUpdate(client);
-		 
+	 public void addClient(@RequestBody ClientDTO source) {
+		 Client target = new Client();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 clientservice.saveOrUpdate(target);
 	 }
 	 
 	 @PutMapping("/client/modify")
-	 public void modifyClient(@RequestBody Client client) {
-		 clientservice.saveOrUpdate(client);
+	 public void modifyClient(@RequestBody ClientDTO source) {
+		 Client target = new Client();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 clientservice.saveOrUpdate(target);
 		 
 	 }
 	 

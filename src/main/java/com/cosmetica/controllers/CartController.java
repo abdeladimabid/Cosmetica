@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.CartDTO;
 import com.cosmetica.entities.Cart;
 import com.cosmetica.entities.InvoiceBody;
 import com.cosmetica.entities.Order;
@@ -46,13 +48,19 @@ public class CartController {
 	 }
 
 	 @PostMapping("/client/add/cart")
-	 public void addCart(@RequestBody Cart cart) {
-		 cartservice.saveOrUpdate(cart);
-		 
+	 public void addCart(@RequestBody CartDTO source) {
+		 Cart target = new Cart();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 cartservice.saveOrUpdate(target);
 	 }
+	 
 	 @PutMapping("/client/modify/cart")
-	 public void modifyCart(@RequestBody Cart cart) {
-		 cartservice.saveOrUpdate(cart);
+	 public void modifyCart(@RequestBody CartDTO source) {
+		 Cart target = new Cart();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 cartservice.saveOrUpdate(target);
 		 
 	 }
 	 

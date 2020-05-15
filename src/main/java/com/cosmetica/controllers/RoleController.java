@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.RoleDTO;
 import com.cosmetica.entities.Role;
 import com.cosmetica.entities.User;
 import com.cosmetica.exceptions.CosmeticaException;
@@ -43,13 +45,20 @@ public class RoleController {
 	 }
 
 	 @PostMapping("/superadmin/role/add")						//add a role, new role is given in parameters
-	 public void addRole(@RequestBody Role role) {
-		 roleservice.saveOrUpdate(role);
+	 public void addRole(@RequestBody RoleDTO source) {
+		 Role target = new Role();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 roleservice.saveOrUpdate(target);
+		 
 		 
 	 }
 	 @PutMapping("/superadmin/role/modify")						//modify a role, new role is given in parameters
-	 public void modifyRole(@RequestBody Role role) {
-		 roleservice.saveOrUpdate(role);
+	 public void modifyRole(@RequestBody RoleDTO source) {
+		 Role target = new Role();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 roleservice.saveOrUpdate(target);
 		 
 	 }
 	 @DeleteMapping("/superadmin/role/remove/{roleId}")		//delete a role, new role is given in parameters

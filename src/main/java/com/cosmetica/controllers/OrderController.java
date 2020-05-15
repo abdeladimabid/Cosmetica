@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.OrderDTO;
 import com.cosmetica.entities.Cart;
 import com.cosmetica.entities.Order;
 import com.cosmetica.entities.Product;
@@ -44,13 +46,19 @@ public class OrderController {
 	 }
 
 	 @PostMapping("/client/order/add")					//add an order, takes an order in parameters
-	 public void addOrder(@RequestBody Order order) {
-		 orderservice.saveOrUpdate(order);
+	 public void addOrder(@RequestBody OrderDTO source) {
+		 Order target = new Order();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 orderservice.saveOrUpdate(target);
 		 
 	 }
 	 @PutMapping("/client/order/modify")				//modify an order, takes an order in parameters
-	 public void modifyOrder(@RequestBody Order order) {
-		 orderservice.saveOrUpdate(order);
+	 public void modifyOrder(@RequestBody OrderDTO source) {
+		 Order target = new Order();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 orderservice.saveOrUpdate(target);
 		 
 	 }
 	 

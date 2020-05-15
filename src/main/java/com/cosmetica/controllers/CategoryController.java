@@ -5,6 +5,7 @@ import java.util.List;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.CategoryDTO;
 import com.cosmetica.entities.Category;
 import com.cosmetica.entities.Product;
 import com.cosmetica.exceptions.CosmeticaException;
@@ -54,13 +56,20 @@ public class CategoryController {
 	}
 	
 	 @PostMapping("/superadmin/add/cateory")
-	 public void addCategory(@RequestBody Category  category) {
-		 categoryservice.saveOrUpdate(category);
+	 public void addCategory(@RequestBody CategoryDTO  source) {
+		 Category target = new Category();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 categoryservice.saveOrUpdate(target);
 		 
 	 }
+	 
 	 @PutMapping("/superadmin/modify/cateory")
-	 public void modifyCategory(@RequestBody Category  category) {
-		 categoryservice.saveOrUpdate(category);
+	 public void modifyCategory(@RequestBody CategoryDTO  source) {
+		 Category target = new Category();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 categoryservice.saveOrUpdate(target);
 		 
 	 }
 	 

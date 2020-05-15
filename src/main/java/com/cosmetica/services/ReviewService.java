@@ -55,8 +55,7 @@ public class ReviewService implements IReviewService{
 		ZonedDateTime now = ZonedDateTime.now();
 		Long diff = now.toInstant().toEpochMilli()- review.getInsertedAt().getTime();
 		
-		diff = diff + 3600000;
-		diff = diff / 1000;
+		diff = (diff + 3600000)/ 1000;
 
 		long days = diff / (24 * 60 * 60);
 		long hours = diff / (60 * 60) % 24;
@@ -89,7 +88,6 @@ public class ReviewService implements IReviewService{
 			SimpleDateFormat formater = new SimpleDateFormat("dd MMM");
 		    return formater.format(review.getInsertedAt());
 		}
-		System.out.println(now);
 		return null;
 	}
 

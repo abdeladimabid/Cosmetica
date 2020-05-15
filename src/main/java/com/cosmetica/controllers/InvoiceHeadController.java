@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.InvoiceHeadDTO;
 import com.cosmetica.entities.InvoiceBody;
 import com.cosmetica.entities.InvoiceHead;
 import com.cosmetica.exceptions.CosmeticaException;
@@ -59,13 +61,22 @@ public class InvoiceHeadController {
 	 }
 	 
 	 @PutMapping("/superadmin/head/modify")		//modify a head , takes the new invoiceHead in parameters
-	 public void modifyinvoicehead(@RequestBody InvoiceHead invoicehead) {
-		 invoiceHeadservice.saveOrUpdate(invoicehead);
+	 public void modifyinvoicehead(@RequestBody InvoiceHeadDTO source) {
+		 InvoiceHead target = new InvoiceHead();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 invoiceHeadservice.saveOrUpdate(target);
 		 
 	 }
 
 	 @PostMapping("/client/head/add")			//create invoice info , takes an invoiceHead in parameters
-	 public void addinvoiceHead(@RequestBody InvoiceHead invoiceHead) {
+	 public void addinvoiceHead(@RequestBody InvoiceHeadDTO invoiceHeadDto) {
+		 
+		 InvoiceHead invoiceHead = new InvoiceHead();
+		 ModelMapper model = new ModelMapper();
+		 model.map(invoiceHeadDto, invoiceHead);
+		 invoiceHeadservice.saveOrUpdate(invoiceHead);
+		 
 		 String type = invoiceHead.getType().getLabel();
 		 if(type.equals("facture")) {
 			 int refLast = invoiceHeadservice.getLastFac().getRef();

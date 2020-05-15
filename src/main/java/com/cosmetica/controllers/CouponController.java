@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.CouponDTO;
 import com.cosmetica.entities.Brand;
 import com.cosmetica.entities.Coupon;
 import com.cosmetica.exceptions.CosmeticaException;
@@ -75,14 +77,20 @@ public class CouponController {
 	 }
 	 
 	 @PostMapping("/saller/add/coupon/add")
-	 public void addCoupon(@RequestBody Coupon coupon) {
-		 couponservice.saveOrUpdate(coupon);
+	 public void addCoupon(@RequestBody CouponDTO source) {
+		 Coupon target = new Coupon();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 couponservice.saveOrUpdate(target);
 		 
 	 }
 	 
 	 @PutMapping("/saller/coupon/modify")
-	 public void modifyCoupon(@RequestBody Coupon coupon) {
-		 couponservice.saveOrUpdate(coupon);
+	 public void modifyCoupon(@RequestBody CouponDTO source) {
+		 Coupon target = new Coupon();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 couponservice.saveOrUpdate(target);
 		 
 	 }
 	 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.ProductDTO;
 import com.cosmetica.entities.Image;
 import com.cosmetica.entities.Product;
 import com.cosmetica.entities.Review;
@@ -61,7 +63,7 @@ public class ProductController {
 		 
 		 if(!productservice.getOneById(productId).isPresent())
 			 throw new CosmeticaException(productId );
-		 Product product = productservice.getOneById(productId).get();
+		 Product product = productservice.getOneById(productId).orElseThrow(()-> new CosmeticaException(productId));
 		 if(product.getStatus()==1) {
 		 return productservice.getOneById(productId);
 		 } else throw new ItemDontExistException(productId);
@@ -71,9 +73,8 @@ public class ProductController {
 	 @GetMapping("/product/name/{productName}")			//get one Product, id_Product is given in parameters
 	 public List<Product> productByNameClient(@PathVariable("productName")String productName){
 		 
-		 if(productservice.getByName(productName).isEmpty())
-			 throw new CosmeticaException(productName );
-			 return productservice.getByName(productName);
+		if(productservice.getByName(productName).isEmpty())throw new CosmeticaException(productName );
+		return productservice.getByName(productName);
 		 
 	 }
 	 
@@ -87,16 +88,23 @@ public class ProductController {
 	 }
 
 	 @PostMapping("/saller/add/product")					//add a new Product, new Product is given in parameters
-	 public void addProduct(@RequestBody Product produit) {
-		 if(productservice.getOneByRef(produit.getProductRef()).isPresent()) {
-	         throw new DuplicateKeyException(produit.getProductRef());
-	     } else { productservice.saveOrUpdate(produit); }
+	 public void addProduct(@RequestBody ProductDTO source) {
+		 Product target = new Product();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 if(productservice.getOneByRef(target.getProductRef()).isPresent()) {
+	         throw new DuplicateKeyException(target.getProductRef());
+	     } else { 
+		 productservice.saveOrUpdate(target); }
 		 
 	 }
 
 	 @PutMapping("/saller/modify/product")					//modify a Product, new Product is given in parameters
-	 public void modifyProduct(@RequestBody Product produit) {
-		 productservice.saveOrUpdate(produit);
+	 public void modifyProduct(@RequestBody ProductDTO source) {
+		 Product target = new Product();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 productservice.saveOrUpdate(target);
 		 
 	 }
 	 

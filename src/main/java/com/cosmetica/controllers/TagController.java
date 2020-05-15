@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.TagDTO;
 import com.cosmetica.entities.Tag;
 import com.cosmetica.exceptions.CosmeticaException;
 import com.cosmetica.iservices.ITagService;
@@ -44,14 +46,21 @@ public class TagController {
 	 }
 
 	 @PostMapping("/saller/tag/add")					//add tag, new tag is given in parameters
-	 public void addTag(@RequestBody Tag tag) {
-		 tagService.saveOrUpdate(tag);
+	 public void addTag(@RequestBody TagDTO source) {
+		 Tag target = new Tag();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 tagService.saveOrUpdate(target);
 		 
 	 }
 	 
 	 @PutMapping("/saller/tag/modify")					//modify tag, new tag is given in parameters
-	 public void modifyTag(@RequestBody Tag tag) {
-		 tagService.saveOrUpdate(tag); 
+	 public void modifyTag(@RequestBody TagDTO source) {
+		 Tag target = new Tag();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 tagService.saveOrUpdate(target);
+		 
 	 }
 	 
 	 @DeleteMapping("/saller/tag/remove/{tagId}")		//delete tag by id, id_tag is given in parameters

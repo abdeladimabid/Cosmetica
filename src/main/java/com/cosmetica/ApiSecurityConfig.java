@@ -42,6 +42,8 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter{
 		return super.authenticationManager();
 	}
 	
+	private String king="superadmin";
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -55,16 +57,16 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests().antMatchers("/COSMETICA/coupon/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/image/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/user/**").permitAll().and()
-		.authorizeRequests().antMatchers("/COSMETICA/superadmin/**").hasAnyAuthority("superadmin").and()
-		.authorizeRequests().antMatchers("/COSMETICA/supervisor/**").hasAnyAuthority("superadmin","supervisor").and()
-		.authorizeRequests().antMatchers("/COSMETICA/cart/**").hasAnyAuthority("superadmin","user").and()
-		.authorizeRequests().antMatchers("/COSMETICA/client/**").hasAnyAuthority("superadmin","user").and()
-		.authorizeRequests().antMatchers("/COSMETICA/order/**").hasAnyAuthority("superadmin").and()
-		.authorizeRequests().antMatchers("/COSMETICA/role/**").hasAnyAuthority("superadmin").and()
-		.authorizeRequests().antMatchers("/COSMETICA/tag/**").hasAnyAuthority("superadmin").and()
-		.authorizeRequests().antMatchers("/COSMETICA/saller/**").hasAnyAuthority("superadmin","saller").and()
-		.authorizeRequests().antMatchers("/COSMETICA/head/**").hasAnyAuthority("superadmin","user").and()
-		.authorizeRequests().antMatchers("/COSMETICA/body/**").hasAnyAuthority("superadmin","user")
+		.authorizeRequests().antMatchers("/COSMETICA/superadmin/**").hasAnyAuthority(king).and()
+		.authorizeRequests().antMatchers("/COSMETICA/supervisor/**").hasAnyAuthority(king,"supervisor").and()
+		.authorizeRequests().antMatchers("/COSMETICA/cart/**").hasAnyAuthority(king,"user").and()
+		.authorizeRequests().antMatchers("/COSMETICA/client/**").hasAnyAuthority(king,"user").and()
+		.authorizeRequests().antMatchers("/COSMETICA/order/**").hasAnyAuthority(king).and()
+		.authorizeRequests().antMatchers("/COSMETICA/role/**").hasAnyAuthority(king).and()
+		.authorizeRequests().antMatchers("/COSMETICA/tag/**").hasAnyAuthority(king).and()
+		.authorizeRequests().antMatchers("/COSMETICA/saller/**").hasAnyAuthority(king,"saller").and()
+		.authorizeRequests().antMatchers("/COSMETICA/head/**").hasAnyAuthority(king,"user").and()
+		.authorizeRequests().antMatchers("/COSMETICA/body/**").hasAnyAuthority(king,"user")
 		
 		.anyRequest().authenticated()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

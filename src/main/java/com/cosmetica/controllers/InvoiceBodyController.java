@@ -3,6 +3,7 @@ package com.cosmetica.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetica.dto.InvoiceBodyDTO;
 import com.cosmetica.entities.Cart;
 import com.cosmetica.entities.InvoiceBody;
 import com.cosmetica.entities.InvoiceHead;
@@ -51,14 +53,21 @@ public class InvoiceBodyController {
 	 }
 
 	 @PostMapping("/client/body/add")					//add recipient info , takes an invoiceBody in parameters
-	 public void addinvoicebody(@RequestBody InvoiceBody invoicebody) {
-		 invoicebodyservice.saveOrUpdate(invoicebody);
+	 public void addinvoicebody(@RequestBody InvoiceBodyDTO source) {
+		 InvoiceBody target = new InvoiceBody();
+		 ModelMapper modelv = new ModelMapper();
+		 modelv.map(source, target);
+		 invoicebodyservice.saveOrUpdate(target);
+		 
 		 
 	 }
 	 
 	 @PutMapping("/client/body/modify")					//modify recipient info , takes the new invoiceBody in parameters
-	 public void modifyinvoicebody(@RequestBody InvoiceBody invoicebody) {
-		 invoicebodyservice.saveOrUpdate(invoicebody);
+	 public void modifyinvoicebody(@RequestBody InvoiceBodyDTO source) {
+		 InvoiceBody target = new InvoiceBody();
+		 ModelMapper model = new ModelMapper();
+		 model.map(source, target);
+		 invoicebodyservice.saveOrUpdate(target);
 		 
 	 }
 	 
