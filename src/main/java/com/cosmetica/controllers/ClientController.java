@@ -30,7 +30,7 @@ public class ClientController {
 	@Autowired
 	IClientService clientservice;
 
-	@GetMapping("/superadmin/client/all")
+	@GetMapping("/supervisor/client/all")
 	 public List<Client> allClients() {
 		return clientservice.getAll();
 		 
@@ -126,7 +126,7 @@ public class ClientController {
 		 
 	 }
 	//new method
-	    @PostMapping("/client/validate")                //validate an a client, takes an clientId in parameters
+	    @PostMapping("/client/validate")                //validate an a client though email link, takes an clientId in parameters
 	    public void validate(@RequestBody int id) {
 	     if(!clientservice.getOneById(id).isPresent())
 	        throw new CosmeticaException(id);
@@ -137,7 +137,7 @@ public class ClientController {
 	    }
 
 	//new method
-	    @PostMapping("/client/invalidate")                //unvalidate a client, takes an clientId in parameters
+	    @PostMapping("/supervisor/client/invalidate")                //unvalidate a client, takes an clientId in parameters
 	    public void invalidateed(@RequestBody int id) {
 	    if(!clientservice.getOneById(id).isPresent())
 	        throw new CosmeticaException(id);
