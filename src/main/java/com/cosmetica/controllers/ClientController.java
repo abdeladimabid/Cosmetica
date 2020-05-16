@@ -36,7 +36,7 @@ public class ClientController {
 		 
 	 }
 	 
-	 @GetMapping("/supervisor/client/id/{clientId}")
+	 @GetMapping("/user/client/id/{clientId}")
 	 public Optional <Client> oneClient(@PathVariable("clientId")int clientId){
 		 
 		 if(!clientservice.getOneById(clientId).isPresent())
@@ -45,7 +45,7 @@ public class ClientController {
 		 
 	 }
 
-	 @GetMapping("/supervisor/client/un/{username}")
+	 @GetMapping("/user/client/un/{username}")
 	 public List <Client> clientsByUsername(@PathVariable("username")String username){
 		
 		 if(clientservice.getOneByUsername(username).isEmpty())
