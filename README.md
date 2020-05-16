@@ -70,7 +70,7 @@ Content of Create_client.json
     }
 }
 ```
-**Note:** Username and email must be unique. otherwise youll get a duplicate entry Error.
+**Note:** Username and email must be unique. otherwise you'll get a duplicate entry Error.
 
 **Make a put request to update an existing client**
 
