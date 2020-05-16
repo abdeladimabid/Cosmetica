@@ -54,7 +54,7 @@ public class ClientController {
 		 
 	 }
 
-	 @PostMapping("/superadmin/add/client")
+	 @PostMapping("/signup/client/add")
 	 public void addClient(@RequestBody ClientDTO source) {
 		 Client target = new Client();
 		 ModelMapper model = new ModelMapper();

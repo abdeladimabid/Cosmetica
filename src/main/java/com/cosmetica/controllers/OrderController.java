@@ -45,7 +45,7 @@ public class OrderController {
 		 
 	 }
 
-	 @PostMapping("/client/order/add")					//add an order, takes an order in parameters
+	 @PostMapping("/client/add/order")					//add an order, takes an order in parameters
 	 public void addOrder(@RequestBody OrderDTO source) {
 		 Order target = new Order();
 		 ModelMapper modelv = new ModelMapper();

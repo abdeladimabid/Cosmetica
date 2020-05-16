@@ -69,7 +69,7 @@ public class InvoiceHeadController {
 		 
 	 }
 
-	 @PostMapping("/client/head/add")			//create invoice info , takes an invoiceHead in parameters
+	 @PostMapping("/client/add/head")			//create invoice info , takes an invoiceHead in parameters
 	 public void addinvoiceHead(@RequestBody InvoiceHeadDTO invoiceHeadDto) {
 		 
 		 InvoiceHead invoiceHead = new InvoiceHead();

@@ -52,7 +52,7 @@ public class InvoiceBodyController {
 		 
 	 }
 
-	 @PostMapping("/client/body/add")					//add recipient info , takes an invoiceBody in parameters
+	 @PostMapping("/client/add/body")					//add recipient info , takes an invoiceBody in parameters
 	 public void addinvoicebody(@RequestBody InvoiceBodyDTO source) {
 		 InvoiceBody target = new InvoiceBody();
 		 ModelMapper modelv = new ModelMapper();

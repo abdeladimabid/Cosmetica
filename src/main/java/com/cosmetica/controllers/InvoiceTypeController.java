@@ -46,7 +46,7 @@ public class InvoiceTypeController {
 		 
 	 }
 
-	 @PostMapping("/superadmin/type/add")					//add recipient info , takes an InvoiceType in parameters
+	 @PostMapping("/superadmin/add/type")					//add recipient info , takes an InvoiceType in parameters
 	 public void addInvoiceType(@RequestBody InvoiceTypeDTO source) {
 		 InvoiceType target = new InvoiceType();
 		 ModelMapper modelv = new ModelMapper();

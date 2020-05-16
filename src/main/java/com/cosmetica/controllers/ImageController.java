@@ -45,7 +45,7 @@ public class ImageController {
 	
 	 }
 
-	 @PostMapping("/saller/upload/image")
+	 @PostMapping("/image/upload")
 	 public void addImage(@RequestPart("file") MultipartFile image){
 		 Logger logr = Logger.getLogger("CosmeticaLog");
 		 try {

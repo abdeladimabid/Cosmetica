@@ -44,7 +44,7 @@ public class RoleController {
 		 
 	 }
 
-	 @PostMapping("/superadmin/role/add")						//add a role, new role is given in parameters
+	 @PostMapping("/superadmin/add/role")						//add a role, new role is given in parameters
 	 public void addRole(@RequestBody RoleDTO source) {
 		 Role target = new Role();
 		 ModelMapper model = new ModelMapper();

@@ -45,7 +45,7 @@ public class TagController {
 		 
 	 }
 
-	 @PostMapping("/saller/tag/add")					//add tag, new tag is given in parameters
+	 @PostMapping("/saller/add/tag")					//add tag, new tag is given in parameters
 	 public void addTag(@RequestBody TagDTO source) {
 		 Tag target = new Tag();
 		 ModelMapper model = new ModelMapper();

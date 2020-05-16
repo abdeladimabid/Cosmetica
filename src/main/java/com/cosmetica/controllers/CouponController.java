@@ -76,7 +76,7 @@ public class CouponController {
 		
 	 }
 	 
-	 @PostMapping("/saller/add/coupon/add")
+	 @PostMapping("/saller/add/coupon")
 	 public void addCoupon(@RequestBody CouponDTO source) {
 		 Coupon target = new Coupon();
 		 ModelMapper modelv = new ModelMapper();

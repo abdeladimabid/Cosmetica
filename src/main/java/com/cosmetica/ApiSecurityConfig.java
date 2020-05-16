@@ -56,6 +56,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests().antMatchers("/COSMETICA/product/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/coupon/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/image/**").permitAll().and()
+		.authorizeRequests().antMatchers("/COSMETICA/signup/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/user/**").permitAll().and()
 		.authorizeRequests().antMatchers("/COSMETICA/superadmin/**").hasAnyAuthority(king).and()
 		.authorizeRequests().antMatchers("/COSMETICA/supervisor/**").hasAnyAuthority(king,"supervisor").and()
